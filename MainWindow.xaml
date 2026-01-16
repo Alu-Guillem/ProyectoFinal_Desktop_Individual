@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PereMaria.GestorHotel"
         xmlns:services="clr-namespace:PereMaria.GestorHotel.Services"
+        xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
         mc:Ignorable="d"
         Title="Pere Maria | Gestor de Hotel" Height="450" Width="800">
-        <ContentControl Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}"/>
+    <Grid TextElement.FontFamily="Montserrat">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <components:NavigationBar></components:NavigationBar>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />
+    </Grid>
 </Window>
