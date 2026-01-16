@@ -8,4 +8,6 @@ public partial class NavigationBar : UserControl
     {
         InitializeComponent();
     }
+
+ 
 }

@@ -6,6 +6,7 @@
              xmlns:controller="clr-namespace:PereMaria.GestorHotel.Controllers"
              mc:Ignorable="d"
              d:DesignHeight="Infinity" MinHeight="500" MinWidth="250" MaxWidth="300">
+
     <Border Background="{StaticResource Bg-Secondary}" Padding="20 15">
         <StackPanel Orientation="Vertical"
                     TextElement.Foreground="{StaticResource Bg-White}">
@@ -17,20 +18,28 @@
                 </StackPanel>
             </StackPanel>
             <Border Height="1" Background="#E6EDF3"></Border>
-            <ListView
-                ItemsSource="{x:Static controller:NavigationController.ROUTES}">
-
-                <ListView.ItemTemplate>
+            <!-- Navigation Menu -->
+            <ListBox
+                ItemsSource="{Binding Source={x:Static controller:NavigationController.Instance}, Path=ROUTES}"
+                SelectedValue="{Binding Source={x:Static controller:NavigationController.Instance}, Path=CurrentView, Mode=TwoWay}"
+                SelectedValuePath="Key"
+                BorderThickness="0"
+                Background="Transparent"
+                Margin="0,15,0,0"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                Focusable="False"
+                SelectionMode="Single"
+                KeyboardNavigation.TabNavigation="None"
+                ItemContainerStyle="{StaticResource NavListBoxItemStyle}">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <Button Command="{Binding Value}">
-                                <TextBlock Text="{Binding Key }" />
-                            </Button>
-                        </StackPanel>
+                        <Button Command="{Binding Value}" Style="{StaticResource NavButtonStyle}">
+                            <TextBlock Text="{Binding Key}" />
+                        </Button>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-
-            </ListView>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
         </StackPanel>
     </Border>
