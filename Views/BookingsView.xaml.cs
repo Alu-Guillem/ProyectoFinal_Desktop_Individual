@@ -7,5 +7,7 @@ public partial class BookingsView : UserControl
     public BookingsView()
     {
         InitializeComponent();
+        
     }
+    
 }

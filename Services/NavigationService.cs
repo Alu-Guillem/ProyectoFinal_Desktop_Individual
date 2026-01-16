@@ -9,10 +9,15 @@ public class NavigationService : INotifyPropertyChanged
     private static NavigationService? _instance;
     public static NavigationService Instance => _instance ??= new NavigationService();
 
-    private NavigationService() { }
+
+    private NavigationService()
+    {
+    }
+
 
     // La vista actual
     private UserControl? _currentView;
+
     public UserControl? CurrentView
     {
         get => _currentView;
