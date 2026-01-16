@@ -2,20 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--#region Color Palette-->
-    <SolidColorBrush x:Key="bg-primary" Color="#0d6efd"/>
-    <SolidColorBrush x:Key="bg-secondary" Color="#6c757d"/>
-    <SolidColorBrush x:Key="bg-card" Color="#99aab5"/>
-    <SolidColorBrush x:Key="bg-card-light" Color="#eeeeee"/>
-    <SolidColorBrush x:Key="bg-gray" Color="#cccccc"/>
-    <SolidColorBrush x:Key="bg-white" Color="#ffffff"/>
-    <SolidColorBrush x:Key="bg-success" Color="#198754"/>
-    <SolidColorBrush x:Key="bg-danger" Color="#dc3545"/>
-    <SolidColorBrush x:Key="bg-warning" Color="#ffc107"/>
-    <SolidColorBrush x:Key="bg-info" Color="#0dcaf0"/>
-    <SolidColorBrush x:Key="bg-light" Color="#f8f9fa"/>
-    <SolidColorBrush x:Key="bg—dark" Color="#212529"/>
+    <SolidColorBrush x:Key="Bg-Primary" Color="#0B1C2D"/>
+    <SolidColorBrush x:Key="Bg-Secondary" Color="#1A0A2E"/>
+    <SolidColorBrush x:Key="Bg-Card" Color="#6A4C93"/>
+    <SolidColorBrush x:Key="Bg-Card-Light" Color="#6A4C93DD"/>
+    <SolidColorBrush x:Key="Bg-Gray" Color="#cccccc"/>
+    <SolidColorBrush x:Key="Bg-White" Color="#ffffff"/>
+    <SolidColorBrush x:Key="Bg-Success" Color="#198754"/>
+    <SolidColorBrush x:Key="Bg-Danger" Color="#dc3545"/>
+    <SolidColorBrush x:Key="Bg-Warning" Color="#ffc107"/>
+    <SolidColorBrush x:Key="Bg-Info" Color="#0dcaf0"/>
+    <SolidColorBrush x:Key="Bg-Light" Color="#f8f9fa"/>
+    <SolidColorBrush x:Key="Bg—Dark" Color="#212529"/>
     <!--#endregion-->
     
-    <FontFamily x:Key="font-primary">Monserrat</FontFamily>
+    <FontFamily x:Key="Font-Primary">Monserrat</FontFamily>
     
 </ResourceDictionary>
