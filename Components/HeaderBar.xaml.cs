@@ -2,12 +2,10 @@
 
 namespace PereMaria.GestorHotel.Components;
 
-public partial class NavigationBar : UserControl
+public partial class HeaderBar : UserControl
 {
-    public NavigationBar()
+    public HeaderBar()
     {
         InitializeComponent();
     }
-
- 
 }

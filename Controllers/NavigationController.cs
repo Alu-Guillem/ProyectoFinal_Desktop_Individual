@@ -1,22 +1,73 @@
-﻿using PereMaria.GestorHotel.Commands;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using PereMaria.GestorHotel.Commands;
+using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
 using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class NavigationController
+public class NavigationController : INotifyPropertyChanged
 {
     // Singleton
     private static NavigationController? _instance;
     public static NavigationController Instance => _instance ??= new NavigationController();
-    private static readonly NavigationService _navigationService = NavigationService.Instance;
 
-    public static readonly Dictionary<string, RelayCommand> ROUTES = new()
+    private readonly NavigationService _navigationService = NavigationService.Instance;
+
+    public IReadOnlyList<NavItem> MenuItems { get; }
+
+    private NavItem? _currentItem;
+
+    public NavItem? CurrentItem
     {
-        { "Habitaciones", new RelayCommand(_ => _navigationService.NavigateTo<RoomsView>()) },
-        { "Reservas", new RelayCommand(_ => _navigationService.NavigateTo<BookingsView>()) },
-        { "Huespedes", new RelayCommand(_ => _navigationService.NavigateTo<CustomersView>()) },
-        { "Empleados", new RelayCommand(_ => _navigationService.NavigateTo<EmployeesView>()) },
-        { "Reseñas", new RelayCommand(_ => _navigationService.NavigateTo<EmployeesView>()) }
-    };
+        get => _currentItem;
+        set
+        {
+            if (_currentItem == value) return;
+
+            _currentItem = value;
+            OnPropertyChanged();
+            _currentItem?.Navigate();
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private NavigationController()
+    {
+        MenuItems =
+        [
+            new NavItem
+            {
+                Label = "🏠 Habitaciones", Command = new RelayCommand(_ => CurrentItem = MenuItems?[0]),
+                Navigate = () => _navigationService.NavigateTo<RoomsView>()
+            },
+            new NavItem
+            {
+                Label = "📅 Reservas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[1]),
+                Navigate = () => _navigationService.NavigateTo<BookingsView>()
+            },
+            new NavItem
+            {
+                Label = "👽 Huéspedes", Command = new RelayCommand(_ => CurrentItem = MenuItems?[2]),
+                Navigate = () => _navigationService.NavigateTo<CustomersView>()
+            },
+            new NavItem
+            {
+                Label = "👤 Empleados", Command = new RelayCommand(_ => CurrentItem = MenuItems?[3]),
+                Navigate = () => _navigationService.NavigateTo<EmployeesView>()
+            },
+            new NavItem
+            {
+                Label = "⭐ Reseñas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[4]),
+                Navigate = () => _navigationService.NavigateTo<EmployeesView>()
+            } // TODO: ReviewsView
+        ];
+    }
 }

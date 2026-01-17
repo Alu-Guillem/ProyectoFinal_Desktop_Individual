@@ -5,33 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controller="clr-namespace:PereMaria.GestorHotel.Controllers"
              mc:Ignorable="d"
-             d:DesignHeight="Infinity" MinHeight="500" MinWidth="250" MaxWidth="300">
-    <Border Background="{StaticResource Bg-Secondary}" Padding="20 15">
-        <StackPanel Orientation="Vertical"
-                    TextElement.Foreground="{StaticResource Bg-White}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Resources/logo.png" Width="100"></Image>
-                <StackPanel VerticalAlignment="Center" Margin="0 25">
-                    <TextBlock FontSize="16" FontWeight="Bold">Hotel Pere Maria</TextBlock>
-                    <TextBlock FontSize="10">Dashboard</TextBlock>
+             d:DesignHeight="Infinity" MinHeight="500" MinWidth="250" MaxWidth="290">
+
+    <StackPanel Background="{StaticResource Bg-Cosmic-Dark}" Orientation="Horizontal">
+        <Border Padding="20 15">
+            <StackPanel Orientation="Vertical"
+                        TextElement.Foreground="{StaticResource Text-Primary}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/logo.png" Width="100"/>
+                    <StackPanel VerticalAlignment="Center" Margin="0 25">
+                        <TextBlock FontSize="16" FontWeight="Bold">Hotel Pere Maria</TextBlock>
+                        <TextBlock FontSize="10">Dashboard</TextBlock>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <Border Height="1" Background="#E6EDF3"></Border>
-            <ListView
-                ItemsSource="{x:Static controller:NavigationController.ROUTES}">
-
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Button Command="{Binding Value}">
-                                <TextBlock Text="{Binding Key }" />
+                <Border Height="1" Background="{StaticResource Text-Muted}"/>
+                <!-- Navigation Menu -->
+                <ListBox
+                    ItemsSource="{Binding Source={x:Static controller:NavigationController.Instance}, Path=MenuItems}"
+                    SelectedItem="{Binding Source={x:Static controller:NavigationController.Instance}, Path=CurrentItem, Mode=TwoWay}"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Margin="0,15,0,0"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    Focusable="False"
+                    SelectionMode="Single"
+                    KeyboardNavigation.TabNavigation="None"
+                    ItemContainerStyle="{StaticResource NavListBoxItemStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Command}" Style="{StaticResource NavButtonStyle}">
+                                <TextBlock Text="{Binding Label}" />
                             </Button>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-
-            </ListView>
-
-        </StackPanel>
-    </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Border>
+        <Border Width="1" Background="{StaticResource Nav-Border}"/>
+    </StackPanel>
 </UserControl>
