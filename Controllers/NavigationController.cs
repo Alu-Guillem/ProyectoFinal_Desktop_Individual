@@ -1,19 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using PereMaria.GestorHotel.Commands;
+using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
 using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
-
-public enum ViewType
-{
-    Habitaciones,
-    Reservas,
-    Huespedes,
-    Empleados,
-    Reseñas
-}
 
 public class NavigationController : INotifyPropertyChanged
 {
@@ -23,22 +15,20 @@ public class NavigationController : INotifyPropertyChanged
 
     private readonly NavigationService _navigationService = NavigationService.Instance;
 
-    // ÚNICA FUENTE DE VERDAD
-    private readonly Dictionary<ViewType, Action> _routes;
+    public IReadOnlyList<NavItem> MenuItems { get; }
 
-    public IReadOnlyDictionary<ViewType, RelayCommand> ROUTES { get; }
+    private NavItem? _currentItem;
 
-    private ViewType _currentView;
-    public ViewType CurrentView
+    public NavItem? CurrentItem
     {
-        get => _currentView;
+        get => _currentItem;
         set
         {
-            if (_currentView == value) return;
+            if (_currentItem == value) return;
 
-            _currentView = value;
+            _currentItem = value;
             OnPropertyChanged();
-            Navigate(value);
+            _currentItem?.Navigate();
         }
     }
 
@@ -51,27 +41,33 @@ public class NavigationController : INotifyPropertyChanged
 
     private NavigationController()
     {
-        _routes = new Dictionary<ViewType, Action>
-        {
-            { ViewType.Habitaciones, () => _navigationService.NavigateTo<RoomsView>() },
-            { ViewType.Reservas,     () => _navigationService.NavigateTo<BookingsView>() },
-            { ViewType.Huespedes,    () => _navigationService.NavigateTo<CustomersView>() },
-            { ViewType.Empleados,    () => _navigationService.NavigateTo<EmployeesView>() },
-            { ViewType.Reseñas,      () => _navigationService.NavigateTo<EmployeesView>() }
-        };
-
-        // Generación automática de comandos
-        ROUTES = _routes.ToDictionary(
-            r => r.Key,
-            r => new RelayCommand(_ => CurrentView = r.Key)
-        );
-    }
-
-    private void Navigate(ViewType view)
-    {
-        if (_routes.TryGetValue(view, out var navigate))
-        {
-            navigate();
-        }
+        MenuItems =
+        [
+            new NavItem
+            {
+                Label = "🏠 Habitaciones", Command = new RelayCommand(_ => CurrentItem = MenuItems?[0]),
+                Navigate = () => _navigationService.NavigateTo<RoomsView>()
+            },
+            new NavItem
+            {
+                Label = "📅 Reservas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[1]),
+                Navigate = () => _navigationService.NavigateTo<BookingsView>()
+            },
+            new NavItem
+            {
+                Label = "👽 Huéspedes", Command = new RelayCommand(_ => CurrentItem = MenuItems?[2]),
+                Navigate = () => _navigationService.NavigateTo<CustomersView>()
+            },
+            new NavItem
+            {
+                Label = "👤 Empleados", Command = new RelayCommand(_ => CurrentItem = MenuItems?[3]),
+                Navigate = () => _navigationService.NavigateTo<EmployeesView>()
+            },
+            new NavItem
+            {
+                Label = "⭐ Reseñas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[4]),
+                Navigate = () => _navigationService.NavigateTo<EmployeesView>()
+            } // TODO: ReviewsView
+        ];
     }
 }

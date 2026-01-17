@@ -6,13 +6,24 @@
         xmlns:services="clr-namespace:PereMaria.GestorHotel.Services"
         xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
         mc:Ignorable="d"
-        Title="Pere Maria | Gestor de Hotel" Height="450" Width="800">
-    <Grid TextElement.FontFamily="Montserrat">
+        Title="Pere Maria | Gestor de Hotel" Height="720" Width="1280"
+        Icon="/Resources/logo.png"
+        WindowState="Maximized">
+    <Grid TextElement.FontFamily="{StaticResource Font-Primary}" TextElement.Foreground="{StaticResource Text-Primary}">
+        <Grid.Background>
+            <StaticResource ResourceKey="CosmicBackground"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <components:NavigationBar></components:NavigationBar>
-        <ContentControl Grid.Column="1" Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <components:NavigationBar Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"></components:NavigationBar>
+        <components:HeaderBar Grid.Column="1" Grid.Row="0"></components:HeaderBar>
+        <ContentControl Grid.Column="1" Grid.Row="1"
+                        Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />
     </Grid>
 </Window>
