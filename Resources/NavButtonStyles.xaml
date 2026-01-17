@@ -21,7 +21,7 @@
     <!-- Button Style for Navigation -->
     <Style x:Key="NavButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#b8b8d1"/>
+        <Setter Property="Foreground" Value="{StaticResource Text-Secondary}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="15,12"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -43,14 +43,14 @@
                     <ControlTemplate.Triggers>
                         <!-- Hover -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#2d2055"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Nav-Hover}"/>
                         </Trigger>
 
                         <!-- ACTIVO: ListBoxItem seleccionado -->
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}"
                                      Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#3d2d6d"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Nav-Active}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Text-Primary}"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
