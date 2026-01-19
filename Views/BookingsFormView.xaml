@@ -7,7 +7,7 @@
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
-    DataContext="{x:Static controllers:BookingsController.Instance}">
+    DataContext="{x:Static controllers:BookingsViewModel.Instance}">
     <Grid>
         <TextBlock Text="BookingsFormView Works!"
             HorizontalAlignment="Center"

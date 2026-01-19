@@ -7,11 +7,11 @@ using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class NavigationController : INotifyPropertyChanged
+public class NavigationViewModel : INotifyPropertyChanged
 {
     // Singleton
-    private static NavigationController? _instance;
-    public static NavigationController Instance => _instance ??= new NavigationController();
+    private static NavigationViewModel? _instance;
+    public static NavigationViewModel Instance => _instance ??= new NavigationViewModel();
 
     private readonly NavigationService _navigationService = NavigationService.Instance;
 
@@ -39,7 +39,7 @@ public class NavigationController : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private NavigationController()
+    private NavigationViewModel()
     {
         MenuItems =
         [

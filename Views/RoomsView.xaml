@@ -7,7 +7,7 @@
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300"
-    DataContext="{x:Static controllers:RoomsController.Instance}">
+    DataContext="{x:Static controllers:RoomsViewModel.Instance}">
     <Grid>
         <TextBlock Text="RoomsView Works!"
             HorizontalAlignment="Center"

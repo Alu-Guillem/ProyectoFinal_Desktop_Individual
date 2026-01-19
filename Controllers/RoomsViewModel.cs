@@ -4,13 +4,13 @@ using PereMaria.GestorHotel.Models;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class RoomsController : INotifyPropertyChanged
+public class RoomsViewModel : INotifyPropertyChanged
 {
     // Singleton
-    private static RoomsController? _instance;
-    public static RoomsController Instance => _instance ??= new RoomsController();
+    private static RoomsViewModel? _instance;
+    public static RoomsViewModel Instance => _instance ??= new RoomsViewModel();
 
-    private RoomsController()
+    private RoomsViewModel()
     {
         _currentRoom = new RoomModel();
     }
