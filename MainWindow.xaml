@@ -25,5 +25,7 @@
         <components:HeaderBar Grid.Column="1" Grid.Row="0"></components:HeaderBar>
         <ContentControl Grid.Column="1" Grid.Row="1"
                         Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />
+        
+        
     </Grid>
 </Window>
