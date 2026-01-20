@@ -4,7 +4,7 @@ using PereMaria.GestorHotel.Models;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class ReviewsViewModel : INotifyPropertyChanged
+public class ReviewsViewModel : BaseViewModel
 {
     // Singleton
     private static ReviewsViewModel? _instance;
@@ -29,13 +29,5 @@ public class ReviewsViewModel : INotifyPropertyChanged
             _currentReview = value;
             OnPropertyChanged(nameof(CurrentReview));
         }
-    }
-
-    // ========== INotifyPropertyChanged ==========
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
