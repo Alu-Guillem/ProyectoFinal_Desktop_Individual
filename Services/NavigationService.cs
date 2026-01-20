@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows.Controls;
+using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Services;
 
@@ -10,23 +11,21 @@ public class NavigationService : INotifyPropertyChanged
     public static NavigationService Instance => _instance ??= new NavigationService();
 
 
-    private NavigationService()
+    private List<UserControl> _viewsStack = [new RoomsView()];
+
+    public UserControl CurrentView
     {
-    }
-
-
-    // La vista actual
-    private UserControl? _currentView;
-
-    public UserControl? CurrentView
-    {
-        get => _currentView;
+        get => ViewsStack.First();
         private set
         {
-            if (value == _currentView) return;
-            _currentView = value;
-            OnPropertyChanged(nameof(CurrentView));
+            if (value == ViewsStack.First()) return;
+            _viewsStack.Insert(0, value);
         }
+    }
+
+    public List<UserControl> ViewsStack
+    {
+        get => _viewsStack;
     }
 
     /// <summary>
@@ -35,10 +34,11 @@ public class NavigationService : INotifyPropertyChanged
     /// <typeparam name="T">Tipo del UserControl</typeparam>
     public void NavigateTo<T>() where T : UserControl, new()
     {
-        CurrentView = new T();
+        var view = ViewsStack.Find(v => v is T) ?? new T();
+        CurrentView = view;
+        OnPropertyChanged(nameof(CurrentView));
     }
 
-    // ========== INotifyPropertyChanged ==========
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected void OnPropertyChanged(string propertyName)
