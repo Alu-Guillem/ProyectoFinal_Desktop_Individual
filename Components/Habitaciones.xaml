@@ -1,0 +1,49 @@
+﻿<Page x:Class="PereMaria.GestorHotel.Components.Habitaciones"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PereMaria.GestorHotel.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="565" d:DesignWidth="470"
+      Title="Habitaciones">
+    <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2">
+        <Grid Background="#0B1C2D" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources> <!-- Style -->
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="{StaticResource Bg-Light}"/>
+                    <Setter Property="FontSize" Value="32px"/>
+                </Style>
+            </Grid.Resources>
+        
+            <Grid Grid.Row="0" Margin="10"> <!-- Cabecera -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/logo.ico" Width="150" Height="150" Grid.Column="0"/>
+                <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center"> 
+                    <Label FontWeight="Bold" Content="Saturno"/> <!-- Nombre -->
+                    <Label Content="Estandar"/> <!-- Tipo -->
+                    <Label Foreground="{StaticResource Bg-Success}" FontWeight="Bold" Content="✓ Libre"/> <!-- Estado -->
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1">
+                <Label Content="nº 001 - 100" FontWeight="Bold"/> <!-- nº de habitaciones -->
+                <Label Content="☻ 4 personas" FontWeight="Bold"/> <!-- Capacidad -->
+                <Label FontWeight="Bold" Height="auto"> <!-- Descripcion ¡No final! -->
+                    <AccessText TextWrapping="Wrap">
+                        Si este contenido sigue aqui para final de proyecto significa que he muerto
+                    </AccessText>
+                </Label>
+            </StackPanel>
+        
+        </Grid>
+    </Border>
+</Page>
