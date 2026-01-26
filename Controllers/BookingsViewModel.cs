@@ -12,14 +12,15 @@ public class BookingsViewModel : BaseViewModel
 
     private BookingsViewModel()
     {
-        _currentBooking = new BookingModel();
+        _currentBooking = new BookingModel("Paco");
     }
 
     // La lista de todos los Bookings
-    public ObservableCollection<BookingModel> Bookings { get; } = new();
+    public ObservableCollection<BookingModel> Bookings { get; } = [new ("Paco"), new ("Marta"), new ("Carlos"), new ("Enrique")];
 
     // El booking que se está editando/creando actualmente
     private BookingModel _currentBooking;
+
     public BookingModel CurrentBooking
     {
         get => _currentBooking;
