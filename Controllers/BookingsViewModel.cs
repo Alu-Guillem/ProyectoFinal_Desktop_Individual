@@ -4,7 +4,7 @@ using PereMaria.GestorHotel.Models;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class BookingsViewModel : INotifyPropertyChanged
+public class BookingsViewModel : BaseViewModel
 {
     // Singleton
     private static BookingsViewModel? _instance;
@@ -12,14 +12,15 @@ public class BookingsViewModel : INotifyPropertyChanged
 
     private BookingsViewModel()
     {
-        _currentBooking = new BookingModel();
+        _currentBooking = new BookingModel("Paco");
     }
 
     // La lista de todos los Bookings
-    public ObservableCollection<BookingModel> Bookings { get; } = new();
+    public ObservableCollection<BookingModel> Bookings { get; } = [new ("Paco"), new ("Marta"), new ("Carlos"), new ("Enrique")];
 
     // El booking que se está editando/creando actualmente
     private BookingModel _currentBooking;
+
     public BookingModel CurrentBooking
     {
         get => _currentBooking;
@@ -29,13 +30,5 @@ public class BookingsViewModel : INotifyPropertyChanged
             _currentBooking = value;
             OnPropertyChanged(nameof(CurrentBooking));
         }
-    }
-
-    // ========== INotifyPropertyChanged ==========
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

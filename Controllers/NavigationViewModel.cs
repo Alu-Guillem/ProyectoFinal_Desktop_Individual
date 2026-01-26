@@ -7,7 +7,7 @@ using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class NavigationViewModel : INotifyPropertyChanged
+public class NavigationViewModel : BaseViewModel
 {
     // Singleton
     private static NavigationViewModel? _instance;
@@ -27,16 +27,9 @@ public class NavigationViewModel : INotifyPropertyChanged
             if (_currentItem == value) return;
 
             _currentItem = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(CurrentItem));
             _currentItem?.Navigate();
         }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private NavigationViewModel()
@@ -66,7 +59,7 @@ public class NavigationViewModel : INotifyPropertyChanged
             new NavItem
             {
                 Label = "⭐ Reseñas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[4]),
-                Navigate = () => _navigationService.NavigateTo<EmployeesView>()
+                Navigate = () => _navigationService.NavigateTo<ReviewsView>()
             } // TODO: ReviewsView
         ];
     }
