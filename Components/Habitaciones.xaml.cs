@@ -18,7 +18,7 @@ namespace PereMaria.GestorHotel.Components
     /// <summary>
     /// Interaction logic for Habitaciones.xaml
     /// </summary>
-    public partial class Habitaciones : Page
+    public partial class Habitaciones : UserControl
     {
         public Habitaciones()
         {

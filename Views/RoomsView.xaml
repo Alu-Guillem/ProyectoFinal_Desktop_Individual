@@ -5,13 +5,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+    xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="300"
+    d:DesignHeight="930" d:DesignWidth="1650"
     DataContext="{x:Static controllers:RoomsController.Instance}">
-    <Grid>
-        <TextBlock Text="RoomsView Works!"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24" />
-    </Grid>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <UniformGrid Margin="60" Columns="3">
+            <UniformGrid.Resources>
+                <Style TargetType="components:Habitaciones">
+                    <Setter Property="Margin" Value="15"/>
+                </Style>
+            </UniformGrid.Resources>
+
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+            <components:Habitaciones/>
+
+
+        </UniformGrid>
+    </ScrollViewer>
+    
 </UserControl>

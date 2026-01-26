@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guiangmol\\source\\repos\\proyecto-final-desktop\\views\\roomsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\roomsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guiangmol\\source\\repos\\proyecto-final-desktop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guiangmol\\source\\repos\\proyecto-final-desktop\\components\\habitaciones.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:components\\habitaciones.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guiangmol\\source\\repos\\proyecto-final-desktop\\resources\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:resources\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +26,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Habitaciones.xaml",
+              "DocumentMoniker": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\Components\\Habitaciones.xaml",
+              "RelativeDocumentMoniker": "Components\\Habitaciones.xaml",
+              "ToolTip": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\Components\\Habitaciones.xaml",
+              "RelativeToolTip": "Components\\Habitaciones.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-26T16:41:18.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-23T17:00:42.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RoomsView.xaml",
+              "DocumentMoniker": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\Views\\RoomsView.xaml",
+              "RelativeDocumentMoniker": "Views\\RoomsView.xaml",
+              "ToolTip": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\Views\\RoomsView.xaml",
+              "RelativeToolTip": "Views\\RoomsView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-23T17:00:34.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Styles.xaml",
+              "DocumentMoniker": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\Resources\\Styles.xaml",
+              "RelativeDocumentMoniker": "Resources\\Styles.xaml",
+              "ToolTip": "C:\\Users\\guiangmol\\source\\repos\\proyecto-final-desktop\\Resources\\Styles.xaml",
+              "RelativeToolTip": "Resources\\Styles.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-21T16:15:09.393Z",
+              "EditorCaption": ""
             }
           ]
         }

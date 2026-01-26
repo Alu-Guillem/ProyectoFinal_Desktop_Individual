@@ -8,4 +8,9 @@ public partial class RoomsView : UserControl
     {
         InitializeComponent();
     }
+
+    private void Habitaciones_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+
+    }
 }
