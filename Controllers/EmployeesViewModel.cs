@@ -12,11 +12,16 @@ public class EmployeesViewModel : BaseViewModel
 
     private EmployeesViewModel()
     {
-        _currentEmployee = new EmployeeModel();
+        _currentEmployee = new EmployeeModel("Pere", "admin@peremaria.es", "admin");
     }
 
     // La lista de todos los employees
-    public ObservableCollection<EmployeeModel> Employees { get; } = new();
+    public ObservableCollection<EmployeeModel> Employees { get; } =
+    [
+        new("Pere", "pere@peremaria.es", "admin"),
+        new("Juan", "juan@peremaria.es", "employee"),
+        new("Paco", "paco@peremaria.es", "employee")
+    ];
 
     // El employee que se está editando/creando actualmente
     private EmployeeModel _currentEmployee;
