@@ -53,10 +53,10 @@
 
                                     <StackPanel Grid.Row="1" HorizontalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" FontSize="26" FontWeight="Bold" 
-                                                   Foreground="White" HorizontalAlignment="Center"/>
+                                                   Foreground="{StaticResource Text-Primary}" HorizontalAlignment="Center"/>
                                         <TextBlock Text="{Binding Role}" FontSize="16" 
                                                    Foreground="{StaticResource Text-Secondary}" HorizontalAlignment="Center"/>
-                                        <Border Height="1" Width="180" 
+                                        <Border Height="1" Width="280" 
                                                 Background="{StaticResource Bg-Purple-Accent}" 
                                                 Opacity="0.6" Margin="0,15"/>
                                     </StackPanel>
