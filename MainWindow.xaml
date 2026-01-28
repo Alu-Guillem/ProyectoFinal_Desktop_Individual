@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:services="clr-namespace:PereMaria.GestorHotel.Services"
+        xmlns:controller="clr-namespace:PereMaria.GestorHotel.Controllers"
         xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
         mc:Ignorable="d"
         Title="Pere Maria | Gestor de Hotel" Height="720" Width="1280"
@@ -25,7 +25,7 @@
         <components:HeaderBar Grid.Column="1" Grid.Row="0"></components:HeaderBar>
         <Border Grid.Column="1" Grid.Row="1" Padding="40 20">
             <ContentControl
-                Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />
+                Content="{Binding CurrentView, Source={x:Static controller:NavigationViewModel.Instance}}" />
         </Border>
     </Grid>
 </Window>

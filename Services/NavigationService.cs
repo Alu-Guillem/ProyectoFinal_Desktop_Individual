@@ -1,10 +1,9 @@
-using System.ComponentModel;
 using System.Windows.Controls;
 using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Services;
 
-public class NavigationService : INotifyPropertyChanged
+public class NavigationService
 {
     // Singleton
     private static NavigationService? _instance;
@@ -36,13 +35,11 @@ public class NavigationService : INotifyPropertyChanged
     {
         var view = ViewsStack.Find(v => v is T) ?? new T();
         CurrentView = view;
-        OnPropertyChanged(nameof(CurrentView));
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged(string propertyName)
+    public void NavigateBack()
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        if(ViewsStack.Count == 1) return;
+        ViewsStack.RemoveAt(0);
     }
 }
