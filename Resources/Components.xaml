@@ -209,6 +209,51 @@
         </Setter>
     </Style>
 
+    
+    <!-- TextBox funcional y moderno, basado en el template original -->
+    <Style x:Key="ModernTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource Bg-Purple-Accent}"/> 
+        <Setter Property="Foreground" Value="{StaticResource Text-Primary}"/> 
+        <Setter Property="BorderBrush" Value="{StaticResource Bg-Purple-Accent}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10,0"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Bg-Purple-Accent}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5" 
+                            SnapsToDevicePixels="True">
+                        
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Focusable="false"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#A27BFF"/>
+                            <Setter Property="Background" Value="#2D1B4A"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#A27BFF"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1.2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+                            
+                            
+    
     <!-- DatePicker funcional y moderno, click en todo el elemento -->
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="Background" Value="{StaticResource Bg-Purple-Accent}"/>
