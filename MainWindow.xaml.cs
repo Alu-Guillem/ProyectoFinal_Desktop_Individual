@@ -12,7 +12,5 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        // Navegar a la vista inicial
-        NavigationService.Instance.NavigateTo<BookingsView>();
     }
 }

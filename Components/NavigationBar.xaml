@@ -22,7 +22,7 @@
                 <!-- Navigation Menu -->
                 <ListBox
                     ItemsSource="{Binding Source={x:Static controller:NavigationViewModel.Instance}, Path=MenuItems}"
-                    SelectedItem="{Binding Source={x:Static controller:NavigationViewModel.Instance}, Path=CurrentItem, Mode=TwoWay}"
+                    SelectedItem="{Binding Source={x:Static controller:NavigationViewModel.Instance}, Path=SelectedNavItem, Mode=TwoWay}"
                     BorderThickness="0"
                     Background="Transparent"
                     Margin="0,15,0,0"
