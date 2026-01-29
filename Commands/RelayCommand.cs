@@ -2,14 +2,10 @@
 
 namespace PereMaria.GestorHotel.Commands;
 
-public class RelayCommand(Action<object> execute, Predicate<object> canExecute) : ICommand
+public class RelayCommand(Action<object?> execute, Predicate<object?>? canExecute = null) : ICommand
 {
-    private readonly Action<object> _execute = execute;
-    private readonly Predicate<object>? _canExecute = canExecute;
-
-    public RelayCommand(Action<object> execute) : this(execute, null)
-    {
-    }
+    private readonly Action<object?> _execute = execute;
+    private readonly Predicate<object?>? _canExecute = canExecute;
 
     public bool CanExecute(object? parameter) =>
         _canExecute?.Invoke(parameter) ?? true;

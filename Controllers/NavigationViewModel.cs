@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
@@ -15,22 +16,27 @@ public class NavigationViewModel : BaseViewModel
 
     private readonly NavigationService _navigationService = NavigationService.Instance;
 
-    public IReadOnlyList<NavItem> MenuItems { get; }
-
-    private NavItem? _currentItem;
-
-    public NavItem? CurrentItem
+    // Devuelve el NavItem correspondiente a la vista actual
+    public NavItem? SelectedNavItem
     {
-        get => _currentItem;
+        get
+        {
+            var currentType = CurrentView.GetType();
+            
+            return MenuItems.FirstOrDefault(item => currentType.Name.Contains(item.ViewName));
+        }
         set
         {
-            if (_currentItem == value) return;
-
-            _currentItem = value;
-            OnPropertyChanged(nameof(CurrentItem));
-            _currentItem?.Navigate();
+            if (value == null) return;
+            value.Command.Execute(null);
+            OnPropertyChanged(nameof(SelectedNavItem));
+            OnPropertyChanged(nameof(CurrentView));
         }
     }
+
+    public IReadOnlyList<NavItem> MenuItems { get; }
+
+    public UserControl CurrentView => _navigationService.CurrentView;
 
     private NavigationViewModel()
     {
@@ -38,29 +44,50 @@ public class NavigationViewModel : BaseViewModel
         [
             new NavItem
             {
-                Label = "🏠 Habitaciones", Command = new RelayCommand(_ => CurrentItem = MenuItems?[0]),
-                Navigate = () => _navigationService.NavigateTo<RoomsView>()
+                Label = "🏠 Habitaciones",
+                Command = new RelayCommand(_ => NavigateTo<RoomsView>()),
+                ViewName = typeof(RoomsView).Name.Replace("View", ""),
             },
             new NavItem
             {
-                Label = "📅 Reservas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[1]),
-                Navigate = () => _navigationService.NavigateTo<BookingsView>()
+                Label = "📅 Reservas",
+                Command = new RelayCommand(_ => NavigateTo<BookingsView>()),
+                ViewName = typeof(BookingsView).Name.Replace("View", ""),
             },
             new NavItem
             {
-                Label = "👽 Huéspedes", Command = new RelayCommand(_ => CurrentItem = MenuItems?[2]),
-                Navigate = () => _navigationService.NavigateTo<CustomersView>()
+                Label = "👽 Huéspedes",
+                Command = new RelayCommand(_ => NavigateTo<CustomersView>()),
+                ViewName = typeof(CustomersView).Name.Replace("View", ""),
             },
             new NavItem
             {
-                Label = "👤 Empleados", Command = new RelayCommand(_ => CurrentItem = MenuItems?[3]),
-                Navigate = () => _navigationService.NavigateTo<EmployeesView>()
+                Label = "👤 Empleados",
+                Command = new RelayCommand(_ => NavigateTo<EmployeesView>()),
+                ViewName = typeof(EmployeesView).Name.Replace("View", ""),
             },
             new NavItem
             {
-                Label = "⭐ Reseñas", Command = new RelayCommand(_ => CurrentItem = MenuItems?[4]),
-                Navigate = () => _navigationService.NavigateTo<ReviewsView>()
-            } // TODO: ReviewsView
+                Label = "⭐ Reseñas",
+                Command = new RelayCommand(_ => NavigateTo<ReviewsView>()),
+                ViewName = typeof(ReviewsView).Name.Replace("View", ""),
+            }
         ];
     }
+
+    public void NavigateBack()
+    {
+        _navigationService.NavigateBack();
+        OnPropertyChanged(nameof(CurrentView));
+        OnPropertyChanged(nameof(SelectedNavItem));
+    }
+
+    public void NavigateTo<T>() where T : UserControl, new()
+    {
+        _navigationService.NavigateTo<T>();
+        OnPropertyChanged(nameof(CurrentView));
+        OnPropertyChanged(nameof(SelectedNavItem));
+    }
+
+    public RelayCommand BackCommand => new(_ => NavigateBack());
 }

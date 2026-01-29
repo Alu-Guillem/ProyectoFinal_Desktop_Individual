@@ -5,9 +5,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Styles.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/Resources/NavButtonStyles.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/Resources/Components.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/Styles.xaml" />
+                <ResourceDictionary Source="/Resources/NavButtonStyles.xaml" />
+                <ResourceDictionary Source="/Resources/Components.xaml" />
                 <ResourceDictionary Source="/Resources/TableStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
