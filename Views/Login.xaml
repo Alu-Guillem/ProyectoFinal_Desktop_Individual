@@ -5,11 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
         mc:Ignorable="d"
-        Title="Login" Height="720" Width="1280">
+        Title="Login" Height="720" Width="1280"
+        WindowState="Maximized">
+    
     <Grid Background="{StaticResource CosmicBackground}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -17,10 +19,25 @@
             <TextBlock FontSize="70" Foreground="{StaticResource Text-Primary}" Text="Hotel Pere Maria" HorizontalAlignment="Center"></TextBlock>
             <TextBlock FontSize="26" Foreground="{StaticResource Text-Secondary}" Text="Sistema De Administración" HorizontalAlignment="Center" Margin="0 15 0 0"></TextBlock>
         </StackPanel>
-        <Border Grid.Row="1" Width="500" Height="300" Background="{StaticResource Bg-Cosmic-Mid}" CornerRadius="25" BorderThickness="1" BorderBrush="{StaticResource Bg-Purple-Accent}">
-            <StackPanel>
-                <Label Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18"></Label>
-                <TextBox Style="{StaticResource ModernTextBox}" Width="300"></TextBox>
+        <Border Grid.Row="1" 
+                Width="500" 
+                Height="350"
+                Background="{StaticResource Bg-Cosmic-Mid}"
+                CornerRadius="25" 
+                BorderThickness="1" 
+                BorderBrush="{StaticResource Bg-Purple-Accent}"
+                VerticalAlignment="Top"
+                >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Margin="0 0 0 15">
+                    <Label Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
+                </StackPanel>
+                <StackPanel Margin="0 0 0 25">
+                    <Label Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <PasswordBox Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
+                </StackPanel>
+                <Button Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45"></Button>
             </StackPanel>
         </Border>
 
