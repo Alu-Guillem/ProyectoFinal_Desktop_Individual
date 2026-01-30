@@ -15,9 +15,4 @@ public partial class MainWindow : Window
         // Navegar a la vista inicial
         NavigationService.Instance.NavigateTo<BookingsView>();
     }
-
-    private void NavigationBar_Loaded(object sender, RoutedEventArgs e)
-    {
-
-    }
 }

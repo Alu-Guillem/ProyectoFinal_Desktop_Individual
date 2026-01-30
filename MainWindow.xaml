@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <components:NavigationBar Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Loaded="NavigationBar_Loaded"></components:NavigationBar>
+        <components:NavigationBar Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"></components:NavigationBar>
         <components:HeaderBar Grid.Column="1" Grid.Row="0"></components:HeaderBar>
         <ContentControl Grid.Column="1" Grid.Row="1"
                         Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />

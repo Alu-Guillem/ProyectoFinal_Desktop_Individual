@@ -15,8 +15,4 @@ public partial class NavigationBar : UserControl
         Services.NavigationService.Instance.NavigateTo<PreviewControlsView>();
     }
 
-    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-
-    }
 }

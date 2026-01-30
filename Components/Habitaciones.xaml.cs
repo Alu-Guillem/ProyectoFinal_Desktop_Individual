@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PereMaria.GestorHotel.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace PereMaria.GestorHotel.Components
         public Habitaciones()
         {
             InitializeComponent();
+        }
+
+        private void Grid_Click(object sender, MouseButtonEventArgs e)
+        {
+            Services.NavigationService.Instance.NavigateTo<RoomsFormView>();
         }
     }
 }

@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PereMaria.GestorHotel.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="565" d:DesignWidth="470"
-               Height="565" Width="470"
+             d:DesignHeight="490"
+               Height="490" Width="350"
              >
     <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2">
-        <Grid Background="#0B1C2D">
+        <Grid Background="#0B1C2D" MouseDown="Grid_Click">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2*"/>
@@ -19,7 +19,7 @@
                 <!-- Style -->
                 <Style TargetType="Label">
                     <Setter Property="Foreground" Value="{StaticResource Bg-Light}"/>
-                    <Setter Property="FontSize" Value="32px"/>
+                    <Setter Property="FontSize" Value="30px"/>
                 </Style>
             </Grid.Resources>
 
@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Resources/logo.ico" Width="150" Height="150" Grid.Column="0"/>
+                <Image Source="/Resources/logo.ico" Width="100" Height="100" Grid.Column="0"/>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
                     <Label FontWeight="Bold" Content="Saturno"/>
                     <!-- Nombre -->
@@ -47,8 +47,8 @@
                 <!-- Capacidad -->
                 <Label FontWeight="Bold" Height="auto">
                     <!-- Descripcion ¡No final! -->
-                    <AccessText TextWrapping="Wrap">
-                        En un lugar de la mancha, cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero
+                    <AccessText x:Name="Info" TextWrapping="Wrap">
+                        En un lugar de la mancha, cuyo nombre no quiero acordarme
                     </AccessText>
                 </Label>
             </StackPanel>
