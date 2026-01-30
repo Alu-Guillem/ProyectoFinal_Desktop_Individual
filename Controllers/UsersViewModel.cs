@@ -12,7 +12,7 @@ public class UsersViewModel : BaseViewModel
 
     private UsersViewModel()
     {
-        _currentUser = new UserModel();
+        _currentUser = new UserModel(null, null);
     }
 
     // La lista de todos los users

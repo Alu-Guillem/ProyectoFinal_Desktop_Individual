@@ -31,13 +31,13 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Margin="0 0 0 15">
                     <Label Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
-                    <TextBox Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
+                    <TextBox x:Name="TxtBoxEmailBox" Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
                 </StackPanel>
                 <StackPanel Margin="0 0 0 25">
                     <Label Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
-                    <PasswordBox Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
+                    <PasswordBox x:Name="TxtBoxPasswordBox"  Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
                 </StackPanel>
-                <Button Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45"></Button>
+                <Button x:Name="btn" Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45" Click="Button_Click"></Button>
             </StackPanel>
         </Border>
 
