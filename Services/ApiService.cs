@@ -12,9 +12,7 @@ namespace PereMaria.GestorHotel.Services;
 public class ApiService
 {
     // TODO IMPLEMENT SESSION SERVICE
-    private string JWT =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc3ODFjMDBiZTMyOTdlZmFiNTM1MGEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk0NDAwMzAsImV4cCI6MTc3MDczNjAzMH0.vygSqWOAGZhzLOkXljy5jJkwXbwxzL-1QERf0xzkGo8";
-
+    private string JWT = null;
     // Singleton
     private static ApiService? _instance;
     public static ApiService Instance => _instance ??= new ApiService();
@@ -28,8 +26,15 @@ public class ApiService
         _httpClient.Timeout = new TimeSpan(0, 0, 15);
     }
 
+    public void SetToken(string token)
+    {
+        JWT = token;
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", JWT);
+    }
+    
     public async Task<ApiResult<T>> Get<T>(string route) where T : class
     {
+        
         try
         {
             var response = await _httpClient.GetAsync(route);
@@ -65,6 +70,7 @@ public class ApiService
 
     public async Task<ApiResult<T>> Post<T>(string route, object? o) where T : class
     {
+        
         try
         {
             var response = await _httpClient.PostAsJsonAsync(route, o);
