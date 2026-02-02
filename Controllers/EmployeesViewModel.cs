@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PereMaria.GestorHotel.Models;
+using PereMaria.GestorHotel.Services;
 
 namespace PereMaria.GestorHotel.Controllers;
 
@@ -9,19 +10,28 @@ public class EmployeesViewModel : BaseViewModel
     // Singleton
     private static EmployeesViewModel? _instance;
     public static EmployeesViewModel Instance => _instance ??= new EmployeesViewModel();
+    
+    private readonly UserService _userService = new UserService();
 
     private EmployeesViewModel()
     {
-        _currentEmployee = new EmployeeModel("Pere", "admin@peremaria.es", "admin");
+        _currentEmployee = new EmployeeModel();
     }
 
     // La lista de todos los employees
-    public ObservableCollection<EmployeeModel> Employees { get; } =
-    [
-        new("Pere", "pere@peremaria.es", "admin"),
-        new("Juan", "juan@peremaria.es", "employee"),
-        new("Paco", "paco@peremaria.es", "employee")
-    ];
+    public ObservableCollection<EmployeeModel> Employees { get; } = new();
+
+    public async Task LoadEmployees()
+    {
+        var result = await _userService.GetAllEmployee();
+        
+        Employees.Clear();
+
+        foreach (EmployeeModel employee in result.Data)
+        {
+            Employees.Add(employee);
+        }
+    }
 
     // El employee que se está editando/creando actualmente
     private EmployeeModel _currentEmployee;

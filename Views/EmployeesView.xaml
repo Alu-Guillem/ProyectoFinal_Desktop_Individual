@@ -46,13 +46,13 @@
                                     </Grid.RowDefinitions>
 
                                     <components:AvatarInitial Grid.Row="0" 
-                                                             Initial="A" 
+                                                             Initial="{Binding FirstName[0]}" 
                                                              Size="110" 
                                                              HorizontalAlignment="Center" 
                                                              Margin="0,10"/>
 
                                     <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}" FontSize="26" FontWeight="Bold" 
+                                        <TextBlock Text="{Binding FirstName}" FontSize="26" FontWeight="Bold" 
                                                    Foreground="{StaticResource Text-Primary}" HorizontalAlignment="Center"/>
                                         <TextBlock Text="{Binding Role}" FontSize="16" 
                                                    Foreground="{StaticResource Text-Secondary}" HorizontalAlignment="Center"/>
