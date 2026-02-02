@@ -13,4 +13,9 @@ public partial class RoomsView : UserControl
     {
 
     }
+
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
 }
