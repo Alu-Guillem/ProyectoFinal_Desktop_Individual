@@ -40,11 +40,11 @@
 
     <!-- Table Header Style -->
     <Style x:Key="TableHeaderStyle" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource Table-Header-Bg}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource Table-Header-Border}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="CornerRadius" Value="12 12 0 0"/>
-        <Setter Property="Padding" Value="20,15"/>
+        <Setter Property="Background" Value="{DynamicResource Table-Header-Bg}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Table-Header-Border}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Padding" Value="20,15" />
+        <Setter Property="CornerRadius" Value="12 12 0 0" />
     </Style>
 
     <!-- Table Container Style -->

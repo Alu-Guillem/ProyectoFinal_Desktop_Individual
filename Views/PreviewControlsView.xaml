@@ -36,34 +36,50 @@
 
             <TextBlock Text="Tabla" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Text-Primary}"
                        Margin="0,20,0,10" />
-            <Border Style="{StaticResource TableBorderStyle}" Padding="20" Margin="0,0,0,10">
+            <Border Style="{StaticResource TableContainerStyle}" Margin="0,0,0,10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+
                     <!-- Header -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Nombre" Style="{StaticResource TableHeaderText}" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Estado" Style="{StaticResource TableHeaderText}" />
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Fecha" Style="{StaticResource TableHeaderText}" />
+                    <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nombre"
+                                       Style="{StaticResource TableMainText}" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="Estado"
+                                       Style="{StaticResource TableMainText}" />
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="Fecha" Style="{StaticResource TableMainText}" />
+                        </Grid>
+                    </Border>
                     <!-- Row -->
-                    <StackPanel Grid.Row="1" Grid.Column="0">
-                        <TextBlock Text="Juan Pérez" Style="{StaticResource TableText}" />
-                        <TextBlock Text="VIP" Style="{StaticResource TableSubText}" />
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1">
-                        <TextBlock Text="Confirmado" Style="{StaticResource TableText}" />
-                        <TextBlock Text="Pagado" Style="{StaticResource TableSubText}" />
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="2">
-                        <TextBlock Text="17/01/2026" Style="{StaticResource TableText}" />
-                        <TextBlock Text="Check-in" Style="{StaticResource TableSubText}" />
-                    </StackPanel>
+                    <Border Grid.Row="1" Style="{StaticResource TableRowStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Juan Pérez" Style="{StaticResource TableMainText}" />
+                                <TextBlock Text="VIP" Style="{StaticResource TableSubText}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Confirmado" Style="{StaticResource TableMainText}" />
+                                <TextBlock Text="Pagado" Style="{StaticResource TableSubText}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="17/01/2026" Style="{StaticResource TableMainText}" />
+                                <TextBlock Text="Check-in" Style="{StaticResource TableSubText}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Border>
 
