@@ -4,9 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
+        xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
         mc:Ignorable="d"
         Title="Login" Height="720" Width="1280"
+        DataContext="{x:Static controllers:LoginViewModel.Instance}"
         WindowState="Maximized">
+    
     
     <Grid Background="{StaticResource CosmicBackground}" >
         <Grid.RowDefinitions>
@@ -21,7 +24,7 @@
         </StackPanel>
         <Border Grid.Row="1" 
                 Width="500" 
-                Height="350"
+                Height="400"
                 Background="{StaticResource Bg-Cosmic-Mid}"
                 CornerRadius="25" 
                 BorderThickness="1" 
@@ -31,13 +34,14 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Margin="0 0 0 15">
                     <Label Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
-                    <TextBox x:Name="TxtBoxEmailBox" Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="TxtBoxEmailBox" Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
                 </StackPanel>
-                <StackPanel Margin="0 0 0 25">
+                <StackPanel Margin="0 0 0 15">
                     <Label Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
-                    <PasswordBox x:Name="TxtBoxPasswordBox"  Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
+                    <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
                 </StackPanel>
-                <Button x:Name="btn" Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45" Click="Button_Click"></Button>
+                <CheckBox Style="{StaticResource CheckBoxStyle}" Content="Recordame" Margin="5 0 0 25" ></CheckBox>
+                <Button x:Name="btn" Command="{Binding LoginCommand}" Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45" ></Button>
             </StackPanel>
         </Border>
 
