@@ -1,0 +1,49 @@
+﻿using PereMaria.GestorHotel.Models;
+
+namespace PereMaria.GestorHotel.Services;
+
+public class UserService
+{
+    private readonly ApiService _api = ApiService.Instance;
+
+    public async Task<ApiResult<List<UserModel>>> GetAllUsers()
+    {
+        return await _api.Get<List<UserModel>>("users");
+    }
+    
+    public async Task<ApiResult<List<EmployeeModel>>> GetAllEmployee()
+    {
+        return await _api.Get<List<EmployeeModel>>("users/employees");
+    }
+    
+    public async Task<ApiResult<List<CustomerModel>>> GetAllCustomers()
+    {
+        return await _api.Get<List<CustomerModel>>("users/customers");
+    }
+
+    public async Task<ApiResult<List<UserModel>>> GetUser(string id)
+    {
+        return await _api.Get<List<UserModel>>($"users/{id}");
+    }
+    
+    public async Task<ApiResult<CustomerModel>> CreateCustomer(CustomerModel customerModel)
+    {
+        return await _api.Post<CustomerModel>("users/customer", customerModel);
+    }
+    
+    public async Task<ApiResult<EmployeeModel>> CreateEmployee(EmployeeModel employeeModel)
+    {
+        return await _api.Post<EmployeeModel>("users/employee", employeeModel);
+    }
+    
+
+    
+
+    public async Task<ApiResult<UserModel>> GetMe()
+    {
+        return await _api.Get<UserModel>("users/me");
+    }
+
+
+
+}
