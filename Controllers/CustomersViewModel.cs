@@ -1,8 +1,10 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
+using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
+using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
@@ -67,6 +69,20 @@ public class CustomersViewModel : BaseViewModel
     }
 
 
+    private RelayCommand _openCustomerFormCommand;
+    public RelayCommand OpenCustomerFormCommand =>
+        _openCustomerFormCommand ??= new RelayCommand(OpenCustomerForm);
+    private void OpenCustomerForm(object parameter)
+    {
+        Console.WriteLine("Entro en Form");
+        
+        if (parameter is not CustomerModel customer) return;
+
+        CustomerFromViewModel.Instance.Customer = customer;
+
+        NavigationViewModel.Instance.NavigateTo<CustomersFormView>();
+    }
+    
     private bool ChangedEmail(object obj)
     {
         if (obj is not CustomerModel c)

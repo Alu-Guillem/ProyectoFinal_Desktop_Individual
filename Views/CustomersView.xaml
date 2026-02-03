@@ -64,6 +64,24 @@
                                     <TextBlock Text="{Binding Email}" Grid.Column="2" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding Dni}" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding VipText}" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    
+                                    <Button
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Focusable="False"
+                                        Cursor="Hand"
+                                        Grid.ColumnSpan="6"
+                                        Command="{Binding DataContext.OpenCustomerFormCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}">
+
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" />
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    
+                                    
                                 </Grid>
                             </Border>
                         </DataTemplate>
