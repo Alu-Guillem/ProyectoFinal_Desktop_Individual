@@ -19,13 +19,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Center">
-            <TextBlock FontSize="70" Foreground="{StaticResource Text-Primary}" Text="Hotel Pere Maria" HorizontalAlignment="Center"></TextBlock>
-            <TextBlock FontSize="26" Foreground="{StaticResource Text-Secondary}" Text="Sistema De Administración" HorizontalAlignment="Center" Margin="0 15 0 0"></TextBlock>
+            <TextBlock FontSize="70"   FontFamily="{StaticResource Font-Primary}" Foreground="{StaticResource Text-Primary}" Text="Hotel Pere Maria" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock FontSize="26" FontFamily="{StaticResource Font-Primary}" Foreground="{StaticResource Text-Secondary}" Text="Sistema De Administración" HorizontalAlignment="Center" Margin="0 15 0 0"></TextBlock>
         </StackPanel>
         <Border Grid.Row="1" 
                 Width="500" 
                 Height="400"
-                Background="{StaticResource Bg-Cosmic-Mid}"
+                Background="{StaticResource Nav-Hover}"
                 CornerRadius="25" 
                 BorderThickness="1" 
                 BorderBrush="{StaticResource Bg-Purple-Accent}"
@@ -33,11 +33,11 @@
                 >
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Margin="0 0 0 15">
-                    <Label Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <Label FontWeight="Bold" Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="TxtBoxEmailBox" Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
                 </StackPanel>
                 <StackPanel Margin="0 0 0 15">
-                    <Label Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <Label FontWeight="Bold" FontFamily="{StaticResource Font-Primary}"  Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
                     <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
                 </StackPanel>
                 <CheckBox Style="{StaticResource CheckBoxStyle}" Content="Recordame" Margin="5 0 0 25" ></CheckBox>
