@@ -22,8 +22,8 @@ public class CustomerModel : UserModel
 
     public string VipText => Vip ? "Sí" : "No";
     
-    public CustomerModel(string id, string email, string role, string password, string firstName, string lastName, string photo,  string gender, string dni, string city, bool vip) :
-        base(id, email, role, password, firstName, lastName, photo)
+    public CustomerModel(string userId, string email, string role, string password, string firstName, string lastName, string photo,  string gender, string dni, string city, bool vip) :
+        base(userId, email, role, password, firstName, lastName, photo)
     {
         Gender = gender;
         Dni = dni;
