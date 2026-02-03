@@ -5,13 +5,175 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+    xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="300"
-    DataContext="{x:Static controllers:CustomersViewModel.Instance}">
-    <Grid>
-        <TextBlock Text="CustomersFormView Works!"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24" />
+    d:DesignHeight="600" d:DesignWidth="800"
+    DataContext="{x:Static controllers:CustomerFromViewModel.Instance}">
+   <Grid Margin="30">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+       <DockPanel Grid.Row="0" LastChildFill="False">
+           <TextBlock Text="Gestión del Usuario"
+                      Foreground="{StaticResource Text-Primary}"
+                      FontSize="50"
+                      Margin="0 0 0 30"/>
+       </DockPanel>
+
+
+        <Border Grid.Row="1"
+                Background="{StaticResource Nav-Hover}"
+                CornerRadius="25"
+                BorderThickness="1"
+                BorderBrush="{StaticResource Bg-Purple-Accent}"
+                Padding="25">
+
+            <StackPanel>
+
+                <TextBlock Text="Información del Usuario"
+                           Foreground="{StaticResource Text-Primary}"
+                           FontSize="20"/>
+
+                <Grid Margin="0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <components:AvatarInitial Initial="A"
+                                              Size="110"
+                                              Margin="0 0 20 0"/>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding FullName}"
+                                   Foreground="{StaticResource Text-Primary}"
+                                   FontSize="20"/>
+                        <TextBlock Text="{Binding Customer.Email}"
+                                   Foreground="{StaticResource Text-Primary}"
+                                   FontSize="20"/>
+                    </StackPanel>
+                </Grid>
+
+                <Border Height="1"
+                        Background="{StaticResource Bg-Purple-Accent}"
+                        Opacity="0.6"
+                        Margin="0 15"/>
+
+                <TextBlock Text="Campos Editables"
+                           Foreground="{StaticResource Text-Secondary}"
+                           FontSize="20"
+                           Margin="0 10"/>
+
+                <Grid Margin="0 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 15 15">
+                        <Label Content="Nombre" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="15 0 0 15">
+                        <Label Content="Apellido" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 15 0">
+                        <Label Content="Fecha de Nacimiento" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <DatePicker Style="{StaticResource DatePickerStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
+                        <Label Content="Nueva Contraseña" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <PasswordBox Style="{StaticResource PasswordBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0 5 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Email" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Customer.Email}"                                   
+                                   Foreground="{StaticResource Text-Secondary}"
+                                   FontSize="18"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="DNI" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Customer.Dni}"                                   
+                                   Foreground="{StaticResource Text-Secondary}"
+                                   FontSize="18"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="0" Margin="0,15,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Género" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Customer.Gender}"                                   
+                                   Foreground="{StaticResource Text-Secondary}"
+                                   FontSize="18"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="2" Margin="0,15,0,0" HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Ciudad" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Customer.City}"                                   
+                                   Foreground="{StaticResource Text-Secondary}"
+                                   FontSize="18"/>
+                    </Grid>
+                </Grid>
+                
+
+            </StackPanel>
+        </Border>
+       
+       <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+           <Button Command="{Binding SaveCustomerCommand}" Style="{StaticResource ActionButtonStyle}">Guardar Cambios</Button>
+       </StackPanel>
+
     </Grid>
 </UserControl>
