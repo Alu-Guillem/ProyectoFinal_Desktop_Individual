@@ -50,7 +50,11 @@ public class LoginViewModel : BaseViewModel
         
         if (result.Success)
         {
-            ApiService.Instance.SetToken(result.Data.Token);
+            SessionService.Instance.SetToken(result.Data.Token);
+            
+            await SessionService.Instance.LoadUserInfo();
+
+            
             ChangeWindow();
         }
         else

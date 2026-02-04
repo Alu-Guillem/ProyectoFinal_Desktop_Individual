@@ -20,11 +20,11 @@
                     arrow_back
                 </Button>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <components:AvatarInitial Initial="{Binding Initial, Source={x:Static controllers:UsersViewModel.Instance}}" Size="40" Margin="0,0,12,0" />
+                    <components:AvatarInitial Initial="{Binding Initial}" Size="40" Margin="0,0,12,0" />
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{Binding FirstName, Source={x:Static controllers:UsersViewModel.Instance}}" Foreground="{StaticResource Text-Primary}" FontSize="12"
+                        <TextBlock Text="{Binding FirstName}" Foreground="{StaticResource Text-Primary}" FontSize="12"
                                    FontWeight="Bold"></TextBlock>
-                        <TextBlock Text="{Binding Role, Source={x:Static controllers:UsersViewModel.Instance}}" Foreground="{StaticResource Text-Secondary}" FontSize="10"
+                        <TextBlock Text="{Binding Role}" Foreground="{StaticResource Text-Secondary}" FontSize="10"
                                    FontWeight="Medium">
                         </TextBlock>
                     </StackPanel>
