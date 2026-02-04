@@ -11,8 +11,6 @@ namespace PereMaria.GestorHotel.Services;
 
 public class ApiService
 {
-    // TODO IMPLEMENT SESSION SERVICE
-    private string JWT = null;
     // Singleton
     private static ApiService? _instance;
     public static ApiService Instance => _instance ??= new ApiService();
@@ -22,14 +20,12 @@ public class ApiService
     private ApiService()
     {
         _httpClient.BaseAddress = new Uri(GlobalConfig.Default.ApiUri);
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", JWT);
         _httpClient.Timeout = new TimeSpan(0, 0, 15);
     }
 
     public void SetToken(string token)
     {
-        JWT = token;
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", JWT);
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
     
     public async Task<ApiResult<T>> Get<T>(string route) where T : class
@@ -105,6 +101,42 @@ public class ApiService
         }
     }
 
+    public async Task<ApiResult<T>> Patch<T>(string route, object? o) where T : class
+    {
+        
+        try
+        {
+            var response = await _httpClient.PatchAsJsonAsync(route, o);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                return new ApiResult<T>
+                {
+                    Success = true,
+                    Data = JsonConvert.DeserializeObject<T>(content),
+                    StatusCode = response.StatusCode
+                };
+            }
+
+            return new ApiResult<T>
+            {
+                Success = false,
+                Error = TryParseError(content),
+                StatusCode = response.StatusCode
+            };
+        }
+        catch (HttpRequestException ex)
+        {
+            return new ApiResult<T>
+            {
+                Success = false,
+                Error = new ApiError { Message = "No se pudo conectar con el servidor" },
+                StatusCode = 0
+            };
+        }
+    }    
 
     private static ApiError TryParseError(string json)
     {

@@ -15,7 +15,6 @@ public class UsersViewModel : BaseViewModel
     
     private UsersViewModel()
     {
-       InitalizeUser();
     }
 
     
@@ -28,36 +27,12 @@ public class UsersViewModel : BaseViewModel
             if (value == _currentUser) return;
             _currentUser = value;
             OnPropertyChanged(nameof(CurrentUser));
-            OnPropertyChanged(nameof(FirstName));
-            OnPropertyChanged(nameof(Initial));
-            OnPropertyChanged(nameof(Role));
         }
     }
 
-
-    public string FirstName => CurrentUser?.FirstName ?? "Invitado";
-
-    public string Initial => CurrentUser.FirstName.Split("")[0];
-    
-    public string Role => CurrentUser.Role;
     
 
-    private async void InitalizeUser()
-    {
-        await LoadUserInfo();
-    }
     
-    public async Task LoadUserInfo()
-    {
-        try
-        {
-            var result = await _userService.GetMe();
-            CurrentUser = result.Data;
-        }
-        catch (Exception e)
-        {
-            _currentUser = null;
-        }
-    }
+
     
 }
