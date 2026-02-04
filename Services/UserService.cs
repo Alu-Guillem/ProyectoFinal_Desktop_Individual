@@ -36,8 +36,10 @@ public class UserService
         return await _api.Post<EmployeeModel>("users/employee", employeeModel);
     }
     
-
-    
+    public async Task<ApiResult<UserModel>> UpdateUser(UserModel userModel)
+    {
+        return await _api.Patch<UserModel>($"users/{userModel.UserId}", userModel);
+    }
 
     public async Task<ApiResult<UserModel>> GetMe()
     {
