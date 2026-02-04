@@ -8,7 +8,7 @@
     xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800"
-    DataContext="{x:Static controllers:CustomerFromViewModel.Instance}">
+    DataContext="{x:Static controllers:UserFromViewModel.Instance}">
    <Grid Margin="30">
 
         <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <components:AvatarInitial Initial="A"
+                    <components:AvatarInitial Initial="{Binding User.FirstName[0]}"
                                               Size="110"
                                               Margin="0 0 20 0"/>
 
@@ -53,7 +53,7 @@
                         <TextBlock Text="{Binding FullName}"
                                    Foreground="{StaticResource Text-Primary}"
                                    FontSize="20"/>
-                        <TextBlock Text="{Binding Customer.Email}"
+                        <TextBlock Text="{Binding User.Email}"
                                    Foreground="{StaticResource Text-Primary}"
                                    FontSize="20"/>
                     </StackPanel>
@@ -98,7 +98,7 @@
 
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
                         <Label Content="Nueva Contraseña" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <PasswordBox Style="{StaticResource PasswordBoxStyle}"/>
+                        <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" Style="{StaticResource PasswordBoxStyle}"/>
                     </StackPanel>
                 </Grid>
 
@@ -122,7 +122,7 @@
 
                         <Label Content="Email" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Row="1"
-                                   Text="{Binding Customer.Email}"                                   
+                                   Text="{Binding User.Email}"                                   
                                    Foreground="{StaticResource Text-Secondary}"
                                    FontSize="18"/>
                     </Grid>
@@ -135,7 +135,7 @@
 
                         <Label Content="DNI" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Row="1"
-                                   Text="{Binding Customer.Dni}"                                   
+                                   Text="{Binding User.Dni}"                                   
                                    Foreground="{StaticResource Text-Secondary}"
                                    FontSize="18"/>
                     </Grid>
@@ -148,7 +148,7 @@
 
                         <Label Content="Género" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Row="1"
-                                   Text="{Binding Customer.Gender}"                                   
+                                   Text="{Binding User.Gender}"                                   
                                    Foreground="{StaticResource Text-Secondary}"
                                    FontSize="18"/>
                     </Grid>
@@ -161,7 +161,7 @@
 
                         <Label Content="Ciudad" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Row="1"
-                                   Text="{Binding Customer.City}"                                   
+                                   Text="{Binding User.City}"                                   
                                    Foreground="{StaticResource Text-Secondary}"
                                    FontSize="18"/>
                     </Grid>
@@ -172,7 +172,7 @@
         </Border>
        
        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-           <Button Command="{Binding SaveCustomerCommand}" Style="{StaticResource ActionButtonStyle}">Guardar Cambios</Button>
+           <Button Command="{Binding SaveUserCommand}" Style="{StaticResource ActionButtonStyle}">Guardar Cambios</Button>
        </StackPanel>
 
     </Grid>

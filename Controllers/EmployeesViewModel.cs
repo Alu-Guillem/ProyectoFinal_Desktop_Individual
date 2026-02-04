@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
+using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
@@ -12,13 +14,13 @@ public class EmployeesViewModel : BaseViewModel
     public static EmployeesViewModel Instance => _instance ??= new EmployeesViewModel();
     
     private readonly UserService _userService = new UserService();
+    
 
     private EmployeesViewModel()
     {
         _currentEmployee = new EmployeeModel();
     }
 
-    // La lista de todos los employees
     public ObservableCollection<EmployeeModel> Employees { get; } = new();
 
     public async Task LoadEmployees()
@@ -33,7 +35,6 @@ public class EmployeesViewModel : BaseViewModel
         }
     }
 
-    // El employee que se está editando/creando actualmente
     private EmployeeModel _currentEmployee;
     public EmployeeModel CurrentEmployee
     {
@@ -44,5 +45,19 @@ public class EmployeesViewModel : BaseViewModel
             _currentEmployee = value;
             OnPropertyChanged(nameof(CurrentEmployee));
         }
+    }
+    
+    private RelayCommand _openEmployeeFormCommand;
+    public RelayCommand OpenEmployeeFormCommand =>
+        _openEmployeeFormCommand ??= new RelayCommand(OpenEmployeeForm);
+    private void OpenEmployeeForm(object parameter)
+    {
+        if (SessionService.Instance.CurrentUser?.Role != "admin") return;
+        
+        if (parameter is not EmployeeModel employee) return;
+
+        UserFromViewModel.Instance.User = employee;
+
+        NavigationViewModel.Instance.NavigateTo<EmployeesFormView>();
     }
 }
