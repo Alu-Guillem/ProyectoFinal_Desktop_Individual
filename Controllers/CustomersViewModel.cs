@@ -74,9 +74,16 @@ public class CustomersViewModel : BaseViewModel
         _openCustomerFormCommand ??= new RelayCommand(OpenCustomerForm);
     private void OpenCustomerForm(object parameter)
     {
-        if (parameter is not CustomerModel customer) return;
-
-        UserFromViewModel.Instance.User = customer;
+        if (parameter is CustomerModel customer)
+        {
+            UserFromViewModel.Instance.User = customer;
+            UserFromViewModel.Instance.IsEditing = true;
+        }
+        else
+        {
+            UserFromViewModel.Instance.User = new CustomerModel();
+            UserFromViewModel.Instance.IsEditing = false;
+        }
 
         NavigationViewModel.Instance.NavigateTo<CustomersFormView>();
     }

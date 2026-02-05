@@ -54,9 +54,16 @@ public class EmployeesViewModel : BaseViewModel
     {
         if (SessionService.Instance.CurrentUser?.Role != "admin") return;
         
-        if (parameter is not EmployeeModel employee) return;
-
-        UserFromViewModel.Instance.User = employee;
+        if (parameter is EmployeeModel employee)
+        {
+            UserFromViewModel.Instance.User = employee;
+            UserFromViewModel.Instance.IsEditing = true;
+        }
+        else
+        {
+            UserFromViewModel.Instance.User = new EmployeeModel();
+            UserFromViewModel.Instance.IsEditing = false;
+        }
 
         NavigationViewModel.Instance.NavigateTo<EmployeesFormView>();
     }
