@@ -23,6 +23,12 @@
                            FontSize="40" FontWeight="Bold" 
                            Foreground="{StaticResource Text-Primary}" 
                            Margin="0,0,0,30"/>
+                
+                <Button Content="Nuevo Empleado" 
+                        Style="{StaticResource ActionButtonStyle}"
+                        Command="{Binding OpenEmployeeFormCommand}"
+                        CommandParameter="{x:Null}" 
+                        HorizontalAlignment="Right"/>
 
                 <ItemsControl ItemsSource="{Binding Employees}">
                     <ItemsControl.ItemsPanel>

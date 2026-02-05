@@ -17,7 +17,10 @@
         <DockPanel Grid.Row="0" LastChildFill="False">
             <TextBlock Text="Buscar:" Foreground="{StaticResource Text-Primary}" FontSize="15" VerticalAlignment="Center" Margin="0 0 15 0"></TextBlock>
             <TextBox Text="{Binding FiltrerText,  UpdateSourceTrigger=PropertyChanged }" Style="{StaticResource TextBoxStyle}" Width="200"></TextBox>
-            <Button Style="{StaticResource ActionButtonStyle}" DockPanel.Dock="Right">Nuevo Usuario</Button>
+            <Button Command="{Binding OpenCustomerFormCommand}" 
+                    CommandParameter="{x:Null}" 
+                    Style="{StaticResource ActionButtonStyle}" 
+                    DockPanel.Dock="Right">Nuevo Usuario</Button>
         </DockPanel>
         <Border Grid.Row="1" Style="{StaticResource TableContainerStyle}">
             <Grid>
