@@ -53,7 +53,7 @@
                         <TextBlock Text="{Binding FullName}"
                                    Foreground="{StaticResource Text-Primary}"
                                    FontSize="20"/>
-                        <TextBlock Text="{Binding User.Email}"
+                        <TextBlock Text="{Binding Email}"
                                    Foreground="{StaticResource Text-Primary}"
                                    FontSize="20"/>
                     </StackPanel>
@@ -93,7 +93,7 @@
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 15 0">
                         <Label Content="Fecha de Nacimiento" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <DatePicker Style="{StaticResource DatePickerStyle}"/>
+                        <DatePicker Text="{Binding BirthDate, StringFormat='dd/MM/yyyy', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DatePickerStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
@@ -114,7 +114,7 @@
 
                     <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 15 15">
                         <Label Content="Email" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <TextBox Text="{Binding Email}"
+                        <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  IsEnabled="{Binding IsTextBoxEnabled}"
                                  Style="{StaticResource TextBoxStyle}"/>
                     </StackPanel>
