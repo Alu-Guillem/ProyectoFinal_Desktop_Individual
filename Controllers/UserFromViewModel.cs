@@ -102,7 +102,7 @@ public class UserFromViewModel : BaseViewModel
         {
             if (User is CustomerModel customer)
             {
-                customer.Gender = value;
+                customer.Gender = value.ToLower();
                 OnPropertyChanged(nameof(Gender));
             }
         }
@@ -124,18 +124,23 @@ public class UserFromViewModel : BaseViewModel
         }
     }
     
-    public DateTimeKind BirthDate
+    public string BirthDate
     {
         get 
         {
-            return User is CustomerModel customer ? customer.BirthDate : DateTimeKind.Utc;
+            if (User is CustomerModel customer)
+            {
+                return customer.BirthDate;
+            }
+
+            return DateTime.UtcNow.ToString("dd/MM/yyyy");
         }
         set
         {
             if (User is CustomerModel customer)
             {
                 customer.BirthDate = value;
-                OnPropertyChanged(nameof(Dni));
+                OnPropertyChanged(nameof(BirthDate));
             }
         }
     }    
@@ -197,6 +202,7 @@ public class UserFromViewModel : BaseViewModel
             {
                 try
                 {
+                    customerModel.Role = "customer";
                     var result = await _userService.CreateCustomer(customerModel);
                     Console.WriteLine(result.Data);
                     if (result.Success)
@@ -222,8 +228,6 @@ public class UserFromViewModel : BaseViewModel
                 {
                     var result = await _userService.CreateEmployee(User as EmployeeModel);
                     
-                    var json = JsonConvert.SerializeObject(User);
-                    Console.WriteLine("JSON QUE SE ENVIA: " + json);
                     Console.WriteLine(result.Data);
                     if (result.Success)
                     {
