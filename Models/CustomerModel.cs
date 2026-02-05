@@ -20,15 +20,20 @@ public class CustomerModel : UserModel
     [JsonProperty("vip")]
     public bool Vip { get; set; }
 
+        
+    [JsonProperty("birthDate")]
+    public DateTimeKind BirthDate { get; set; }    
+    
     public string VipText => Vip ? "Sí" : "No";
     
-    public CustomerModel(string userId, string email, string role, string password, string firstName, string lastName, string photo,  string gender, string dni, string city, bool vip) :
+    public CustomerModel(string userId, string email, string role, string password, string firstName, string lastName, string photo,  string gender, string dni, string city, bool vip, DateTimeKind birthDate) :
         base(userId, email, role, password, firstName, lastName, photo)
     {
         Gender = gender;
         Dni = dni;
         City = city;
         Vip = vip;
+        BirthDate = birthDate;
     }
     
     public CustomerModel() {}
