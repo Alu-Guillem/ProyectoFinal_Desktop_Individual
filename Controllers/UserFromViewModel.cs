@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Newtonsoft.Json;
 using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
@@ -22,6 +23,22 @@ public class UserFromViewModel : BaseViewModel
             OnPropertyChanged(nameof(User));
         }
     }
+    
+    
+    private bool _isEditing;
+    public bool IsEditing
+    {
+        get => _isEditing;
+        set
+        {
+            _isEditing = value;
+            OnPropertyChanged(nameof(IsEditing));
+            OnPropertyChanged(nameof(IsTextBoxEnabled)); 
+        }
+    }
+
+    public bool IsTextBoxEnabled => !IsEditing;
+    public string Visibility => IsEditing ? "Hidden" : "Visibility";
     
     public string FirstName
     {
@@ -55,7 +72,90 @@ public class UserFromViewModel : BaseViewModel
         }
     }
 
+    public string Email
+    {
+        get => User.Email;
+        set
+        {
+            User.Email = value;
+            OnPropertyChanged(nameof(Email));
+        }
+    }
 
+    public string Role
+    {
+        get => User.Role;
+        set
+        {
+            User.Role = value.ToLower();
+            OnPropertyChanged(nameof(Role));
+        }
+    }
+    
+    public string Gender
+    {
+        get 
+        {
+            return User is CustomerModel customer ? customer.Gender : string.Empty;
+        }
+        set
+        {
+            if (User is CustomerModel customer)
+            {
+                customer.Gender = value;
+                OnPropertyChanged(nameof(Gender));
+            }
+        }
+    }
+    
+    public string Dni
+    {
+        get 
+        {
+            return User is CustomerModel customer ? customer.Dni : string.Empty;
+        }
+        set
+        {
+            if (User is CustomerModel customer)
+            {
+                customer.Dni = value;
+                OnPropertyChanged(nameof(Dni));
+            }
+        }
+    }
+    
+    public DateTimeKind BirthDate
+    {
+        get 
+        {
+            return User is CustomerModel customer ? customer.BirthDate : DateTimeKind.Utc;
+        }
+        set
+        {
+            if (User is CustomerModel customer)
+            {
+                customer.BirthDate = value;
+                OnPropertyChanged(nameof(Dni));
+            }
+        }
+    }    
+    
+    public string City
+    {
+        get 
+        {
+            return User is CustomerModel customer ? customer.City : string.Empty;
+        }
+        set
+        {
+            if (User is CustomerModel customer)
+            {
+                customer.City = value;
+                OnPropertyChanged(nameof(City));
+            }
+        }
+    }
+    
     public string FullName => $"{User.FirstName} {User.LastName}";
     
     private RelayCommand _saveCommand;
@@ -68,26 +168,85 @@ public class UserFromViewModel : BaseViewModel
             return;
         }
 
-        try
+        if (IsEditing)
         {
-            var result = await _userService.UpdateUser(User);
-            Console.WriteLine(result.Data);
-            if (result.Success)
+            try
             {
+                var result = await _userService.UpdateUser(User);
+                Console.WriteLine(result.Data);
+                if (result.Success)
+                {
                 
 
-                MessageBox.Show($"Usuario actualizado: {result.Data.FirstName}");
+                    MessageBox.Show($"Usuario actualizado: {result.Data.FirstName}");
 
+                }
+                else
+                {
+                    MessageBox.Show($"Error al guardar: {result.Error}");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            } 
+        }
+        else
+        {
+            if (User is CustomerModel customerModel)
+            {
+                try
+                {
+                    var result = await _userService.CreateCustomer(customerModel);
+                    Console.WriteLine(result.Data);
+                    if (result.Success)
+                    {
+                
+
+                        MessageBox.Show($"Usuario Creado: {result.Data.FirstName}");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error al crear: {result.Error}");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                } 
             }
             else
             {
-                MessageBox.Show($"Error al guardar: {result.Error}");
+                try
+                {
+                    var result = await _userService.CreateEmployee(User as EmployeeModel);
+                    
+                    var json = JsonConvert.SerializeObject(User);
+                    Console.WriteLine("JSON QUE SE ENVIA: " + json);
+                    Console.WriteLine(result.Data);
+                    if (result.Success)
+                    {
+                
+
+                        MessageBox.Show($"Usuario Creado: {result.Data.FirstName}");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error al crear: {result.Error}");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                } 
             }
-        }
-        catch (Exception ex)
-        {
+            
 
         }
+        
+
     }
 
 }
