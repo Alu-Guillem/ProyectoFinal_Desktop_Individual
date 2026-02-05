@@ -102,69 +102,45 @@
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="0 5 0 0">
+                <Grid Margin="0 10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Row="0" Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 15 15">
                         <Label Content="Email" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Row="1"
-                                   Text="{Binding User.Email}"                                   
-                                   Foreground="{StaticResource Text-Secondary}"
-                                   FontSize="18"/>
-                    </Grid>
+                        <TextBox Text="{Binding Email}"
+                                 IsEnabled="{Binding IsTextBoxEnabled}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
 
-                    <Grid Grid.Row="0" Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="15 0 0 15">
+                        <Label Content="Dni" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding Dni}" 
+                                 IsEnabled="{Binding IsTextBoxEnabled}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
 
-                        <Label Content="DNI" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Row="1"
-                                   Text="{Binding User.Dni}"                                   
-                                   Foreground="{StaticResource Text-Secondary}"
-                                   FontSize="18"/>
-                    </Grid>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 15 0">
+                        <Label Content="Genero" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <ComboBox Text="{Binding Gender}" IsEnabled="{Binding IsTextBoxEnabled}" Style="{StaticResource DropdownStyle}" Width="200" HorizontalAlignment="Left">
+                            <ComboBoxItem Content="Masculino" />
+                            <ComboBoxItem Content="Femenino" />
+                            <ComboBoxItem Content="Prefiero no decirlo" />
+                        </ComboBox>
+                    </StackPanel>
 
-                    <Grid Grid.Row="1" Grid.Column="0" Margin="0,15,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Content="Género" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Row="1"
-                                   Text="{Binding User.Gender}"                                   
-                                   Foreground="{StaticResource Text-Secondary}"
-                                   FontSize="18"/>
-                    </Grid>
-
-                    <Grid Grid.Row="1" Grid.Column="2" Margin="0,15,0,0" HorizontalAlignment="Left">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
                         <Label Content="Ciudad" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Row="1"
-                                   Text="{Binding User.City}"                                   
-                                   Foreground="{StaticResource Text-Secondary}"
-                                   FontSize="18"/>
-                    </Grid>
+                        <TextBox Text="{Binding City}" 
+                                 IsEnabled="{Binding IsTextBoxEnabled}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
                 </Grid>
                 
 
