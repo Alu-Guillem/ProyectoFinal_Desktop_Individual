@@ -11,7 +11,7 @@ public class UserService
         return await _api.Get<List<UserModel>>("users");
     }
     
-    public async Task<ApiResult<List<EmployeeModel>>> GetAllEmployee()
+    public async Task<ApiResult<List<EmployeeModel>>> GetAllEmployees()
     {
         return await _api.Get<List<EmployeeModel>>("users/employees");
     }

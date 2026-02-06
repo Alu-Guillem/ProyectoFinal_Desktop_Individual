@@ -25,7 +25,7 @@ public class EmployeesViewModel : BaseViewModel
 
     public async Task LoadEmployees()
     {
-        var result = await _userService.GetAllEmployee();
+        var result = await _userService.GetAllEmployees();
         
         Employees.Clear();
 
