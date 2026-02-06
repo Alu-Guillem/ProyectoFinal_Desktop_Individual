@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Collections.Specialized;
 using System.Windows;
 
 namespace PereMaria.GestorHotel;

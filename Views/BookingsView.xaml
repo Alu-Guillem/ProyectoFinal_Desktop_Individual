@@ -6,12 +6,69 @@
              xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
              xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{x:Static controllers:BookingsController.Instance}">
-        <Grid>
-        <TextBlock Text="BookingsView Works!"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24" />
+             d:DesignHeight="600" d:DesignWidth="800"
+             DataContext="{x:Static controllers:BookingsViewModel.Instance}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Button Style="{StaticResource ActionButtonStyle}" DockPanel.Dock="Left">Nueva Reserva</Button>
+            <Button Style="{StaticResource PrimaryButtonStyle}" DockPanel.Dock="Right">Restablecer</Button>
+        </DockPanel>
+        <Border Grid.Row="1" Style="{StaticResource TableContainerStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Header Row -->
+                <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Huesped" Grid.Column="0" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Entrada" Grid.Column="1" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Salida" Grid.Column="2" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Creación" Grid.Column="3" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Precio" Grid.Column="4" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                    </Grid>
+                </Border>
+                <!-- Data Rows -->
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding Bookings}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource TableRowStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2.5*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Client}" Grid.Column="0" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prueba" Grid.Column="1" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prueba" Grid.Column="2" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prueba" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prueba" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

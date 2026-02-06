@@ -58,6 +58,7 @@
 
     <!--#region Typography -->
     <FontFamily x:Key="Font-Primary">Montserrat</FontFamily>
+    <FontFamily x:Key="Material-Icons">/Resources/Fonts/#Material Icons Round</FontFamily>
     <!--#endregion-->
 
 

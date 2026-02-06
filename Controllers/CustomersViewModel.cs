@@ -4,13 +4,13 @@ using PereMaria.GestorHotel.Models;
 
 namespace PereMaria.GestorHotel.Controllers;
 
-public class CustomersController : INotifyPropertyChanged
+public class CustomersViewModel : BaseViewModel
 {
     // Singleton
-    private static CustomersController? _instance;
-    public static CustomersController Instance => _instance ??= new CustomersController();
+    private static CustomersViewModel? _instance;
+    public static CustomersViewModel Instance => _instance ??= new CustomersViewModel();
 
-    private CustomersController()
+    private CustomersViewModel()
     {
         _currentCustomer = new CustomerModel();
     }
@@ -29,13 +29,5 @@ public class CustomersController : INotifyPropertyChanged
             _currentCustomer = value;
             OnPropertyChanged(nameof(CurrentCustomer));
         }
-    }
-
-    // ========== INotifyPropertyChanged ==========
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

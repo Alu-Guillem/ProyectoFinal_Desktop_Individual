@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:services="clr-namespace:PereMaria.GestorHotel.Services"
+        xmlns:controller="clr-namespace:PereMaria.GestorHotel.Controllers"
         xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
         mc:Ignorable="d"
         Title="Pere Maria | Gestor de Hotel" Height="720" Width="1280"
@@ -11,7 +11,7 @@
         WindowState="Maximized">
     <Grid TextElement.FontFamily="{StaticResource Font-Primary}" TextElement.Foreground="{StaticResource Text-Primary}">
         <Grid.Background>
-            <StaticResource ResourceKey="CosmicBackground"/>
+            <StaticResource ResourceKey="CosmicBackground" />
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -23,9 +23,9 @@
         </Grid.RowDefinitions>
         <components:NavigationBar Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"></components:NavigationBar>
         <components:HeaderBar Grid.Column="1" Grid.Row="0"></components:HeaderBar>
-        <ContentControl Grid.Column="1" Grid.Row="1"
-                        Content="{Binding CurrentView, Source={x:Static services:NavigationService.Instance}}" />
-        
-        
+        <Border Grid.Column="1" Grid.Row="1" Padding="40 20">
+            <ContentControl
+                Content="{Binding CurrentView, Source={x:Static controller:NavigationViewModel.Instance}}" />
+        </Border>
     </Grid>
 </Window>
