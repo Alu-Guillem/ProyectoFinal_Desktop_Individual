@@ -7,7 +7,7 @@
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800"
-    DataContext="{x:Static controllers:CustomersViewModel.Instance}">
+>
  <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -88,7 +88,8 @@
                                             Content="Eliminar" 
                                             Style="{StaticResource ActionButtonStyle}" 
                                             Background="{StaticResource Bg-Danger}"
-                                            Command="{Binding}">
+                                            Command="{Binding DataContext.DeleteCustomerCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding}">
                                     </Button>
                                     
                                 </Grid>

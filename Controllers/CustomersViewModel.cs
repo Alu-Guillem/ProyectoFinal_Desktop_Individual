@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
@@ -33,14 +34,32 @@ public class CustomersViewModel : BaseViewModel
 
     public async Task LoadCustomers()
     {
-        var result = await _userService.GetAllCustomers();
-        
-        Customers.Clear();
 
-        foreach (CustomerModel customer in result.Data)
+        try
         {
-            Customers.Add(customer);
+            var result = await _userService.GetAllCustomers();
+
+
+            if (result.Success)
+            {
+                Customers.Clear();
+
+                foreach (CustomerModel customer in result.Data)
+                {
+                    Customers.Add(customer);
+                }
+            }
+            
+
+            
         }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+
     }
     
     // El customer que se está editando/creando actualmente
@@ -87,6 +106,58 @@ public class CustomersViewModel : BaseViewModel
 
         NavigationViewModel.Instance.NavigateTo<CustomersFormView>();
     }
+
+    private RelayCommand _delteCustomerCommand;
+
+    public RelayCommand DeleteCustomerCommand => _delteCustomerCommand ??= new RelayCommand(async parameter => DeleteCustomer(parameter));
+
+    private async Task DeleteCustomer(object parameter)
+    {
+        if (parameter is not CustomerModel customer) return;
+        Console.WriteLine("Entro");
+
+        try
+        {
+            var result = await _userService.DeleteUser(customer.UserId);
+
+            Console.WriteLine(result.Data);
+            Console.WriteLine(result);
+            Console.WriteLine(result.Success);
+
+
+            if (result.Success)
+            {
+                // Buscamos por ID (UserId) que es lo más fiable
+                var idABorrar = customer.UserId;
+
+                // Ejecutamos en el Dispatcher para asegurar que la UI responda
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    // Buscamos el objeto que coincide con ese ID en la lista real
+                    var itemInList = Customers.FirstOrDefault(x => x.UserId == idABorrar);
+
+                    if (itemInList != null)
+                    {
+                        Customers.Remove(itemInList);
+                        Console.WriteLine("Eliminado de Customers");
+                    }
+
+                    // Forzamos el refresco de la vista filtrada
+                    CustomersView.Refresh();
+
+                    // Notificamos el cambio de la propiedad de la vista
+                    OnPropertyChanged(nameof(CustomersView));
+                });
+            }
+        }
+        catch
+        {
+
+        }
+
+
+    }
+    
     
     private bool ChangedEmail(object obj)
     {

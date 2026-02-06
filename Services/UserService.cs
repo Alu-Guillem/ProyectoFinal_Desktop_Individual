@@ -45,6 +45,11 @@ public class UserService
     {
         return await _api.Get<UserModel>("users/me");
     }
+    
+    public async Task<ApiResult<String>> DeleteUser(string id)
+    {
+        return await _api.Delete<String>($"users/{id}");
+    }
 
 
 
