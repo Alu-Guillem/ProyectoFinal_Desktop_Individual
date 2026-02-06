@@ -137,6 +137,44 @@ public class ApiService
             };
         }
     }    
+    
+    public async Task<ApiResult<T>> Delete<T>(string route) where T : class
+    {
+        
+        try
+        {
+            var response = await _httpClient.DeleteAsync(route);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                return new ApiResult<T>
+                {
+                    Success = true,
+                    Data = JsonConvert.DeserializeObject<T>(content),
+                    StatusCode = response.StatusCode
+                };
+            }
+
+            return new ApiResult<T>
+            {
+                Success = false,
+                Error = TryParseError(content),
+                StatusCode = response.StatusCode
+            };
+        }
+        catch (HttpRequestException ex)
+        {
+            return new ApiResult<T>
+            {
+                Success = false,
+                Error = new ApiError { Message = "No se pudo conectar con el servidor" },
+                StatusCode = 0
+            };
+        }
+    }    
+    
 
     private static ApiError TryParseError(string json)
     {
