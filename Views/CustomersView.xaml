@@ -7,7 +7,7 @@
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800"
->
+    DataContext="{x:Static controllers:CustomersViewModel.Instance}">
  <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -49,7 +49,7 @@
                     </Grid>
                 </Border>
                 <!-- Data Rows -->
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding CustomersView }">
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding CustomersView, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Style="{StaticResource TableRowStyle}">
@@ -68,12 +68,12 @@
                                     <TextBlock Text="{Binding Dni}" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding VipText}" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                     
-                                    <Button Grid.Row="0"
+                                    <Button Grid.Column="0"
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Focusable="False"
                                         Cursor="Hand"
-                                        Grid.ColumnSpan="6"
+                                        Grid.ColumnSpan="5"
                                         Command="{Binding DataContext.OpenCustomerFormCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                         CommandParameter="{Binding}">
 

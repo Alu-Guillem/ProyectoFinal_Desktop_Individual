@@ -114,47 +114,21 @@ public class CustomersViewModel : BaseViewModel
     private async Task DeleteCustomer(object parameter)
     {
         if (parameter is not CustomerModel customer) return;
-        Console.WriteLine("Entro");
 
         try
         {
             var result = await _userService.DeleteUser(customer.UserId);
 
-            Console.WriteLine(result.Data);
-            Console.WriteLine(result);
-            Console.WriteLine(result.Success);
-
-
             if (result.Success)
             {
-                // Buscamos por ID (UserId) que es lo más fiable
-                var idABorrar = customer.UserId;
-
-                // Ejecutamos en el Dispatcher para asegurar que la UI responda
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    // Buscamos el objeto que coincide con ese ID en la lista real
-                    var itemInList = Customers.FirstOrDefault(x => x.UserId == idABorrar);
-
-                    if (itemInList != null)
-                    {
-                        Customers.Remove(itemInList);
-                        Console.WriteLine("Eliminado de Customers");
-                    }
-
-                    // Forzamos el refresco de la vista filtrada
-                    CustomersView.Refresh();
-
-                    // Notificamos el cambio de la propiedad de la vista
-                    OnPropertyChanged(nameof(CustomersView));
-                });
+                    var customerToRemove = Customers.First(c => c.UserId == customer.UserId);
+                    Customers.Remove(customerToRemove);
             }
         }
-        catch
+        catch (Exception ex)
         {
-
+            Console.WriteLine($"Error al eliminar: {ex.Message}");
         }
-
 
     }
     
