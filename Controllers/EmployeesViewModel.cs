@@ -67,4 +67,33 @@ public class EmployeesViewModel : BaseViewModel
 
         NavigationViewModel.Instance.NavigateTo<EmployeesFormView>();
     }
+    
+    private RelayCommand _delteEmployeeCommand;
+    public RelayCommand DeleteEmployeeCommand => _delteEmployeeCommand ??= new RelayCommand(async parameter => DeleteEmployee(parameter));
+
+    private async Task DeleteEmployee(object parameter)
+    {
+        if (parameter is not EmployeeModel employee) return;
+        Console.WriteLine($"Deleting {employee.UserId}");
+        
+        try
+        {
+            var result = await _userService.DeleteUser(employee.UserId);
+
+            if (result.Success)
+            {
+                var employeeToRemove = Employees.First(e => e.UserId == employee.UserId);
+                Employees.Remove(employeeToRemove);
+            }
+            else
+            {
+                Console.WriteLine("No se elimino");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al eliminar: {ex.Message}");
+        }
+
+    }
 }

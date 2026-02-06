@@ -81,18 +81,20 @@
                                         </StackPanel>
                                     </StackPanel>
 
-                                    <Button Grid.Row="3" Content="Activo" 
+                                    <Button Grid.Row="3" Content="Eliminar" 
                                             Style="{StaticResource PrimaryButtonStyle}" 
-                                            Background="{StaticResource Bg-Success}" 
+                                            Background="{StaticResource Bg-Danger}" 
                                             Width="110" Height="36" 
-                                            HorizontalAlignment="Center"/>
+                                            HorizontalAlignment="Center"
+                                            Command="{Binding DataContext.DeleteEmployeeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding}"/>
                                     
                                     <Button Grid.Row="0"
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Focusable="False"
                                         Cursor="Hand"
-                                        Grid.RowSpan="4"
+                                        Grid.RowSpan="3"
                                         Command="{Binding DataContext.OpenEmployeeFormCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                         CommandParameter="{Binding}">
                                         <Button.Template>
