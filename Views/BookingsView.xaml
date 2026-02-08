@@ -15,8 +15,11 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" LastChildFill="False">
-            <Button Style="{StaticResource ActionButtonStyle}" DockPanel.Dock="Left">Nueva Reserva</Button>
-            <Button Style="{StaticResource PrimaryButtonStyle}" DockPanel.Dock="Right">Restablecer</Button>
+            <Button Style="{StaticResource ActionButtonStyle}" DockPanel.Dock="Left"
+                    Command="{Binding NavigateFormCommand}">
+                Nueva Reserva
+            </Button>
+            <Button Style="{StaticResource IconBaseButton}" Command="{Binding ReloadCommand}" DockPanel.Dock="Right">refresh</Button>
         </DockPanel>
         <Border Grid.Row="1" Style="{StaticResource TableContainerStyle}">
             <Grid>
@@ -30,6 +33,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2.5*" />
+                            <ColumnDefinition Width="2.5*" />
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="1.5*" />
                             <ColumnDefinition Width="1.5*" />
@@ -37,11 +41,18 @@
                             <ColumnDefinition Width="1.5*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Huesped" Grid.Column="0" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Entrada" Grid.Column="1" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Salida" Grid.Column="2" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Creación" Grid.Column="3" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Precio" Grid.Column="4" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Huesped" Grid.Column="0" Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Habitación" Grid.Column="1" Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Entrada" Grid.Column="2" Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Salida" Grid.Column="3" Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Creación" Grid.Column="4" Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Precio" Grid.Column="5" Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
                     </Grid>
                 </Border>
                 <!-- Data Rows -->
@@ -49,8 +60,15 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Style="{StaticResource TableRowStyle}">
+                                <Border.InputBindings>
+                                    <MouseBinding
+                                        Gesture="LeftClick"
+                                        Command="{Binding DataContext.NavigateFormCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}" />
+                                </Border.InputBindings>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2.5*" />
                                         <ColumnDefinition Width="2.5*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="1.5*" />
@@ -58,16 +76,46 @@
                                         <ColumnDefinition Width="1.5*" />
                                         <ColumnDefinition Width="1.5*" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Client}" Grid.Column="0" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="1" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="2" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                        <TextBlock
+                                            Style="{StaticResource TableMainText}" VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="Customer.FirstName"></Binding>
+                                                    <Binding Path="Customer.LastName"></Binding>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock
+                                            Style="{StaticResource TableSubText}"
+                                            Text="VIP"
+                                            Visibility="{Binding Customer.IsVip, Converter={StaticResource BoolToVisibility}}">
+
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding RoomId}" Grid.Column="1"
+                                               Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding StartDate}" Grid.Column="2"
+                                               Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding EndDate}" Grid.Column="3"
+                                               Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding BookingDate}" Grid.Column="4"
+                                               Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding PricePerNight, StringFormat={}{0:c}}" Grid.Column="5"
+                                               Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                 </Grid>
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+
+                <!-- Loading overlay -->
+                <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
+                    <TextBlock FontWeight="UltraBold">Cargando...</TextBlock>
+                </Border>
             </Grid>
         </Border>
     </Grid>

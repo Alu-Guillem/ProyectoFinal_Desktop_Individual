@@ -6,12 +6,207 @@
     xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="300"
+    d:DesignHeight="600" d:DesignWidth="1024"
     DataContext="{x:Static controllers:BookingsViewModel.Instance}">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomerDropdownItemTemplate">
+            <Border Padding="6">
+                <StackPanel>
+                    <TextBlock Foreground="#2F2F2F" FontSize="14">
+                        <Run Text="{Binding FirstName}" />
+                        <Run Text=" " />
+                        <Run Text="{Binding LastName}" />
+                    </TextBlock>
+                    <TextBlock Foreground="{StaticResource Text-Secondary}" FontSize="12"
+                        Text="{Binding Dni}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="RoomDropdownItemTemplate">
+            <TextBlock Text="{Binding Name}" Foreground="#2F2F2F" FontSize="14" />
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="BookingsFormView Works!"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <TextBlock Text="{Binding FormTitle}"
+                FontSize="18" FontWeight="Bold"
+                VerticalAlignment="Center" />
+            <Border Background="#33FFFFFF" CornerRadius="12" Padding="8 2"
+                VerticalAlignment="Center" Margin="10 0"
+                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="{Binding CurrentBooking.BookingId}"></TextBlock>
+            </Border>
+            <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding SaveBookingCommand}">
+                Guardar
+            </Button>
+            <Button DockPanel.Dock="Right" Style="{StaticResource ActionButtonStyle}"
+                Command="{Binding CancelCommand}">Cancelar</Button>
+        </DockPanel>
+        <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
+            <TextBlock FontWeight="UltraBold">Cargando...</TextBlock>
+        </Border>
+        <Grid Grid.Row="1" Margin="0 20 80 0"
+            Visibility="{Binding IsNotLoading, Converter={StaticResource BoolToVisibility}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Margin="0 10" Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Cliente
+                </Label>
+                <ComboBox Grid.Column="1"
+                    Style="{StaticResource EditableDropdownStyle}"
+                    ItemsSource="{Binding FilteredCustomers}"
+                    SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
+                    Text="{Binding UserSearchText, UpdateSourceTrigger=PropertyChanged}"
+                    ItemTemplate="{StaticResource CustomerDropdownItemTemplate}"
+                    IsEnabled="{Binding IsCreating}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Habitación
+                </Label>
+                <ComboBox Grid.Column="1"
+                    Style="{StaticResource EditableDropdownStyle}"
+                    ItemsSource="{Binding FilteredRooms}"
+                    SelectedItem="{Binding SelectedRoom, Mode=TwoWay}"
+                    Text="{Binding RoomSearchText, UpdateSourceTrigger=PropertyChanged}"
+                    ItemTemplate="{StaticResource RoomDropdownItemTemplate}"
+                    IsEnabled="{Binding IsCreating}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Cantidad de huespedes
+                </Label>
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1"
+                    Text="{Binding CurrentBooking.Occupants}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Fecha de entrada
+                </Label>
+                <DatePicker Grid.Column="1"
+                    Style="{StaticResource DatePickerStyle}"
+                    SelectedDateFormat="Short">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="CurrentBooking.StartDate" Mode="TwoWay"
+                            Converter="{StaticResource DateStringToDateTime}" />
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Fecha de salida
+                </Label>
+                <DatePicker Grid.Column="1"
+                    Style="{StaticResource DatePickerStyle}"
+                    SelectedDateFormat="Short">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="CurrentBooking.EndDate" Mode="TwoWay"
+                            Converter="{StaticResource DateStringToDateTime}" />
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Total de noches
+                </Label>
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" IsEnabled="False"
+                    Text="{Binding CurrentBooking.TotalNights}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="3" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Precio por noche
+                </Label>
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" IsEnabled="False"
+                    Text="{Binding CurrentBooking.PricePerNight, StringFormat=C}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="3" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Precio total
+                </Label>
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" IsEnabled="False"
+                    Text="{Binding CurrentBooking.TotalPrice, StringFormat=C}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="4" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Descuento
+                </Label>
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1"
+                    Text="{Binding CurrentBooking.Discount}" />
+            </Grid>
+            <Grid Margin="0 10" Grid.Row="4" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition SharedSizeGroup="InputColumn" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                    Estado de la reserva
+                </Label>
+                <DockPanel Grid.Column="1">
+                    <Button DockPanel.Dock="Right" Style="{StaticResource ActionButtonStyle}"
+                        Background="{StaticResource Bg-Danger}" FontSize="12"
+                        Padding="8"
+                        Command="{Binding CancelBookingCommand}"
+                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibility}}">
+                        Cancelar la reserva
+                    </Button>
+                    <TextBox Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding CurrentBooking.Status}"
+                        IsEnabled="False" />
+                </DockPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
