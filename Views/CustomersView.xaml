@@ -6,12 +6,98 @@
     xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="300"
+    d:DesignHeight="600" d:DesignWidth="800"
     DataContext="{x:Static controllers:CustomersViewModel.Instance}">
-    <Grid>
-        <TextBlock Text="CustomersView Works!"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24" />
+ <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <TextBlock Text="Buscar:" Foreground="{StaticResource Text-Primary}" FontSize="15" VerticalAlignment="Center" Margin="0 0 15 0"></TextBlock>
+            <TextBox Text="{Binding FiltrerText,  UpdateSourceTrigger=PropertyChanged }" Style="{StaticResource TextBoxStyle}" Width="200"></TextBox>
+            <Button Command="{Binding OpenCustomerFormCommand}" 
+                    CommandParameter="{x:Null}" 
+                    Style="{StaticResource ActionButtonStyle}" 
+                    DockPanel.Dock="Right">Nuevo Usuario</Button>
+        </DockPanel>
+        <Border Grid.Row="1" Style="{StaticResource TableContainerStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Header Row -->
+                <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Foto" Grid.Column="0" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Nombre" Grid.Column="1" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Email" Grid.Column="2" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="DNI" Grid.Column="3" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="VIP" Grid.Column="4" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                    </Grid>
+                </Border>
+                <!-- Data Rows -->
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding CustomersView, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource TableRowStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding  Photo}" Grid.Column="0" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding FirstName}" Grid.Column="1" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Email}" Grid.Column="2" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Dni}" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding VipText}" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                    
+                                    <Button Grid.Column="0"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Focusable="False"
+                                        Cursor="Hand"
+                                        Grid.ColumnSpan="5"
+                                        Command="{Binding DataContext.OpenCustomerFormCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}">
+
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" />
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    
+                                    <Button Grid.Column="5" 
+                                            Content="Eliminar" 
+                                            Style="{StaticResource ActionButtonStyle}" 
+                                            Background="{StaticResource Bg-Danger}"
+                                            Command="{Binding DataContext.DeleteCustomerCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding}">
+                                    </Button>
+                                    
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

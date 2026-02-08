@@ -2,6 +2,7 @@
 using System.Data;
 using System.Collections.Specialized;
 using System.Windows;
+using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel;
 
@@ -13,7 +14,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         // TODO: Initialize login window if not authenticated
-        MainWindow = new MainWindow();
+        MainWindow = new Login();
         MainWindow.Show();
         base.OnStartup(e);
     }
