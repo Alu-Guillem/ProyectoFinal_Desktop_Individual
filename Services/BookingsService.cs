@@ -150,6 +150,25 @@ public class BookingsService
         }
     }
 
+    public async Task<BookingModel?> PayBooking(string id)
+    {
+        try
+        {
+            var res = await _apiService.Put<BookingModel>($"bookings/{id}/pay", new object());
+
+            return res.Error != null ? throw new Exception(res.Error.Message) : res.Data;
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new Exception(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw new Exception("Error al conectar con el servidor");
+        }
+    }
+
     public async Task<bool> DeleteBooking(string id)
     {
         try

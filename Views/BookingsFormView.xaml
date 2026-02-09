@@ -1,29 +1,73 @@
 ﻿<UserControl x:Class="PereMaria.GestorHotel.Views.BookingsFormView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
-    xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
-    mc:Ignorable="d"
-    d:DesignHeight="600" d:DesignWidth="1024"
-    DataContext="{x:Static controllers:BookingsViewModel.Instance}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
+             xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="1024"
+             DataContext="{x:Static controllers:BookingsViewModel.Instance}">
     <UserControl.Resources>
+        <Style x:Key="PayButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource PrimaryButtonStyle}">
+            <Setter Property="Background"
+                    Value="{StaticResource Bg-Success}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource Bg-White}" />
+            <Setter Property="FontSize"
+                    Value="15" />
+            <Setter Property="Padding"
+                    Value="26,14" />
+            <Setter Property="MinWidth"
+                    Value="220" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#22A05A" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DeleteBookingButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Background"
+                    Value="{StaticResource Bg-Danger}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource Bg-White}" />
+            <Setter Property="Padding"
+                    Value="18,10" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#E0525E" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <DataTemplate x:Key="CustomerDropdownItemTemplate">
             <Border Padding="6">
                 <StackPanel>
-                    <TextBlock Foreground="#2F2F2F" FontSize="14">
+                    <TextBlock Foreground="#2F2F2F"
+                               FontSize="14">
                         <Run Text="{Binding FirstName}" />
-                        <Run Text=" " />
+                        <Run Text="
+                        " />
                         <Run Text="{Binding LastName}" />
                     </TextBlock>
-                    <TextBlock Foreground="{StaticResource Text-Secondary}" FontSize="12"
-                        Text="{Binding Dni}" />
+                    <TextBlock Foreground="{StaticResource Text-Secondary}"
+                               FontSize="12"
+                               Text="{Binding Dni}" />
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="RoomDropdownItemTemplate">
-            <TextBlock Text="{Binding Name}" Foreground="#2F2F2F" FontSize="14" />
+            <TextBlock Text="{Binding Name}"
+                       Foreground="#2F2F2F"
+                       FontSize="14" />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -31,28 +75,53 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" LastChildFill="False">
+        <DockPanel Grid.Row="0"
+                   LastChildFill="False">
             <TextBlock Text="{Binding FormTitle}"
-                FontSize="18" FontWeight="Bold"
-                VerticalAlignment="Center" />
-            <Border Background="#33FFFFFF" CornerRadius="12" Padding="8 2"
-                VerticalAlignment="Center" Margin="10 0"
-                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibility}}">
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center" />
+            <Border Background="#33FFFFFF"
+                    CornerRadius="12"
+                    Padding="8 2"
+                    VerticalAlignment="Center"
+                    Margin="10 0"
+                    Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock Text="{Binding CurrentBooking.BookingId}"></TextBlock>
             </Border>
-            <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButtonStyle}"
-                Command="{Binding SaveBookingCommand}">
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding SaveBookingCommand}">
                 Guardar
             </Button>
-            <Button DockPanel.Dock="Right" Style="{StaticResource ActionButtonStyle}"
-                Command="{Binding CancelCommand}">Cancelar</Button>
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource PayButtonStyle}"
+                    Command="{Binding PayBookingCommand}"
+                    Visibility="{Binding IsPaymentPending, Converter={StaticResource BoolToVisibility}}">
+                Marcar como pagada
+            </Button>
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource DeleteBookingButtonStyle}"
+                    Command="{Binding DeleteBookingCommand}"
+                    Visibility="{Binding CanDeleteBooking, Converter={StaticResource BoolToVisibility}}">
+                Eliminar reserva
+            </Button>
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource ActionButtonStyle}"
+                    Command="{Binding CancelCommand}">
+                Cancelar
+            </Button>
         </DockPanel>
-        <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
-            <TextBlock FontWeight="UltraBold">Cargando...</TextBlock>
+        <Border Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
+            <TextBlock FontWeight="UltraBold">Guardando...</TextBlock>
         </Border>
-        <Grid Grid.Row="1" Margin="0 20 80 0"
-            Visibility="{Binding IsNotLoading, Converter={StaticResource BoolToVisibility}}">
+        <Grid Grid.Row="1"
+              Margin="0 20 80 0"
+              Visibility="{Binding IsNotLoading, Converter={StaticResource BoolToVisibility}}"
+              IsEnabled="{Binding IsFormEnabled}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -64,147 +133,328 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Margin="0 10" Grid.Row="0" Grid.Column="0">
+            <Grid Margin="0 10"
+                  Grid.Row="0"
+                  Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Cliente
                 </Label>
-                <ComboBox Grid.Column="1"
-                    Style="{StaticResource EditableDropdownStyle}"
-                    ItemsSource="{Binding FilteredCustomers}"
-                    SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
-                    Text="{Binding UserSearchText, UpdateSourceTrigger=PropertyChanged}"
-                    ItemTemplate="{StaticResource CustomerDropdownItemTemplate}"
-                    IsEnabled="{Binding IsCreating}" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBox x:Name="CustomerSearchBox"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding CustomerSearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding IsCreating}"
+                                 GotFocus="CustomerSearchBox_GotFocus"
+                                 LostFocus="CustomerSearchBox_LostFocus"
+                                 TextChanged="CustomerSearchBox_TextChanged" />
+                        <Popup x:Name="CustomerPopup"
+                               PlacementTarget="{Binding ElementName=CustomerSearchBox}"
+                               Placement="Bottom"
+                               IsOpen="{Binding IsCustomerPopupOpen, Mode=TwoWay}"
+                               AllowsTransparency="True"
+                               StaysOpen="True"
+                               PopupAnimation="Slide">
+                            <Grid MinWidth="{Binding ElementName=CustomerSearchBox, Path=ActualWidth}"
+                                  MaxHeight="220">
+                                <Border
+                                    Background="{StaticResource Bg-White}"
+                                    BorderBrush="{StaticResource Bg-Purple-Accent}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="4">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="#2D1B4F"
+                                            BlurRadius="12"
+                                            ShadowDepth="2"
+                                            Opacity="0.35" />
+                                    </Border.Effect>
+                                    <ListBox
+                                        x:Name="CustomerList"
+                                        ItemsSource="{Binding FilteredCustomers}"
+                                        SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
+                                        ItemTemplate="{StaticResource CustomerDropdownItemTemplate}"
+                                        SelectionChanged="CustomerList_SelectionChanged"
+                                        LostFocus="CustomerList_LostFocus" />
+                                </Border>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <TextBlock Grid.Row="1"
+                               Foreground="{StaticResource Bg-Danger}"
+                               FontSize="11"
+                               Margin="4,4,0,0"
+                               Text="{Binding CustomerError}"
+                               Visibility="{Binding CustomerError, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                </Grid>
             </Grid>
-            <Grid Margin="0 10" Grid.Row="0" Grid.Column="1">
+            <Grid Margin="0 10"
+                  Grid.Row="0"
+                  Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Habitación
                 </Label>
-                <ComboBox Grid.Column="1"
-                    Style="{StaticResource EditableDropdownStyle}"
-                    ItemsSource="{Binding FilteredRooms}"
-                    SelectedItem="{Binding SelectedRoom, Mode=TwoWay}"
-                    Text="{Binding RoomSearchText, UpdateSourceTrigger=PropertyChanged}"
-                    ItemTemplate="{StaticResource RoomDropdownItemTemplate}"
-                    IsEnabled="{Binding IsCreating}" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBox x:Name="RoomSearchBox"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding RoomSearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding IsCreating}"
+                                 GotFocus="RoomSearchBox_GotFocus"
+                                 LostFocus="RoomSearchBox_LostFocus"
+                                 TextChanged="RoomSearchBox_TextChanged" />
+                        <Popup x:Name="RoomPopup"
+                               PlacementTarget="{Binding ElementName=RoomSearchBox}"
+                               Placement="Bottom"
+                               IsOpen="{Binding IsRoomPopupOpen, Mode=TwoWay}"
+                               AllowsTransparency="True"
+                               StaysOpen="True"
+                               PopupAnimation="Slide">
+                            <Grid MinWidth="{Binding ElementName=RoomSearchBox, Path=ActualWidth}"
+                                  MaxHeight="220">
+                                <Border
+                                    Background="{StaticResource Bg-White}"
+                                    BorderBrush="{StaticResource Bg-Purple-Accent}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="4">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="#2D1B4F"
+                                            BlurRadius="12"
+                                            ShadowDepth="2"
+                                            Opacity="0.35" />
+                                    </Border.Effect>
+                                    <ListBox
+                                        x:Name="RoomList"
+                                        ItemsSource="{Binding FilteredRooms}"
+                                        SelectedItem="{Binding SelectedRoom, Mode=TwoWay}"
+                                        ItemTemplate="{StaticResource RoomDropdownItemTemplate}"
+                                        SelectionChanged="RoomList_SelectionChanged"
+                                        LostFocus="RoomList_LostFocus" />
+                                </Border>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <TextBlock Grid.Row="1"
+                               Foreground="{StaticResource Bg-Danger}"
+                               FontSize="11"
+                               Margin="4,4,0,0"
+                               Text="{Binding RoomError}"
+                               Visibility="{Binding RoomError, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                </Grid>
             </Grid>
-            <Grid Margin="0 10" Grid.Row="1" Grid.Column="0">
+            <Grid Margin="0 10"
+                  Grid.Row="1"
+                  Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Cantidad de huespedes
                 </Label>
-                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1"
-                    Text="{Binding CurrentBooking.Occupants}" />
+                <StackPanel Grid.Column="1">
+                    <TextBox Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding OccupantsText, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Foreground="{StaticResource Bg-Danger}"
+                        FontSize="11"
+                        Margin="4,4,0,0"
+                        Text="{Binding OccupantsError}"
+                        Visibility="{Binding OccupantsError, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                </StackPanel>
             </Grid>
-            <Grid Margin="0 10" Grid.Row="1" Grid.Column="1">
+            <Grid Margin="0 10"
+                  Grid.Row="1"
+                  Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Fecha de entrada
                 </Label>
-                <DatePicker Grid.Column="1"
-                    Style="{StaticResource DatePickerStyle}"
-                    SelectedDateFormat="Short">
-                    <DatePicker.SelectedDate>
-                        <Binding Path="CurrentBooking.StartDate" Mode="TwoWay"
-                            Converter="{StaticResource DateStringToDateTime}" />
-                    </DatePicker.SelectedDate>
-                </DatePicker>
+                <StackPanel Grid.Column="1">
+                    <DatePicker
+                        Style="{StaticResource DatePickerStyle}"
+                        SelectedDateFormat="Short">
+                        <DatePicker.SelectedDate>
+                            <Binding Path="StartDateText"
+                                     Mode="TwoWay"
+                                     Converter="{StaticResource DateStringToDateTime}" />
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
+                    <TextBlock
+                        Foreground="{StaticResource Bg-Danger}"
+                        FontSize="11"
+                        Margin="4,4,0,0"
+                        Text="{Binding StartDateError}"
+                        Visibility="{Binding StartDateError, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                </StackPanel>
 
             </Grid>
-            <Grid Margin="0 10" Grid.Row="2" Grid.Column="0">
+            <Grid Margin="0 10"
+                  Grid.Row="2"
+                  Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Fecha de salida
                 </Label>
-                <DatePicker Grid.Column="1"
-                    Style="{StaticResource DatePickerStyle}"
-                    SelectedDateFormat="Short">
-                    <DatePicker.SelectedDate>
-                        <Binding Path="CurrentBooking.EndDate" Mode="TwoWay"
-                            Converter="{StaticResource DateStringToDateTime}" />
-                    </DatePicker.SelectedDate>
-                </DatePicker>
+                <StackPanel Grid.Column="1">
+                    <DatePicker
+                        Style="{StaticResource DatePickerStyle}"
+                        SelectedDateFormat="Short">
+                        <DatePicker.SelectedDate>
+                            <Binding Path="EndDateText"
+                                     Mode="TwoWay"
+                                     Converter="{StaticResource DateStringToDateTime}" />
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
+                    <TextBlock
+                        Foreground="{StaticResource Bg-Danger}"
+                        FontSize="11"
+                        Margin="4,4,0,0"
+                        Text="{Binding EndDateError}"
+                        Visibility="{Binding EndDateError, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                    <TextBlock
+                        Foreground="{StaticResource Bg-Danger}"
+                        FontSize="11"
+                        Margin="4,2,0,0"
+                        Text="{Binding DateConflictMessage}"
+                        Visibility="{Binding DateConflictMessage, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                </StackPanel>
             </Grid>
-            <Grid Margin="0 10" Grid.Row="2" Grid.Column="1">
+            <Grid Margin="0 10"
+                  Grid.Row="2"
+                  Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Total de noches
                 </Label>
-                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" IsEnabled="False"
-                    Text="{Binding CurrentBooking.TotalNights}" />
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Text="{Binding ComputedTotalNights, Mode=OneWay}" />
             </Grid>
-            <Grid Margin="0 10" Grid.Row="3" Grid.Column="0">
+            <Grid Margin="0 10"
+                  Grid.Row="3"
+                  Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Precio por noche
                 </Label>
-                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" IsEnabled="False"
-                    Text="{Binding CurrentBooking.PricePerNight, StringFormat=C}" />
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Text="{Binding ComputedPricePerNight, StringFormat=C, Mode=OneWay}" />
             </Grid>
-            <Grid Margin="0 10" Grid.Row="3" Grid.Column="1">
+            <Grid Margin="0 10"
+                  Grid.Row="3"
+                  Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Precio total
                 </Label>
-                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" IsEnabled="False"
-                    Text="{Binding CurrentBooking.TotalPrice, StringFormat=C}" />
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Grid.Column="1"
+                         IsEnabled="False"
+                         Text="{Binding ComputedTotalPrice, StringFormat=C, Mode=OneWay}" />
             </Grid>
-            <Grid Margin="0 10" Grid.Row="4" Grid.Column="0">
+            <Grid Margin="0 10"
+                  Grid.Row="4"
+                  Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Descuento
                 </Label>
-                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1"
-                    Text="{Binding CurrentBooking.Discount}" />
+                <StackPanel Grid.Column="1">
+                    <TextBox Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding DiscountText, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Foreground="{StaticResource Bg-Danger}"
+                        FontSize="11"
+                        Margin="4,4,0,0"
+                        Text="{Binding DiscountError}"
+                        Visibility="{Binding DiscountError, Converter={StaticResource StringNotEmptyToVisibility}}" />
+                </StackPanel>
             </Grid>
-            <Grid Margin="0 10" Grid.Row="4" Grid.Column="1">
+            <Grid Margin="0 10"
+                  Grid.Row="4"
+                  Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="LabelColumn" />
                     <ColumnDefinition SharedSizeGroup="InputColumn" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource FormLabelStyle}">
+                <Label Grid.Column="0"
+                       Style="{StaticResource FormLabelStyle}">
                     Estado de la reserva
                 </Label>
                 <DockPanel Grid.Column="1">
-                    <Button DockPanel.Dock="Right" Style="{StaticResource ActionButtonStyle}"
-                        Background="{StaticResource Bg-Danger}" FontSize="12"
-                        Padding="8"
-                        Command="{Binding CancelBookingCommand}"
-                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibility}}">
+                    <Button DockPanel.Dock="Right"
+                            Style="{StaticResource ActionButtonStyle}"
+                            Background="{StaticResource Bg-Danger}"
+                            FontSize="12"
+                            Padding="8"
+                            Command="{Binding CancelBookingCommand}">
+                        <Button.Visibility>
+                            <MultiBinding Converter="{StaticResource BookingCancelVisibility}">
+                                <Binding Path="IsEditing" />
+                                <Binding Path="CurrentBooking.Status" />
+                            </MultiBinding>
+                        </Button.Visibility>
                         Cancelar la reserva
                     </Button>
-                    <TextBox Style="{StaticResource TextBoxStyle}"
-                        Text="{Binding CurrentBooking.Status}"
-                        IsEnabled="False" />
+                    <Border CornerRadius="10"
+                            Padding="10,6"
+                            Background="{Binding CurrentBooking.Status, Converter={StaticResource BookingStatusToBadgeBrush}}">
+                        <TextBlock FontWeight="SemiBold"
+                                   Foreground="{StaticResource Text-Primary}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding CurrentBooking.Status, Converter={StaticResource BookingStatusToBadgeText}}" />
+                    </Border>
                 </DockPanel>
             </Grid>
         </Grid>

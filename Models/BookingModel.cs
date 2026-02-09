@@ -27,12 +27,14 @@ namespace PereMaria.GestorHotel.Models
 
         [JsonPropertyName("status")] public string Status { get; set; } = "active";
 
+        [JsonPropertyName("isPaid")] public bool IsPaid { get; set; }
+
         [JsonPropertyName("bookingId")] public string? BookingId { get; set; }
 
         public override string ToString()
         {
             return
-                $"BookingId: {BookingId}, UserId: {UserId}, RoomId: {RoomId}, StartDate: {StartDate}, EndDate: {EndDate}, BookingDate: {BookingDate}, Occupants: {Occupants}, PricePerNight: {PricePerNight}, TotalPrice: {TotalPrice}, Discount: {Discount}, TotalNights: {TotalNights}, Status: {Status}";
+                $"BookingId: {BookingId}, UserId: {UserId}, RoomId: {RoomId}, StartDate: {StartDate}, EndDate: {EndDate}, BookingDate: {BookingDate}, Occupants: {Occupants}, PricePerNight: {PricePerNight}, TotalPrice: {TotalPrice}, Discount: {Discount}, TotalNights: {TotalNights}, Status: {Status}, IsPaid: {IsPaid}";
         }
 
         [JsonIgnore] public CustomerModel? Customer { get; set; }
