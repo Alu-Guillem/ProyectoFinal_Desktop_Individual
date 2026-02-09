@@ -32,7 +32,6 @@ public class ApiService
 
     public async Task<ApiResult<T>> Get<T>(string route) where T : class
     {
-
         try
         {
             var response = await _httpClient.GetAsync(route);
@@ -68,7 +67,6 @@ public class ApiService
 
     public async Task<ApiResult<T>> Post<T>(string route, object? o) where T : class
     {
-
         try
         {
             var response = await _httpClient.PostAsJsonAsync(route, o);

@@ -13,9 +13,12 @@ public class LoginViewModel : BaseViewModel
 
     private readonly AuthService _authService = new AuthService();
 
-    private LoginViewModel() { }
+    private LoginViewModel()
+    {
+    }
 
     private string _email;
+
     public String Email
     {
         get => _email;
@@ -26,8 +29,9 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged(nameof(Email));
         }
     }
-    
+
     private string _password;
+
     public String Password
     {
         get => _password;
@@ -44,26 +48,25 @@ public class LoginViewModel : BaseViewModel
     private async Task Login()
     {
         Console.WriteLine("Logeando");
-        
+
         var result = await _authService.Login(Email, Password);
-        
-        
+
+
         if (result.Success)
         {
             SessionService.Instance.SetToken(result.Data.Token);
-            
+
             await SessionService.Instance.LoadUserInfo();
 
-            
+
             ChangeWindow();
         }
         else
         {
             Console.WriteLine(result.Error.Message);
         }
-        
     }
-    
+
     private void ChangeWindow()
     {
         Application.Current.Dispatcher.Invoke(() =>
@@ -82,5 +85,4 @@ public class LoginViewModel : BaseViewModel
             }
         );
     }
-    
 }
