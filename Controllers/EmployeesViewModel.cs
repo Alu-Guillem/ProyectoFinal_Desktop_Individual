@@ -51,6 +51,10 @@ public class EmployeesViewModel : BaseViewModel
         }
     }
 
+    public string Visibility => SessionService.Instance.CurrentUser?.Role == "admin" ? "Visibility" : "Hidden";
+    
+
+    
     private RelayCommand _openEmployeeFormCommand;
 
     public RelayCommand OpenEmployeeFormCommand =>

@@ -25,6 +25,7 @@
                            Margin="0,0,0,30"/>
                 
                 <Button Content="Nuevo Empleado" 
+                        Visibility="{Binding Visibility}"
                         Style="{StaticResource ActionButtonStyle}"
                         Command="{Binding OpenEmployeeFormCommand}"
                         CommandParameter="{x:Null}" 
@@ -82,6 +83,7 @@
                                     </StackPanel>
 
                                     <Button Grid.Row="3" Content="Eliminar" 
+                                            Visibility="{Binding DataContext.Visibility, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             Style="{StaticResource PrimaryButtonStyle}" 
                                             Background="{StaticResource Bg-Danger}" 
                                             Width="110" Height="36" 

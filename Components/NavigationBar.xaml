@@ -40,14 +40,14 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Style="{StaticResource NavButtonStyle}" Click="PaletteButton_Click">
-                    <TextBlock>Paleta y Elementos</TextBlock>
-                </Button>
                 <Button VerticalAlignment="Bottom" Style="{StaticResource NavButtonStyle}" 
                         Command="{Binding LogoutCommand, Source={x:Static controller:NavigationViewModel.Instance}}">
                     <Button.Content>
                         <TextBlock Text="⏻ Cerrar Sessión"></TextBlock>
                     </Button.Content>
+                </Button>
+                <Button Style="{StaticResource NavButtonStyle}" Click="PaletteButton_Click">
+                    <TextBlock>Paleta y Elementos</TextBlock>
                 </Button>
             </StackPanel>
         </Border>
