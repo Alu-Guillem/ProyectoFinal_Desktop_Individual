@@ -15,7 +15,7 @@ public class NavigationViewModel : BaseViewModel
     public static NavigationViewModel Instance => _instance ??= new NavigationViewModel();
 
     private readonly NavigationService _navigationService = NavigationService.Instance;
-    
+
     private readonly SessionService _session = SessionService.Instance;
 
 
@@ -25,7 +25,7 @@ public class NavigationViewModel : BaseViewModel
         get
         {
             var currentType = CurrentView.GetType();
-            
+
             return MenuItems.FirstOrDefault(item => currentType.Name.Contains(item.ViewName));
         }
         set
@@ -37,8 +37,7 @@ public class NavigationViewModel : BaseViewModel
         }
     }
 
-    
-    
+
     public IReadOnlyList<NavItem> MenuItems { get; }
 
     public UserControl CurrentView => _navigationService.CurrentView;
@@ -46,7 +45,7 @@ public class NavigationViewModel : BaseViewModel
     private NavigationViewModel()
     {
         _session.SessionChanged += OnSessionChanged;
-        
+
         MenuItems =
         [
             new NavItem
@@ -81,14 +80,14 @@ public class NavigationViewModel : BaseViewModel
             }
         ];
     }
-    
+
     private void OnSessionChanged()
     {
         OnPropertyChanged(nameof(FirstName));
         OnPropertyChanged(nameof(Initial));
         OnPropertyChanged(nameof(Role));
     }
-    
+
     public string FirstName => _session.CurrentUser?.FirstName ?? "Invitado";
 
     public string Initial =>

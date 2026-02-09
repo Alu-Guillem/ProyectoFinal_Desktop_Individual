@@ -17,15 +17,14 @@ public class CustomersViewModel : BaseViewModel
 
     private readonly UserService _userService = new UserService();
 
-    
+
     private CustomersViewModel()
     {
         _currentCustomer = new CustomerModel();
-        
+
         CustomersView = CollectionViewSource.GetDefaultView(Customers);
 
         CustomersView.Filter = ChangedEmail;
-
     }
 
     // La lista de todos los customers
@@ -34,7 +33,6 @@ public class CustomersViewModel : BaseViewModel
 
     public async Task LoadCustomers()
     {
-
         try
         {
             var result = await _userService.GetAllCustomers();
@@ -49,21 +47,17 @@ public class CustomersViewModel : BaseViewModel
                     Customers.Add(customer);
                 }
             }
-            
-
-            
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-        
-
     }
-    
+
     // El customer que se está editando/creando actualmente
     private CustomerModel _currentCustomer;
+
     public CustomerModel CurrentCustomer
     {
         get => _currentCustomer;
@@ -76,6 +70,7 @@ public class CustomersViewModel : BaseViewModel
     }
 
     public string _fitrerText;
+
     public String FiltrerText
     {
         get => _fitrerText;
@@ -89,8 +84,10 @@ public class CustomersViewModel : BaseViewModel
 
 
     private RelayCommand _openCustomerFormCommand;
+
     public RelayCommand OpenCustomerFormCommand =>
         _openCustomerFormCommand ??= new RelayCommand(OpenCustomerForm);
+
     private void OpenCustomerForm(object parameter)
     {
         if (parameter is CustomerModel customer)
@@ -109,7 +106,8 @@ public class CustomersViewModel : BaseViewModel
 
     private RelayCommand _delteCustomerCommand;
 
-    public RelayCommand DeleteCustomerCommand => _delteCustomerCommand ??= new RelayCommand(async parameter => DeleteCustomer(parameter));
+    public RelayCommand DeleteCustomerCommand =>
+        _delteCustomerCommand ??= new RelayCommand(async parameter => DeleteCustomer(parameter));
 
     private async Task DeleteCustomer(object parameter)
     {
@@ -121,18 +119,17 @@ public class CustomersViewModel : BaseViewModel
 
             if (result.Success)
             {
-                    var customerToRemove = Customers.First(c => c.UserId == customer.UserId);
-                    Customers.Remove(customerToRemove);
+                var customerToRemove = Customers.First(c => c.UserId == customer.UserId);
+                Customers.Remove(customerToRemove);
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error al eliminar: {ex.Message}");
         }
-
     }
-    
-    
+
+
     private bool ChangedEmail(object obj)
     {
         if (obj is not CustomerModel c)
@@ -143,7 +140,6 @@ public class CustomersViewModel : BaseViewModel
 
         return c.Email.Contains(FiltrerText, StringComparison.OrdinalIgnoreCase)
                || c.Dni.Contains(FiltrerText, StringComparison.OrdinalIgnoreCase)
-               || c.FirstName.Contains(FiltrerText, StringComparison.OrdinalIgnoreCase);        
+               || c.FirstName.Contains(FiltrerText, StringComparison.OrdinalIgnoreCase);
     }
-
 }

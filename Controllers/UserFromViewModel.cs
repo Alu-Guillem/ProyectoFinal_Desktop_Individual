@@ -10,10 +10,11 @@ public class UserFromViewModel : BaseViewModel
 {
     private static UserFromViewModel? _instance;
     public static UserFromViewModel Instance => _instance ??= new();
-    
+
     private readonly UserService _userService = new UserService();
-    
+
     private UserModel _user;
+
     public UserModel User
     {
         get => _user;
@@ -23,9 +24,10 @@ public class UserFromViewModel : BaseViewModel
             OnPropertyChanged(nameof(User));
         }
     }
-    
-    
+
+
     private bool _isEditing;
+
     public bool IsEditing
     {
         get => _isEditing;
@@ -33,13 +35,13 @@ public class UserFromViewModel : BaseViewModel
         {
             _isEditing = value;
             OnPropertyChanged(nameof(IsEditing));
-            OnPropertyChanged(nameof(IsTextBoxEnabled)); 
+            OnPropertyChanged(nameof(IsTextBoxEnabled));
         }
     }
 
     public bool IsTextBoxEnabled => !IsEditing;
     public string Visibility => IsEditing ? "Hidden" : "Visibility";
-    
+
     public string FirstName
     {
         get => User.FirstName;
@@ -47,7 +49,7 @@ public class UserFromViewModel : BaseViewModel
         {
             User.FirstName = value;
             OnPropertyChanged(nameof(FirstName));
-            OnPropertyChanged(nameof(FullName)); 
+            OnPropertyChanged(nameof(FullName));
         }
     }
 
@@ -61,7 +63,7 @@ public class UserFromViewModel : BaseViewModel
             OnPropertyChanged(nameof(FullName));
         }
     }
-    
+
     public string Password
     {
         get => User.Password;
@@ -91,13 +93,10 @@ public class UserFromViewModel : BaseViewModel
             OnPropertyChanged(nameof(Role));
         }
     }
-    
+
     public string Gender
     {
-        get 
-        {
-            return User is CustomerModel customer ? customer.Gender : string.Empty;
-        }
+        get { return User is CustomerModel customer ? customer.Gender : string.Empty; }
         set
         {
             if (User is CustomerModel customer)
@@ -107,13 +106,10 @@ public class UserFromViewModel : BaseViewModel
             }
         }
     }
-    
+
     public string Dni
     {
-        get 
-        {
-            return User is CustomerModel customer ? customer.Dni : string.Empty;
-        }
+        get { return User is CustomerModel customer ? customer.Dni : string.Empty; }
         set
         {
             if (User is CustomerModel customer)
@@ -123,10 +119,10 @@ public class UserFromViewModel : BaseViewModel
             }
         }
     }
-    
+
     public string BirthDate
     {
-        get 
+        get
         {
             if (User is CustomerModel customer)
             {
@@ -143,14 +139,11 @@ public class UserFromViewModel : BaseViewModel
                 OnPropertyChanged(nameof(BirthDate));
             }
         }
-    }    
-    
+    }
+
     public string City
     {
-        get 
-        {
-            return User is CustomerModel customer ? customer.City : string.Empty;
-        }
+        get { return User is CustomerModel customer ? customer.City : string.Empty; }
         set
         {
             if (User is CustomerModel customer)
@@ -160,9 +153,9 @@ public class UserFromViewModel : BaseViewModel
             }
         }
     }
-    
+
     public string FullName => $"{User.FirstName} {User.LastName}";
-    
+
     private RelayCommand _saveCommand;
     public RelayCommand SaveUserCommand => _saveCommand ??= new RelayCommand(async _ => await SaveUser());
 
@@ -181,20 +174,18 @@ public class UserFromViewModel : BaseViewModel
                 Console.WriteLine(result.Data);
                 if (result.Success)
                 {
-                
-
-                    MessageBox.Show($"Usuario actualizado: {result.Data.FirstName}");
-
+                    ShowMessageBox($"Usuario actualizado: {result.Data.FirstName}", "Usuario",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Error al guardar: {result.Error}");
+                    ShowMessageBox($"Error al guardar: {result.Error}", "Error", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-
-            } 
+            }
         }
         else
         {
@@ -207,50 +198,41 @@ public class UserFromViewModel : BaseViewModel
                     Console.WriteLine(result.Data);
                     if (result.Success)
                     {
-                
-
-                        MessageBox.Show($"Usuario Creado: {result.Data.FirstName}");
-
+                        ShowMessageBox($"Usuario creado: {result.Data.FirstName}", "Usuario",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show($"Error al crear: {result.Error}");
+                        ShowMessageBox($"Error al crear: {result.Error}", "Error", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-
-                } 
+                }
             }
             else
             {
                 try
                 {
                     var result = await _userService.CreateEmployee(User as EmployeeModel);
-                    
+
                     Console.WriteLine(result.Data);
                     if (result.Success)
                     {
-                
-
-                        MessageBox.Show($"Usuario Creado: {result.Data.FirstName}");
-
+                        ShowMessageBox($"Usuario creado: {result.Data.FirstName}", "Usuario",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show($"Error al crear: {result.Error}");
+                        ShowMessageBox($"Error al crear: {result.Error}", "Error", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-
-                } 
+                }
             }
-            
-
         }
-        
-
     }
-
 }

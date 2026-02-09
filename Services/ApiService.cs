@@ -15,7 +15,8 @@ public class ApiService
     private static ApiService? _instance;
     public static ApiService Instance => _instance ??= new ApiService();
 
-    private HttpClient _httpClient = new();
+    private HttpClient _httpClient
+        = new();
 
     private ApiService()
     {
@@ -27,10 +28,10 @@ public class ApiService
     {
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
-    
+
+
     public async Task<ApiResult<T>> Get<T>(string route) where T : class
     {
-        
         try
         {
             var response = await _httpClient.GetAsync(route);
@@ -66,7 +67,6 @@ public class ApiService
 
     public async Task<ApiResult<T>> Post<T>(string route, object? o) where T : class
     {
-        
         try
         {
             var response = await _httpClient.PostAsJsonAsync(route, o);
@@ -101,12 +101,11 @@ public class ApiService
         }
     }
 
-    public async Task<ApiResult<T>> Patch<T>(string route, object? o) where T : class
+    public async Task<ApiResult<T>> Put<T>(string route, object? o) where T : class
     {
-        
         try
         {
-            var response = await _httpClient.PatchAsJsonAsync(route, o);
+            var response = await _httpClient.PutAsJsonAsync(route, o);
 
             var content = await response.Content.ReadAsStringAsync();
 
@@ -136,11 +135,10 @@ public class ApiService
                 StatusCode = 0
             };
         }
-    }    
-    
+    }
+
     public async Task<ApiResult<T>> Delete<T>(string route) where T : class
     {
-        
         try
         {
             var response = await _httpClient.DeleteAsync(route);
@@ -173,8 +171,8 @@ public class ApiService
                 StatusCode = 0
             };
         }
-    }    
-    
+    }
+
 
     private static ApiError TryParseError(string json)
     {
@@ -188,21 +186,4 @@ public class ApiService
             return new ApiError { Message = "Error desconocido" };
         }
     }
-
-
-    /*
-    public async Task<string> TestConnection()
-    {
-        try
-        {
-            var response = await _httpClient.GetAsync("users");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
-        }
-        catch (Exception e)
-        {
-            MessageBox.Show(e.Message);
-            throw;
-        }
-    }*/
 }

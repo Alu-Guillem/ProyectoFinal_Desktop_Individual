@@ -20,6 +20,7 @@ public class ReviewsViewModel : BaseViewModel
 
     // La room que se está editando/creando actualmente
     private ReviewModel _currentReview;
+
     public ReviewModel CurrentReview
     {
         get => _currentReview;

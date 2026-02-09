@@ -12,13 +12,14 @@ public class UsersViewModel : BaseViewModel
     public static UsersViewModel Instance => _instance ??= new UsersViewModel();
 
     private readonly UserService _userService = new UserService();
-    
+
     private UsersViewModel()
     {
     }
 
-    
+
     private UserModel _currentUser;
+
     public UserModel CurrentUser
     {
         get => _currentUser;
@@ -29,10 +30,4 @@ public class UsersViewModel : BaseViewModel
             OnPropertyChanged(nameof(CurrentUser));
         }
     }
-
-    
-
-    
-
-    
 }
