@@ -96,7 +96,17 @@ public class UserFromViewModel : BaseViewModel
 
     public string Gender
     {
-        get { return User is CustomerModel customer ? customer.Gender : string.Empty; }
+        get
+        {
+            if (User is CustomerModel customer && !string.IsNullOrEmpty(customer.Gender))
+            {
+                return Char.ToUpper(customer.Gender[0]) + customer.Gender.Substring(1);
+
+                
+            }
+            return string.Empty;
+            
+        }
         set
         {
             if (User is CustomerModel customer)
@@ -130,6 +140,7 @@ public class UserFromViewModel : BaseViewModel
             }
 
             return DateTime.UtcNow.ToString("dd/MM/yyyy");
+            
         }
         set
         {
@@ -153,6 +164,34 @@ public class UserFromViewModel : BaseViewModel
             }
         }
     }
+    
+    public string Vip
+    {
+        get {
+            if (User is CustomerModel customer)
+            {
+                return customer.Vip ? "Sí" : "No";
+            }
+
+            return "No";
+        }
+        set
+        {
+            if (User is CustomerModel customer)
+            {
+                if (value.Equals("Sí"))
+                {
+                    customer.Vip = true;
+                }
+                else if (value.Equals("No"))
+                {
+                    customer.Vip = false;
+                }
+                OnPropertyChanged(nameof(Vip));
+            }
+        }
+    }
+
 
     public string FullName => $"{User.FirstName} {User.LastName}";
 
@@ -179,12 +218,14 @@ public class UserFromViewModel : BaseViewModel
                 }
                 else
                 {
-                    ShowMessageBox($"Error al guardar: {result.Error}", "Error", MessageBoxButton.OK,
+                    ShowMessageBox($"Error al guardar: {result.Error.Message}", "Error", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
+                ShowMessageBox("Ocurrió un error inesperado al procesar la solicitud.", "Error Crítico", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         else
@@ -193,6 +234,11 @@ public class UserFromViewModel : BaseViewModel
             {
                 try
                 {
+                    if (DateTime.TryParse(customerModel.BirthDate, out DateTime parsedDate))
+                    {
+                        customerModel.BirthDate = parsedDate.ToString("dd/MM/yyyy");
+                    }
+                    
                     customerModel.Role = "customer";
                     var result = await _userService.CreateCustomer(customerModel);
                     Console.WriteLine(result.Data);
@@ -203,12 +249,14 @@ public class UserFromViewModel : BaseViewModel
                     }
                     else
                     {
-                        ShowMessageBox($"Error al crear: {result.Error}", "Error", MessageBoxButton.OK,
+                        ShowMessageBox($"Error al crear: {result.Error.Message}", "Error", MessageBoxButton.OK,
                             MessageBoxImage.Error);
                     }
                 }
                 catch (Exception ex)
                 {
+                    ShowMessageBox("Ocurrió un error inesperado al procesar la solicitud.", "Error Crítico", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -225,12 +273,14 @@ public class UserFromViewModel : BaseViewModel
                     }
                     else
                     {
-                        ShowMessageBox($"Error al crear: {result.Error}", "Error", MessageBoxButton.OK,
+                        ShowMessageBox($"Error al crear: {result.Error.Message}", "Error", MessageBoxButton.OK,
                             MessageBoxImage.Error);
                     }
                 }
                 catch (Exception ex)
                 {
+                    ShowMessageBox("Ocurrió un error inesperado al procesar la solicitud.", "Error Crítico", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
