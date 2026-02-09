@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Services;
@@ -15,6 +16,8 @@ public class EmployeesViewModel : BaseViewModel
 
     private readonly UserService _userService = new UserService();
 
+    private readonly SessionService _sessionService = new SessionService();
+    
 
     private EmployeesViewModel()
     {
@@ -78,26 +81,45 @@ public class EmployeesViewModel : BaseViewModel
 
     private async Task DeleteEmployee(object parameter)
     {
-        if (parameter is not EmployeeModel employee) return;
-        Console.WriteLine($"Deleting {employee.UserId}");
-
-        try
+        
+        if (SessionService.Instance.CurrentUser?.Role != "admin")
         {
-            var result = await _userService.DeleteUser(employee.UserId);
-
-            if (result.Success)
-            {
-                var employeeToRemove = Employees.First(e => e.UserId == employee.UserId);
-                Employees.Remove(employeeToRemove);
-            }
-            else
-            {
-                Console.WriteLine("No se elimino");
-            }
+            Console.WriteLine("No puede");
+            ShowMessageBox("No puedes eliminar si tienes rol employee", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            return;
         }
-        catch (Exception ex)
+        if (parameter is not EmployeeModel employee) return;
+        Console.WriteLine($"{_sessionService.CurrentUser.Role}");
+
+        
+
+
+        var confirmarEliminar =
+            ShowMessageBox($"Seguro que quieres eliminar al usuario: {employee.FirstName} {employee.LastName}",
+                "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+        if (confirmarEliminar == MessageBoxResult.Yes)
         {
-            Console.WriteLine($"Error al eliminar: {ex.Message}");
+
+            try
+            {
+                var result = await _userService.DeleteUser(employee.UserId);
+
+                if (result.Success)
+                {
+                    var employeeToRemove = Employees.First(e => e.UserId == employee.UserId);
+                    Employees.Remove(employeeToRemove);
+                }
+                else
+                {
+                    ShowMessageBox(result.Error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar: {ex.Message}");
+            }
         }
     }
 }

@@ -111,22 +111,39 @@ public class CustomersViewModel : BaseViewModel
 
     private async Task DeleteCustomer(object parameter)
     {
+        
+        
         if (parameter is not CustomerModel customer) return;
 
-        try
-        {
-            var result = await _userService.DeleteUser(customer.UserId);
+        
+        var confirmarEliminar =
+            ShowMessageBox($"Seguro que quieres eliminar al usuario: {customer.FirstName} {customer.LastName}",
+                "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            if (result.Success)
+        if (confirmarEliminar == MessageBoxResult.Yes)
+        {
+            try
             {
-                var customerToRemove = Customers.First(c => c.UserId == customer.UserId);
-                Customers.Remove(customerToRemove);
+                var result = await _userService.DeleteUser(customer.UserId);
+
+                if (result.Success)
+                {
+                    var customerToRemove = Customers.First(c => c.UserId == customer.UserId);
+                    Customers.Remove(customerToRemove);
+                }
+                else
+                {
+                    ShowMessageBox(result.Error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar: {ex.Message}");
             }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error al eliminar: {ex.Message}");
-        }
+        
+
     }
 
 
