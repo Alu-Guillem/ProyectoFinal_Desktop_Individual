@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PereMaria.GestorHotel.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="490"
-               Height="490" Width="350"
+             d:DesignHeight="400"
+               Height="400" Width="320"
              >
     <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2">
-        <Grid Background="#0B1C2D" MouseDown="Grid_Click">
+        <Grid Background="{StaticResource Bg-Cosmic-Mid}" MouseDown="Grid_Click">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.Resources>
@@ -31,7 +31,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/logo.ico" Width="100" Height="100" Grid.Column="0"/>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
-                    <Label FontWeight="Bold" Content="Saturno"/>
+                    <Label FontWeight="Bold" Content="{Binding CurrentRoom.name}"/>
                     <!-- Nombre -->
                     <Label Content="Estandar"/>
                     <!-- Tipo -->
@@ -45,12 +45,7 @@
                 <!-- nº de habitaciones -->
                 <Label Content="☻ 4 personas" FontWeight="Bold"/>
                 <!-- Capacidad -->
-                <Label FontWeight="Bold" Height="auto">
-                    <!-- Descripcion ¡No final! -->
-                    <AccessText x:Name="Info" TextWrapping="Wrap">
-                        En un lugar de la mancha, cuyo nombre no quiero acordarme
-                    </AccessText>
-                </Label>
+                <Label FontWeight="Bold" Height="auto" Content="100€"/>
             </StackPanel>
 
         </Grid>

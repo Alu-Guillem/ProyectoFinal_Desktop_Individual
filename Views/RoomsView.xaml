@@ -8,36 +8,42 @@
     xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
     mc:Ignorable="d"
     d:DesignHeight="930" d:DesignWidth="1650"
-    DataContext="{x:Static controllers:RoomsController.Instance}">
+    DataContext="{x:Static controllers:RoomsViewModel.Instance}">
 
-    <Grid>
+    <Grid Height="926">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
             <!-- Buscar -->
             <StackPanel Orientation="Vertical" Margin="15" Width="200">
-                <Label Foreground="{StaticResource Text-Primary}">Buscar</Label>
-                <TextBox Padding="5"/>
+                <TextBlock Text="Buscar" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Text-Primary}" Margin="0,20,0,10" />
+                <TextBox Style="{StaticResource TextBoxStyle}" />
             </StackPanel>
             
             <!-- Filtrar -->
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="15" VerticalAlignment="Center">
                 <TextBlock Text="Filtrar" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Text-Primary}" Margin="0,20,0,10" />
                 <ComboBox Style="{StaticResource DropdownStyle}" Width="200" Margin="0,0,0,10">
-                    <ComboBoxItem Content="No" />
-                    <ComboBoxItem Content="Libre" />
-                    <ComboBoxItem Content="Ocupado" />
+                    <ComboBoxItem Content="" />
+                    <ComboBoxItem Content="Libre"/>
+                    <ComboBoxItem Content="Ocupado"/>
                 </ComboBox>
             </StackPanel>
-            <!-- Crear -->
-            <Button Content="Crear" Style="{StaticResource PrimaryButtonStyle}" Margin="10" Height="40"/>
+        </StackPanel>
+
+        <!-- Crear -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="20">
+            <Button Content="Crear" Style="{StaticResource PrimaryButtonStyle}" Margin="10" Height="40" Width="80" Click="Create_Button"/>
         </StackPanel>
         
-        
-        <Border  BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2" Grid.Row="1" Margin="20 0 20 0">
+        <Border  BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2" Grid.Row="1" Margin="20 0 20 0" Grid.ColumnSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  Background="{StaticResource Bg-Cosmic-Dark}">
                 <UniformGrid x:Name="HabitacionesGrid" Margin="30" Columns="4">
                     <UniformGrid.Resources>
@@ -51,11 +57,8 @@
                     <components:Habitaciones/>
                     <components:Habitaciones/>
                     <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
+
+
 
 
                 </UniformGrid>
