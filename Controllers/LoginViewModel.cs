@@ -50,25 +50,34 @@ public class LoginViewModel : BaseViewModel
         Console.WriteLine("Logeando");
 
         var result = await _authService.Login(Email, Password);
-
+        
+        
 
         if (result.Success)
         {
+            
+            
+            
             SessionService.Instance.SetToken(result.Data.Token);
-
             await SessionService.Instance.LoadUserInfo();
 
-
+            if (SessionService.Instance.CurrentUser.Role == "customer")
+            {
+                ShowMessageBox("Un customer no se puede loguear", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
             ChangeWindow();
         }
         else
         {
-            Console.WriteLine(result.Error.Message);
+            ShowMessageBox(result.Error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
     private void ChangeWindow()
     {
+        
         Application.Current.Dispatcher.Invoke(() =>
             {
                 var mainWindow = new MainWindow();
