@@ -39,7 +39,7 @@ public class NavigationService
 
     public void NavigateBack()
     {
-        if(ViewsStack.Count == 1) return;
+        if (ViewsStack.Count == 1) return;
         ViewsStack.RemoveAt(0);
     }
 }

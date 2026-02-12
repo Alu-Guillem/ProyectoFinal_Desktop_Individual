@@ -29,6 +29,7 @@ public class RoomsViewModel : BaseViewModel
 
     // La room que se está editando/creando actualmente
     private RoomModel _currentRoom;
+
     public RoomModel CurrentRoom
     {
         get => _currentRoom;

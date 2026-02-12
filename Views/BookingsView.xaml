@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
              xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="800"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
              DataContext="{x:Static controllers:BookingsViewModel.Instance}">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,11 +15,35 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" LastChildFill="False">
-            <Button Style="{StaticResource ActionButtonStyle}" DockPanel.Dock="Left">Nueva Reserva</Button>
-            <Button Style="{StaticResource PrimaryButtonStyle}" DockPanel.Dock="Right">Restablecer</Button>
+        <DockPanel Grid.Row="0"
+                   LastChildFill="False">
+            <Button Style="{StaticResource ActionButtonStyle}"
+                    DockPanel.Dock="Left"
+                    Command="{Binding NavigateFormCommand}">
+                Nueva Reserva
+            </Button>
+            <Grid DockPanel.Dock="Left"
+                  Width="260"
+                  Margin="12,0">
+                <TextBox x:Name="TableSearchBox"
+                         Style="{StaticResource TextBoxStyle}"
+                         Padding="34,10,10,10"
+                         Text="{Binding TableSearchText, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="search"
+                           HorizontalAlignment="Left"
+                           FontFamily="{StaticResource Material-Icons}"
+                           Foreground="{StaticResource Bg-Purple-Accent}"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0" />
+            </Grid>
+            <Button Style="{StaticResource IconBaseButton}"
+                    Command="{Binding ReloadCommand}"
+                    DockPanel.Dock="Right">
+                refresh
+            </Button>
         </DockPanel>
-        <Border Grid.Row="1" Style="{StaticResource TableContainerStyle}">
+        <Border Grid.Row="1"
+                Style="{StaticResource TableContainerStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -26,49 +51,233 @@
                 </Grid.RowDefinitions>
 
                 <!-- Header Row -->
-                <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                <Border Grid.Row="0"
+                        Style="{StaticResource TableHeaderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2.5*" />
+                            <ColumnDefinition Width="2.2*" />
+                            <ColumnDefinition Width="1.4*" />
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="1.5*" />
                             <ColumnDefinition Width="1.5*" />
-                            <ColumnDefinition Width="1.5*" />
-                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1.4*" />
+                            <ColumnDefinition Width="1.4*" />
+                            <ColumnDefinition Width="1.3*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Huesped" Grid.Column="0" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Entrada" Grid.Column="1" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Salida" Grid.Column="2" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Creación" Grid.Column="3" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Precio" Grid.Column="4" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Huesped"
+                                   Grid.Column="0"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="DNI"
+                                   Grid.Column="1"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Habitación"
+                                   Grid.Column="2"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Entrada"
+                                   Grid.Column="3"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Salida"
+                                   Grid.Column="4"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Total"
+                                   Grid.Column="5"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Pago"
+                                   Grid.Column="6"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="Estado"
+                                   Grid.Column="7"
+                                   Style="{StaticResource TableSubText}"
+                                   FontWeight="SemiBold" />
                     </Grid>
                 </Border>
                 <!-- Data Rows -->
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding Bookings}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Style="{StaticResource TableRowStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2.5*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="1.5*" />
-                                        <ColumnDefinition Width="1.5*" />
-                                        <ColumnDefinition Width="1.5*" />
-                                        <ColumnDefinition Width="1.5*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Client}" Grid.Column="0" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="1" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="2" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prueba" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding PagedBookings}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource TableRowStyle}">
+                                    <Border.InputBindings>
+                                        <MouseBinding
+                                            Gesture="LeftClick"
+                                            Command="{Binding DataContext.NavigateFormCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" />
+                                    </Border.InputBindings>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.2*" />
+                                            <ColumnDefinition Width="1.4*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="1.5*" />
+                                            <ColumnDefinition Width="1.5*" />
+                                            <ColumnDefinition Width="1.4*" />
+                                            <ColumnDefinition Width="1.4*" />
+                                            <ColumnDefinition Width="1.3*" />
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <StackPanel Grid.Column="0"
+                                                    Orientation="Vertical">
+                                            <TextBlock
+                                                Style="{StaticResource TableMainText}"
+                                                VerticalAlignment="Center">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0} {1}">
+                                                        <Binding Path="Customer.FirstName"></Binding>
+                                                        <Binding Path="Customer.LastName"></Binding>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                            <TextBlock
+                                                Style="{StaticResource TableSubText}"
+                                                Text="VIP"
+                                                Visibility="{Binding Customer.Vip, Converter={StaticResource BoolToVisibility}}" />
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Customer.Dni}"
+                                                   Grid.Column="1"
+                                                   Style="{StaticResource TableMutedText}"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding Room.Name}"
+                                                   Grid.Column="2"
+                                                   Style="{StaticResource TableMainText}"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding StartDate}"
+                                                   Grid.Column="3"
+                                                   Style="{StaticResource TableMutedText}"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding EndDate}"
+                                                   Grid.Column="4"
+                                                   Style="{StaticResource TableMutedText}"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding TotalPrice, StringFormat={}{0:c}}"
+                                                   Grid.Column="5"
+                                                   Style="{StaticResource TableMutedText}"
+                                                   VerticalAlignment="Center" />
+                                        <Border Grid.Column="6"
+                                                CornerRadius="10"
+                                                Padding="10,6"
+                                                VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource Bg-Warning}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsPaid}"
+                                                                     Value="True">
+                                                            <Setter Property="Background"
+                                                                    Value="{StaticResource Bg-Success}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock FontWeight="SemiBold"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text"
+                                                                Value="Pago pendiente" />
+                                                        <Setter Property="Foreground"
+                                                                Value="{StaticResource Bg-Dark}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsPaid}"
+                                                                         Value="True">
+                                                                <Setter Property="Text"
+                                                                        Value="Pagada" />
+                                                                <Setter Property="Foreground"
+                                                                        Value="{StaticResource Text-Primary}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+                                        <Border Grid.Column="7"
+                                                CornerRadius="10"
+                                                Padding="10,6"
+                                                Background="{Binding Status, Converter={StaticResource BookingStatusToBadgeBrush}}"
+                                                VerticalAlignment="Center">
+                                            <TextBlock FontWeight="SemiBold"
+                                                       Foreground="{StaticResource Text-Primary}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Text="{Binding Status, Converter={StaticResource BookingStatusToBadgeText}}" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <!-- Loading overlay -->
+                <Border Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
+                    <TextBlock FontWeight="UltraBold">Cargando...</TextBlock>
+                </Border>
             </Grid>
         </Border>
+        <DockPanel Grid.Row="2"
+                   LastChildFill="False"
+                   Margin="0 10 0 0">
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Left">
+                <TextBlock Text="Filas por pagina"
+                           VerticalAlignment="Center"
+                           Margin="0 0 8 0" />
+                <ComboBox Width="90"
+                          Style="{StaticResource DropdownStyle}"
+                          ItemsSource="{Binding PageSizeOptions}"
+                          SelectedItem="{Binding SelectedPageSize}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Right">
+                <Button Style="{StaticResource ActionButtonStyle}"
+                        Command="{Binding PreviousPageCommand}">
+                    Anterior
+                </Button>
+                <TextBlock Text="{Binding PageSummary}"
+                           VerticalAlignment="Center"
+                           Margin="10 0" />
+                <Button Style="{StaticResource ActionButtonStyle}"
+                        Command="{Binding NextPageCommand}">
+                    Siguiente
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Right"
+                        Margin="0 0 20 0">
+                <TextBlock Text="Ordenar"
+                           VerticalAlignment="Center"
+                           Margin="0 0 8 0" />
+                <ComboBox Width="140"
+                          Style="{StaticResource DropdownStyle}"
+                          ItemsSource="{Binding SortOptions}"
+                          DisplayMemberPath="Label"
+                          SelectedValuePath="Key"
+                          SelectedValue="{Binding SelectedSortKey}" />
+                <TextBlock Text="Orden"
+                           VerticalAlignment="Center"
+                           Margin="12 0 8 0" />
+                <ComboBox Width="90"
+                          Style="{StaticResource DropdownStyle}"
+                          ItemsSource="{Binding SortDirectionOptions}"
+                          DisplayMemberPath="Label"
+                          SelectedValuePath="Key"
+                          SelectedValue="{Binding SelectedSortDirection}" />
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

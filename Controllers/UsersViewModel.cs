@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PereMaria.GestorHotel.Models;
+using PereMaria.GestorHotel.Services;
 
 namespace PereMaria.GestorHotel.Controllers;
 
@@ -10,16 +11,15 @@ public class UsersViewModel : BaseViewModel
     private static UsersViewModel? _instance;
     public static UsersViewModel Instance => _instance ??= new UsersViewModel();
 
+    private readonly UserService _userService = new UserService();
+
     private UsersViewModel()
     {
-        _currentUser = new UserModel();
     }
 
-    // La lista de todos los users
-    public ObservableCollection<UserModel> Users { get; } = new();
 
-    // El user que se está editando/creando actualmente
     private UserModel _currentUser;
+
     public UserModel CurrentUser
     {
         get => _currentUser;

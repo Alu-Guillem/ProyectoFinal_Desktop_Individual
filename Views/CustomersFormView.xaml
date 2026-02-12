@@ -5,13 +5,169 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+    xmlns:components="clr-namespace:PereMaria.GestorHotel.Components"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="300"
-    DataContext="{x:Static controllers:CustomersViewModel.Instance}">
-    <Grid>
-        <TextBlock Text="CustomersFormView Works!"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24" />
+    d:DesignHeight="600" d:DesignWidth="800"
+    DataContext="{x:Static controllers:UserFromViewModel.Instance}">
+   <Grid Margin="30">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+       <DockPanel Grid.Row="0" LastChildFill="False">
+           <TextBlock Text="Gestión del Usuario"
+                      Foreground="{StaticResource Text-Primary}"
+                      FontSize="50"
+                      Margin="0 0 0 30"/>
+       </DockPanel>
+
+
+        <Border Grid.Row="1"
+                Background="{StaticResource Nav-Hover}"
+                CornerRadius="25"
+                BorderThickness="1"
+                BorderBrush="{StaticResource Bg-Purple-Accent}"
+                Padding="25">
+
+            <StackPanel>
+
+                <TextBlock Text="Información del Usuario"
+                           Foreground="{StaticResource Text-Primary}"
+                           FontSize="20"/>
+
+                <Grid Margin="0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <components:AvatarInitial Initial="{Binding User.FirstName[0]}"
+                                              Size="110"
+                                              Margin="0 0 20 0"/>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding FullName}"
+                                   Foreground="{StaticResource Text-Primary}"
+                                   FontSize="20"/>
+                        <TextBlock Text="{Binding Email}"
+                                   Foreground="{StaticResource Text-Primary}"
+                                   FontSize="20"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                        <TextBlock Foreground="{StaticResource Text-Primary}" FontSize="18" Margin="0 0 0 10">Vip</TextBlock>
+                        <ComboBox MaxWidth="100" 
+                                  SelectedValue="{Binding Vip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  Style="{StaticResource DropdownStyle}" 
+                                  Width="200"
+                                  HorizontalAlignment="Left"
+                                  SelectedValuePath="Content">
+                            <ComboBoxItem Content="Sí" />
+                            <ComboBoxItem Content="No" />
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <Border Height="1"
+                        Background="{StaticResource Bg-Purple-Accent}"
+                        Opacity="0.6"
+                        Margin="0 15"/>
+
+                <TextBlock Text="Campos Editables"
+                           Foreground="{StaticResource Text-Secondary}"
+                           FontSize="20"
+                           Margin="0 10"/>
+
+                <Grid Margin="0 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 15 15">
+                        <Label Content="Nombre" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="15 0 0 15">
+                        <Label Content="Apellido" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 15 0">
+                        <Label Content="Fecha de Nacimiento" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <DatePicker Text="{Binding BirthDate, StringFormat='dd/MM/yyyy', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DatePickerStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
+                        <Label Content="Contraseña" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" Style="{StaticResource PasswordBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 15 15">
+                        <Label Content="Email" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding IsTextBoxEnabled}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="15 0 0 15">
+                        <Label Content="Dni" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding Dni}" 
+                                 IsEnabled="{Binding IsTextBoxEnabled}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 15 0">
+                        <Label Content="Genero" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <ComboBox SelectedValue="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValuePath="Content"
+                                  IsEnabled="{Binding IsTextBoxEnabled}"
+                                  Style="{StaticResource DropdownStyle}" Width="200" HorizontalAlignment="Left"
+                                  >
+                            <ComboBoxItem Content="Masculino" />
+                            <ComboBoxItem Content="Femenino" />
+                            <ComboBoxItem Content="Prefiero no decirlo" />
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
+                        <Label Content="Ciudad" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <TextBox Text="{Binding City}" 
+                                 IsEnabled="{Binding IsTextBoxEnabled}"
+                                 Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+                
+
+            </StackPanel>
+        </Border>
+       
+       <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+           <Button Command="{Binding SaveUserCommand}" Style="{StaticResource ActionButtonStyle}">Guardar Cambios</Button>
+       </StackPanel>
+
     </Grid>
 </UserControl>

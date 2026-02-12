@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="/Resources/NavButtonStyles.xaml" />
                 <ResourceDictionary Source="/Resources/Components.xaml" />
                 <ResourceDictionary Source="/Resources/TableStyles.xaml" />
+                <ResourceDictionary Source="/Resources/Converters.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
