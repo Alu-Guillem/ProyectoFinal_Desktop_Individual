@@ -1,4 +1,5 @@
 ﻿using PereMaria.GestorHotel.Controllers;
+using PereMaria.GestorHotel.Models;
 using PereMaria.GestorHotel.Views;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,12 @@ namespace PereMaria.GestorHotel.Components
         public Habitaciones()
         {
             InitializeComponent();
-            DataContext = RoomsViewModel.Instance;
         }
 
         private void Grid_Click(object sender, MouseButtonEventArgs e)
         {
+            var room = (RoomModel)DataContext; 
+            RoomsViewModel.Instance.CurrentRoom = room;
             NavigationViewModel.Instance.NavigateTo<RoomsFormView>();
 
         }

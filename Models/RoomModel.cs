@@ -1,24 +1,30 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace PereMaria.GestorHotel.Models;
 
 public class RoomModel
 {
-    public string id { get; set; }
-    public string name { get; set; }
-    public string type { get; set; }
-    public int number { get; set; }
-    public double pricePerNight { get; set; }
-    public bool occuped { get; set; }
-    public int occupancyLimit { get; set; }
+	[JsonProperty("_id")] public string RoomId { get; set; } = "";
 
-	[JsonPropertyName("roomId")] public string RoomId { get; set; } = "";
+	[JsonProperty("name")] public string Name { get; set; } = "";
 
-	[JsonPropertyName("name")] public string Name { get; set; } = "";
+    [JsonProperty("type")] public string Type { get; set; } = "";
 
-	[JsonPropertyName("offer")] public int Offer { get; set; }
+    [JsonProperty("number")] public int Number { get; set; }
 
-	[JsonPropertyName("pricePerNight")] public decimal PricePerNight { get; set; }
+    [JsonProperty("offer")] public int Offer { get; set; }
 
-	[JsonPropertyName("occupancyLimit")] public int OccupancyLimit { get; set; }
+	[JsonProperty("pricePerNight")] public double PricePerNight { get; set; }
+
+	[JsonProperty("occuped")] public Boolean Occuped { get; set; }
+    
+    [JsonProperty("occupancyLimit")] public int OccupancyLimit { get; set; }
+
+    [JsonProperty("description")] public string Description { get; set; } = "";
+
+
+    public String ToString() {
+        return $"ID:{RoomId}, Name: {Name}, Type: {Type}, Number: {Number}, Offer: {Offer}, Price: {PricePerNight}, Occuped: {Occuped}, Limit: {OccupancyLimit}, Description: {Description}";
+    }
 }
