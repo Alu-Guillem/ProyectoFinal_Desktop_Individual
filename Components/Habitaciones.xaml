@@ -31,21 +31,50 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Resources/logo.ico" Width="100" Height="100" Grid.Column="0"/>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
-                    <Label FontWeight="Bold" Content="{Binding CurrentRoom.name}"/>
+                    <Label FontWeight="Bold" Content="{Binding Name}"/>
                     <!-- Nombre -->
-                    <Label Content="Estandar"/>
+                    <Label Content="{Binding Type}"/>
                     <!-- Tipo -->
-                    <Label Foreground="{StaticResource Bg-Success}" FontWeight="Bold" Content="✓ Libre"/>
+
+                    <Label FontWeight="Bold">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Content" Value="✓ Libre"/>
+                                <Setter Property="Foreground" Value="{StaticResource Bg-Success}"/>
+                                <Setter Property="FontSize" Value="30px"/>
+
+                                <Style.Triggers>
+                                    <!-- If Occuped == true -->
+                                    <DataTrigger Binding="{Binding Occuped}" Value="True">
+                                        <Setter Property="Content" Value="✗ Ocupado"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Bg-Danger}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    
                     <!-- Estado -->
                 </StackPanel>
             </Grid>
 
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1">
-                <Label Content="nº 001 - 100" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="nº" FontWeight="Bold"/>
+                    <Label Content="{Binding Number}"/>
+                </StackPanel>
                 <!-- nº de habitaciones -->
-                <Label Content="☻ 4 personas" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="☻" FontWeight="Bold"/>
+                    <Label Content="{Binding OccupancyLimit}"/>
+                    <Label Content="Personas"/>
+                </StackPanel>
                 <!-- Capacidad -->
-                <Label FontWeight="Bold" Height="auto" Content="100€"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding PricePerNight}"/>
+                    <Label FontWeight="Bold" Height="auto" Content="€"/>
+                </StackPanel>
             </StackPanel>
 
         </Grid>

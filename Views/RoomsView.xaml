@@ -45,23 +45,20 @@
         
         <Border  BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2" Grid.Row="1" Margin="20 0 20 0" Grid.ColumnSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  Background="{StaticResource Bg-Cosmic-Dark}">
-                <UniformGrid x:Name="HabitacionesGrid" Margin="30" Columns="4">
-                    <UniformGrid.Resources>
-                        <Style TargetType="components:Habitaciones">
-                            <Setter Property="Margin" Value="10"/>
-                        </Style>
-                    </UniformGrid.Resources>
-                 
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
-                    <components:Habitaciones/>
+                <ItemsControl ItemsSource="{Binding Rooms}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:Habitaciones/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-
-
-                </UniformGrid>
             </ScrollViewer>
         </Border>
     </Grid>

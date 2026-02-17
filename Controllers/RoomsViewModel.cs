@@ -1,5 +1,6 @@
 using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
+using PereMaria.GestorHotel.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Intrinsics.Arm;
@@ -50,73 +51,131 @@ public class RoomsViewModel : BaseViewModel
 
 
 
-    private string _name;
-    public string Name
-    {
-        get => _name;
-        set
-        {
-            _name = value;
-            OnPropertyChanged(nameof(Name));
-        }
-    }
 
-    private string _type;
-    public string Type
+    public async Task LoadRooms()
     {
-        get => _type;
-        set
-        {
-            _type = value;
-            OnPropertyChanged(nameof(Type));
-        }
-    }
+        var result = await ApiService.Instance.Get<List<RoomModel>>("rooms");
 
-    private double _price;
-    public double Price
-    {
-        get => _price;
-        set
+        if (result.Success && result.Data != null)
         {
-            _price = value;
-            OnPropertyChanged(nameof(Price));
+            Rooms.Clear();
+            foreach (var room in result.Data)
+                Rooms.Add(room);
         }
-    }
-
-    private int _limit;
-    public int Limit
-    {
-        get => _limit;
-        set
+        else
         {
-            _limit = value;
-            OnPropertyChanged(nameof(Limit));
-        }
-    }
-
-    private int _number;
-    public int Number
-    {
-        get => _number;
-        set
-        {
-            _number = value;
-            OnPropertyChanged(nameof(Number));
+            MessageBox.Show(result.Error?.Message ?? "Error cargando habitaciones");
         }
     }
 
 
+
+
+    private void TestSave(object? obj)
+    {
+        MessageBox.Show($"SAVE ejecutado \n{CurrentRoom.Name}\n{CurrentRoom.Type}\n{CurrentRoom.PricePerNight}\n{CurrentRoom.OccupancyLimit}\n{CurrentRoom.Number}\n\nID: {CurrentRoom.RoomId} \n {CurrentRoom.ToString()}");
+        
+    }
+
+    private async void Save(object? parameter)
+    {
+        await SaveAsync();
+    }
 
     private RelayCommand saveCommand;
     public ICommand SaveCommand => saveCommand ??= new RelayCommand(Save);
 
-    private void Save(object? obj)
+    private async Task SaveAsync()
     {
-        MessageBox.Show($"SAVE ejecutado \n{CurrentRoom.name}\n{CurrentRoom.type}\n{CurrentRoom.pricePerNight}\n{CurrentRoom.occupancyLimit}\n{CurrentRoom.number}");
-        
+        List<string> errors = new();
+
+        if (string.IsNullOrWhiteSpace(CurrentRoom.Name))
+            errors.Add("Nombre");
+
+        if (string.IsNullOrWhiteSpace(CurrentRoom.Type))
+            errors.Add("Tipo");
+
+        if (CurrentRoom.PricePerNight <= 0)
+            errors.Add("Precio");
+
+        if (CurrentRoom.OccupancyLimit <= 0)
+            errors.Add("Ocupacion Maxima");
+
+        if (CurrentRoom.Number <= 0)
+            errors.Add("Numero");
+
+        if (errors.Any())
+        {
+            MessageBox.Show("Faltan o son incorrectos:\n" + string.Join("\n", errors),
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+            return;
+        }
+
+        ApiResult<RoomModel> result;
+
+        if (string.IsNullOrEmpty(CurrentRoom.RoomId))
+        {
+            //CREAR (POST)
+            result = await ApiService.Instance.Post<RoomModel>("rooms", CurrentRoom);
+        }
+        else
+        {
+            //EDITAR (PUT)
+            result = await ApiService.Instance.Put<RoomModel>($"rooms/{CurrentRoom.RoomId}", CurrentRoom);
+        }
+
+        if (!result.Success)
+        {
+            MessageBox.Show(result.Error?.Message ?? "Error guardando habitación");
+            return;
+        }
+
+        MessageBox.Show("Guardado correctamente");
+
+        await LoadRooms();
+        NavigationViewModel.Instance.BackCommand.Execute(null);
     }
 
+  
 
+   
+
+
+    private async Task DeleteAsync()
+    {
+
+        if (MessageBox.Show("¿Seguro que quieres eliminar?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+        {
+            if (MessageBox.Show("¿Seguro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                ApiResult<RoomModel> result;
+                //ELIMINAR (DELETE)
+                result = await ApiService.Instance.Delete<RoomModel>($"rooms/{CurrentRoom.RoomId}");
+
+                if (!result.Success)
+                {
+                    MessageBox.Show(result.Error?.Message ?? "Error eliminando habitación");
+                    return;
+                }
+
+                await LoadRooms();
+                NavigationViewModel.Instance.BackCommand.Execute(null);
+            }
+            else { return; }   
+        }
+        else { return; }
+
+    }
+
+    private async void Delete(object? parameter)
+    {
+        await DeleteAsync();
+    }
+
+    private RelayCommand deleteCommand;
+    public ICommand DeleteCommand => deleteCommand ??= new RelayCommand(Delete);
 
 
 }
