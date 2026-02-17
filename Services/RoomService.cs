@@ -1,5 +1,7 @@
-using System.Net;
 using PereMaria.GestorHotel.Models;
+using System.Collections.ObjectModel;
+using System.Net;
+using System.Windows;
 
 namespace PereMaria.GestorHotel.Services;
 
@@ -7,42 +9,26 @@ public class RoomService
 {
     public async Task<ApiResult<List<RoomModel>>> GetAllRooms()
     {
-        var rooms = new List<RoomModel>
-        {
-            new()
-            {
-                RoomId = "69530df689fb7880d5983c24",
-                Name = "Habitacion 1",
-                Offer = 20,
-                PricePerNight = 70,
-                OccupancyLimit = 2,
-            }
-        };
-
-        return await Task.FromResult(new ApiResult<List<RoomModel>>
-        {
-            Success = true,
-            Data = rooms,
-            StatusCode = HttpStatusCode.OK
-        });
+        return await ApiService.Instance.Get<List<RoomModel>>("rooms");
     }
 
     public async Task<ApiResult<RoomModel>> GetRoom(string id)
     {
-        var room = new RoomModel
-        {
-            RoomId = "69530df689fb7880d5983c24",
-            Name = "Habitacion 1",
-            Offer = 20,
-            PricePerNight = 70,
-            OccupancyLimit = 2,
-        };
+        return await ApiService.Instance.Get<RoomModel>($"rooms/{id}");
+    }
 
-        return await Task.FromResult(new ApiResult<RoomModel>
-        {
-            Success = true,
-            Data = room,
-            StatusCode = HttpStatusCode.OK
-        });
+    public async Task<ApiResult<RoomModel>> CreateRoom(RoomModel room)
+    {
+        return await ApiService.Instance.Post<RoomModel>("rooms", room);
+    }
+
+    public async Task<ApiResult<RoomModel>> UpdateRoom(RoomModel room)
+    {
+        return await ApiService.Instance.Put<RoomModel>($"rooms/{room.RoomId}", room);
+    }
+
+    public async Task<ApiResult<RoomModel>> DeleteRoom(string id)
+    {
+        return await ApiService.Instance.Delete<RoomModel>($"rooms/{id}");
     }
 }

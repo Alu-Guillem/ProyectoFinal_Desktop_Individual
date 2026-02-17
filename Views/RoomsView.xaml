@@ -43,9 +43,10 @@
             <Button Content="Crear" Style="{StaticResource PrimaryButtonStyle}" Margin="10" Height="40" Width="80" Click="Create_Button"/>
         </StackPanel>
         
+        <!-- Habitaciones -->
         <Border  BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2" Grid.Row="1" Margin="20 0 20 0" Grid.ColumnSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  Background="{StaticResource Bg-Cosmic-Dark}">
-                <ItemsControl ItemsSource="{Binding Rooms}">
+                <ItemsControl ItemsSource="{Binding Rooms}" Margin="10 20 10 20" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="4"/>
