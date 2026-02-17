@@ -71,8 +71,6 @@
 
         </StackPanel>
         
-
-        
         <!-- Image -->
         <DockPanel Grid.Column="1" Grid.Row="0" Margin="5"> 
             <Label Content="Imagen: " DockPanel.Dock="Top"/>
