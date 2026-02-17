@@ -24,8 +24,27 @@ public class RoomsViewModel : BaseViewModel
         _currentRoom = new RoomModel();
     }
 
+    private readonly RoomService _roomService = new RoomService();
+
     // La lista de todas las rooms
     public ObservableCollection<RoomModel> Rooms { get; } = new();
+
+    public async Task LoadRooms()
+    {
+        var result = await _roomService.GetAllRooms();
+
+        if (result.Success && result.Data != null)
+        {
+            Rooms.Clear();
+            foreach (var room in result.Data)
+                Rooms.Add(room);
+        }
+        else
+        {
+            MessageBox.Show(result.Error?.Message ?? "Error cargando habitaciones");
+        }
+    }
+
 
 
     // La room que se está editando/creando actualmente
@@ -47,34 +66,6 @@ public class RoomsViewModel : BaseViewModel
 
     private void Back(object commandParameter)
     {
-    }
-
-
-
-
-    public async Task LoadRooms()
-    {
-        var result = await ApiService.Instance.Get<List<RoomModel>>("rooms");
-
-        if (result.Success && result.Data != null)
-        {
-            Rooms.Clear();
-            foreach (var room in result.Data)
-                Rooms.Add(room);
-        }
-        else
-        {
-            MessageBox.Show(result.Error?.Message ?? "Error cargando habitaciones");
-        }
-    }
-
-
-
-
-    private void TestSave(object? obj)
-    {
-        MessageBox.Show($"SAVE ejecutado \n{CurrentRoom.Name}\n{CurrentRoom.Type}\n{CurrentRoom.PricePerNight}\n{CurrentRoom.OccupancyLimit}\n{CurrentRoom.Number}\n\nID: {CurrentRoom.RoomId} \n {CurrentRoom.ToString()}");
-        
     }
 
     private async void Save(object? parameter)
@@ -117,13 +108,11 @@ public class RoomsViewModel : BaseViewModel
 
         if (string.IsNullOrEmpty(CurrentRoom.RoomId))
         {
-            //CREAR (POST)
-            result = await ApiService.Instance.Post<RoomModel>("rooms", CurrentRoom);
+            result = await _roomService.CreateRoom(CurrentRoom);
         }
         else
         {
-            //EDITAR (PUT)
-            result = await ApiService.Instance.Put<RoomModel>($"rooms/{CurrentRoom.RoomId}", CurrentRoom);
+            result = await _roomService.UpdateRoom(CurrentRoom);
         }
 
         if (!result.Success)
@@ -138,10 +127,6 @@ public class RoomsViewModel : BaseViewModel
         NavigationViewModel.Instance.BackCommand.Execute(null);
     }
 
-  
-
-   
-
 
     private async Task DeleteAsync()
     {
@@ -150,9 +135,8 @@ public class RoomsViewModel : BaseViewModel
         {
             if (MessageBox.Show("¿Seguro?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                ApiResult<RoomModel> result;
                 //ELIMINAR (DELETE)
-                result = await ApiService.Instance.Delete<RoomModel>($"rooms/{CurrentRoom.RoomId}");
+                var result = await _roomService.DeleteRoom(CurrentRoom.RoomId);
 
                 if (!result.Success)
                 {
