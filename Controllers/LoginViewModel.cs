@@ -61,7 +61,7 @@ public class LoginViewModel : BaseViewModel
             SessionService.Instance.SetToken(result.Data.Token);
             await SessionService.Instance.LoadUserInfo();
 
-            if (SessionService.Instance.CurrentUser.Role == "customer")
+            if (SessionService.Instance.CurrentUser?.Role == "customer")
             {
                 ShowMessageBox("Un customer no se puede loguear", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
