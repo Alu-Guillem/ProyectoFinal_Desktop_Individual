@@ -43,6 +43,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <components:AvatarInitial Initial="{Binding User.FirstName[0]}"
@@ -56,6 +57,19 @@
                         <TextBlock Text="{Binding Email}"
                                    Foreground="{StaticResource Text-Primary}"
                                    FontSize="20"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                        <TextBlock Foreground="{StaticResource Text-Primary}" FontSize="18" Margin="0 0 0 10">Vip</TextBlock>
+                        <ComboBox MaxWidth="100" 
+                                  SelectedValue="{Binding Vip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  Style="{StaticResource DropdownStyle}" 
+                                  Width="200"
+                                  HorizontalAlignment="Left"
+                                  SelectedValuePath="Content">
+                            <ComboBoxItem Content="Sí" />
+                            <ComboBoxItem Content="No" />
+                        </ComboBox>
                     </StackPanel>
                 </Grid>
 
@@ -97,7 +111,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
-                        <Label Content="Nueva Contraseña" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
+                        <Label Content="Contraseña" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
                         <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" Style="{StaticResource PasswordBoxStyle}"/>
                     </StackPanel>
                 </Grid>
@@ -128,7 +142,11 @@
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 15 0">
                         <Label Content="Genero" Style="{StaticResource FormLabelStyle}" HorizontalAlignment="Left"/>
-                        <ComboBox Text="{Binding Gender}" IsEnabled="{Binding IsTextBoxEnabled}" Style="{StaticResource DropdownStyle}" Width="200" HorizontalAlignment="Left">
+                        <ComboBox SelectedValue="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValuePath="Content"
+                                  IsEnabled="{Binding IsTextBoxEnabled}"
+                                  Style="{StaticResource DropdownStyle}" Width="200" HorizontalAlignment="Left"
+                                  >
                             <ComboBoxItem Content="Masculino" />
                             <ComboBoxItem Content="Femenino" />
                             <ComboBoxItem Content="Prefiero no decirlo" />

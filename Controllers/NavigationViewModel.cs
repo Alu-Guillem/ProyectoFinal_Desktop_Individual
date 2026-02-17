@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using PereMaria.GestorHotel.Commands;
 using PereMaria.GestorHotel.Models;
@@ -17,6 +18,7 @@ public class NavigationViewModel : BaseViewModel
     private readonly NavigationService _navigationService = NavigationService.Instance;
 
     private readonly SessionService _session = SessionService.Instance;
+    private readonly AuthService _authService = new AuthService();
 
 
     // Devuelve el NavItem correspondiente a la vista actual
@@ -112,4 +114,36 @@ public class NavigationViewModel : BaseViewModel
     }
 
     public RelayCommand BackCommand => new(_ => NavigateBack());
+
+    public RelayCommand LogoutCommand => new(_ => Logout());
+
+    public void Logout()
+    {
+        SessionService.Instance.SetToken(null);
+        SessionService.Instance.CurrentUser = null;
+        
+        LoginViewModel.Instance.Email = string.Empty; 
+
+        Application.Current.Dispatcher.Invoke(() =>
+            {
+                var login = new Login();
+                login.Show();
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window is MainWindow)
+                    {
+                        NavigateTo<RoomsView>();
+                        window.Close();
+                        break;
+                    }
+                }
+            }
+        );
+        
+        
+        
+    }
+
+
 }
