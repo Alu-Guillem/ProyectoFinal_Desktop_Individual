@@ -202,7 +202,7 @@ public class BookingsService
             throw new Exception(message);
         }
 
-        var roomsResponse = await new RoomService().GetAllRooms();
+        var roomsResponse = await new RoomService().GetAllRooms("",null);
         if (!roomsResponse.Success || roomsResponse.Data == null)
         {
             var message = roomsResponse.Error?.Message ?? "No se pudieron cargar las habitaciones";
