@@ -8,7 +8,7 @@
     xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
     mc:Ignorable="d"
     d:DesignHeight="600"
-    d:DesignWidth="800"
+    d:DesignWidth="1200"
     DataContext="{x:Static controllers:BookingsViewModel.Instance}">
     <Grid>
         <Grid.RowDefinitions>
@@ -61,7 +61,8 @@
                 </StackPanel>
                 <Button Style="{StaticResource IconBaseButton}"
                     Command="{Binding ClearDateFiltersCommand}"
-                    Margin="0 18 0 0">
+                    Margin="0 18 0 0"
+                    VerticalAlignment="Center">
                     close
                 </Button>
             </StackPanel>
@@ -74,7 +75,8 @@
                 Visibility="{Binding HasDateFilterError, Converter={StaticResource BoolToVisibility}}" />
             <Button Style="{StaticResource IconBaseButton}"
                 Command="{Binding ReloadCommand}"
-                DockPanel.Dock="Right">
+                DockPanel.Dock="Right"
+                VerticalAlignment="Center">
                 refresh
             </Button>
         </DockPanel>
