@@ -9,6 +9,10 @@ using PereMaria.GestorHotel.Models;
 
 namespace PereMaria.GestorHotel.Services;
 
+/// <summary>
+/// Cliente HTTP base para llamadas REST de la aplicación escritorio.
+/// Encapsula serialización, parseo de errores y resultados tipados.
+/// </summary>
 public class ApiService
 {
     // Singleton
@@ -24,12 +28,19 @@ public class ApiService
         _httpClient.Timeout = new TimeSpan(0, 0, 15);
     }
 
+    /// <summary>
+    /// Configura el token JWT usado en la cabecera Authorization para peticiones posteriores.
+    /// </summary>
+    /// <param name="token">Token Bearer emitido por backend.</param>
     public void SetToken(string token)
     {
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 
 
+    /// <summary>
+    /// Ejecuta una petición GET y devuelve el resultado tipado o error normalizado.
+    /// </summary>
     public async Task<ApiResult<T>> Get<T>(string route) where T : class
     {
         try
@@ -65,6 +76,9 @@ public class ApiService
         }
     }
 
+    /// <summary>
+    /// Ejecuta una petición POST serializando el body en JSON.
+    /// </summary>
     public async Task<ApiResult<T>> Post<T>(string route, object? o) where T : class
     {
         try
@@ -92,6 +106,8 @@ public class ApiService
         }
         catch (HttpRequestException ex)
         {
+            Console.WriteLine(ex.HttpRequestError);
+            Console.WriteLine(ex.Message);
             return new ApiResult<T>
             {
                 Success = false,
@@ -101,6 +117,9 @@ public class ApiService
         }
     }
 
+    /// <summary>
+    /// Ejecuta una petición PUT serializando el body en JSON.
+    /// </summary>
     public async Task<ApiResult<T>> Put<T>(string route, object? o) where T : class
     {
         try
@@ -137,6 +156,9 @@ public class ApiService
         }
     }
 
+    /// <summary>
+    /// Ejecuta una petición DELETE y devuelve el resultado tipado.
+    /// </summary>
     public async Task<ApiResult<T>> Delete<T>(string route) where T : class
     {
         try
@@ -174,6 +196,9 @@ public class ApiService
     }
 
 
+    /// <summary>
+    /// Intenta deserializar el payload de error del backend al contrato de <see cref="ApiError"/>.
+    /// </summary>
     private static ApiError TryParseError(string json)
     {
         try
