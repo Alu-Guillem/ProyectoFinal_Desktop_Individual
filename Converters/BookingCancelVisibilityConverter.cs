@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace PereMaria.GestorHotel.Converters
 {
+    /// <summary>
+    /// Controla la visibilidad del botón de cancelación según estado de edición y estado de la reserva.
+    /// </summary>
     public class BookingCancelVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

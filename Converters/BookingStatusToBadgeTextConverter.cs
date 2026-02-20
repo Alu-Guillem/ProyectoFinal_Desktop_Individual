@@ -4,6 +4,9 @@ using System.Windows.Data;
 
 namespace PereMaria.GestorHotel.Converters
 {
+    /// <summary>
+    /// Convierte el estado de la reserva en una etiqueta legible para la interfaz.
+    /// </summary>
     public class BookingStatusToBadgeTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

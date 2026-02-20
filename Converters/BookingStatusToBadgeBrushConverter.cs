@@ -6,6 +6,9 @@ using System.Windows.Media;
 
 namespace PereMaria.GestorHotel.Converters
 {
+    /// <summary>
+    /// Convierte el estado de la reserva en el color de badge correspondiente.
+    /// </summary>
     public class BookingStatusToBadgeBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
