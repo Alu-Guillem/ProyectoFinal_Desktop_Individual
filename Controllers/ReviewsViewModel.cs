@@ -43,7 +43,6 @@ public class ReviewsViewModel : BaseViewModel
 
     private ReviewsViewModel()
     {
-        _ = LoadReviews();
     }
 
     public ObservableCollection<ReviewModel> Reviews { get; } = new();
@@ -215,7 +214,7 @@ public class ReviewsViewModel : BaseViewModel
     /// <summary>
     /// Carga reseñas desde API, reinicia el estado local de filtros y refresca métricas.
     /// </summary>
-    private async Task LoadReviews()
+    public async Task LoadReviews()
     {
         try
         {
