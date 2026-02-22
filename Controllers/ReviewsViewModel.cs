@@ -222,6 +222,7 @@ public class ReviewsViewModel : BaseViewModel
             IsLoading = true;
 
             var reviews = await _reviewsService.GetReviews();
+            Console.WriteLine(Reviews.Count);
             _allReviews.Clear();
             _allReviews.AddRange(reviews);
 

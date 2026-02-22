@@ -45,9 +45,7 @@
                             SelectedItem="{Binding SelectedRoomFilter}"
                             DisplayMemberPath="Label"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource DropdownStyle}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
@@ -57,9 +55,8 @@
                             SelectedItem="{Binding SelectedCustomerFilter}"
                             DisplayMemberPath="Label"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource DropdownStyle}"
+                        />
                     </StackPanel>
                 </Grid>
 
@@ -79,9 +76,7 @@
                         <TextBox
                             Text="{Binding FilterSearchText, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1"
@@ -91,9 +86,7 @@
                         <TextBox
                             Text="{Binding FilterMinRateText, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="2"
@@ -103,9 +96,7 @@
                         <TextBox
                             Text="{Binding FilterMaxRateText, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="3"
@@ -115,9 +106,7 @@
                         <TextBox
                             Text="{Binding FilterFromDateText, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="4">
@@ -126,9 +115,7 @@
                         <TextBox
                             Text="{Binding FilterToDateText, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0 4 0 0"
-                            Background="{StaticResource Bg-Input}"
-                            Foreground="{StaticResource Text-Primary}"
-                            BorderBrush="{StaticResource Bg-Purple-Accent}" />
+                            Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                 </Grid>
 
@@ -143,21 +130,21 @@
                     <Button Grid.Column="0"
                         Content="Aplicar"
                         Command="{Binding ApplyFiltersCommand}"
-                        Style="{StaticResource PrimaryButton}"
+                        Style="{StaticResource PrimaryButtonStyle}"
                         Margin="0 0 8 0"
                         Padding="16 6" />
 
                     <Button Grid.Column="1"
                         Content="Limpiar"
                         Command="{Binding ClearFiltersCommand}"
-                        Style="{StaticResource SecondaryButton}"
+                        Style="{StaticResource ActionButtonStyle}"
                         Margin="0 0 8 0"
                         Padding="16 6" />
 
                     <Button Grid.Column="2"
                         Content="Actualizar"
                         Command="{Binding RefreshCommand}"
-                        Style="{StaticResource SecondaryButton}"
+                        Style="{StaticResource ActionButtonStyle}"
                         Margin="0 0 8 0"
                         Padding="16 6" />
 

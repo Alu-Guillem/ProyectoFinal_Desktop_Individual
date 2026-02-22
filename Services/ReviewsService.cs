@@ -107,6 +107,7 @@ public class ReviewsService
             var endpoint = BuildEndpoint(query);
             var res = await _apiService.Get<ReviewModel[]>(endpoint);
 
+
             if (res.Error != null)
             {
                 if (res.StatusCode == HttpStatusCode.NotFound)
@@ -122,9 +123,13 @@ public class ReviewsService
                 return new List<ReviewModel>();
             }
 
-            var reviews = res.Data.ToList();
-            await PopulateReviews(reviews);
+            Console.WriteLine($"Fetched api result: {res.Data.Length}");
 
+            var reviews = res.Data.ToList();
+            Console.WriteLine($"Data out of response: {reviews.Count}");
+            await PopulateReviews(reviews);
+            Console.WriteLine($"Data populated {reviews.Count}");
+            Console.WriteLine($"Filters == null? {filters == null}");
             return filters == null ? reviews : ApplyFilters(reviews, filters).ToList();
         }
         catch (HttpRequestException ex)
@@ -143,6 +148,7 @@ public class ReviewsService
     /// </summary>
     public IEnumerable<ReviewModel> ApplyFilters(IEnumerable<ReviewModel> source, ReviewFilterOptions filters)
     {
+        Console.WriteLine("Apliying filters");
         var filtered = source;
 
         if (!string.IsNullOrWhiteSpace(filters.RoomId))
@@ -176,12 +182,14 @@ public class ReviewsService
 
         if (filters.FromDate.HasValue)
         {
-            filtered = filtered.Where(r => TryParseCreatedAt(r.CreatedAt, out var created) && created >= filters.FromDate.Value);
+            filtered = filtered.Where(r =>
+                TryParseCreatedAt(r.CreatedAt, out var created) && created >= filters.FromDate.Value);
         }
 
         if (filters.ToDate.HasValue)
         {
-            filtered = filtered.Where(r => TryParseCreatedAt(r.CreatedAt, out var created) && created <= filters.ToDate.Value);
+            filtered = filtered.Where(r =>
+                TryParseCreatedAt(r.CreatedAt, out var created) && created <= filters.ToDate.Value);
         }
 
         return filtered;
