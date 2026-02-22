@@ -6,12 +6,16 @@ using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
+/// <summary>
+/// ViewModel de autenticación para la ventana de acceso al panel de escritorio.
+/// Gestiona credenciales, login contra API y transición a ventana principal.
+/// </summary>
 public class LoginViewModel : BaseViewModel
 {
     private static LoginViewModel? _instance;
     public static LoginViewModel Instance => _instance ??= new LoginViewModel();
 
-    private readonly AuthService _authService = new AuthService();
+    private readonly AuthService _authService = AuthService.Instance;
 
     private LoginViewModel()
     {
@@ -19,6 +23,9 @@ public class LoginViewModel : BaseViewModel
 
     private string _email;
 
+    /// <summary>
+    /// Correo usado para autenticarse en backend.
+    /// </summary>
     public String Email
     {
         get => _email;
@@ -32,6 +39,9 @@ public class LoginViewModel : BaseViewModel
 
     private string _password;
 
+    /// <summary>
+    /// Contraseña usada para autenticarse en backend.
+    /// </summary>
     public String Password
     {
         get => _password;
@@ -43,30 +53,31 @@ public class LoginViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Ejecuta el flujo de autenticación y redirige a la aplicación principal al completarse.
+    /// </summary>
     public RelayCommand LoginCommand => new RelayCommand(async _ => await Login());
 
+    /// <summary>
+    /// Valida credenciales contra la API y bloquea el acceso para usuarios con rol customer.
+    /// </summary>
     private async Task Login()
     {
         Console.WriteLine("Logeando");
 
         var result = await _authService.Login(Email, Password);
-        
-        
 
         if (result.Success)
         {
-            
-            
-            
             SessionService.Instance.SetToken(result.Data.Token);
             await SessionService.Instance.LoadUserInfo();
 
-            if (SessionService.Instance.CurrentUser.Role == "customer")
+            if (SessionService.Instance.CurrentUser?.Role == "customer")
             {
                 ShowMessageBox("Un customer no se puede loguear", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
             ChangeWindow();
         }
         else
@@ -75,9 +86,11 @@ public class LoginViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Cierra la ventana de login y abre la ventana principal de gestión.
+    /// </summary>
     private void ChangeWindow()
     {
-        
         Application.Current.Dispatcher.Invoke(() =>
             {
                 var mainWindow = new MainWindow();

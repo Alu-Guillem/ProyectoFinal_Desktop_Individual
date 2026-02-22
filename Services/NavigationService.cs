@@ -3,6 +3,9 @@ using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Services;
 
+/// <summary>
+/// Gestiona la pila de vistas de la aplicacion y permite navegar entre ellas.
+/// </summary>
 public class NavigationService
 {
     // Singleton
@@ -28,15 +31,18 @@ public class NavigationService
     }
 
     /// <summary>
-    /// Navega a un UserControl del tipo especificado
+    /// Navega a un UserControl del tipo especificado.
     /// </summary>
-    /// <typeparam name="T">Tipo del UserControl</typeparam>
+    /// <typeparam name="T">Tipo del UserControl.</typeparam>
     public void NavigateTo<T>() where T : UserControl, new()
     {
         var view = ViewsStack.Find(v => v is T) ?? new T();
         CurrentView = view;
     }
 
+    /// <summary>
+    /// Regresa a la vista anterior si existe.
+    /// </summary>
     public void NavigateBack()
     {
         if (ViewsStack.Count == 1) return;

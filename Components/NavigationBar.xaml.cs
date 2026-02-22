@@ -15,4 +15,9 @@ public partial class NavigationBar : UserControl
     {
         NavigationViewModel.Instance.NavigateTo<PreviewControlsView>();
     }
+
+    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
 }

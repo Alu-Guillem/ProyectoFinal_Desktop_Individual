@@ -9,6 +9,9 @@ using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
+/// <summary>
+/// ViewModel de navegación principal: expone menú lateral, vista activa y acciones globales de sesión.
+/// </summary>
 public class NavigationViewModel : BaseViewModel
 {
     // Singleton
@@ -18,10 +21,12 @@ public class NavigationViewModel : BaseViewModel
     private readonly NavigationService _navigationService = NavigationService.Instance;
 
     private readonly SessionService _session = SessionService.Instance;
-    private readonly AuthService _authService = new AuthService();
+    private readonly AuthService _authService = AuthService.Instance;
 
 
-    // Devuelve el NavItem correspondiente a la vista actual
+    /// <summary>
+    /// Devuelve y actualiza el ítem de navegación seleccionado en función de la vista actual.
+    /// </summary>
     public NavItem? SelectedNavItem
     {
         get
@@ -83,6 +88,9 @@ public class NavigationViewModel : BaseViewModel
         ];
     }
 
+    /// <summary>
+    /// Recalcula los datos de cabecera cuando cambia la sesión activa.
+    /// </summary>
     private void OnSessionChanged()
     {
         OnPropertyChanged(nameof(FirstName));
@@ -99,6 +107,9 @@ public class NavigationViewModel : BaseViewModel
 
     public string Role => _session.CurrentUser?.Role ?? "";
 
+    /// <summary>
+    /// Vuelve a la vista anterior de la pila y actualiza bindings de navegación.
+    /// </summary>
     public void NavigateBack()
     {
         _navigationService.NavigateBack();
@@ -106,6 +117,10 @@ public class NavigationViewModel : BaseViewModel
         OnPropertyChanged(nameof(SelectedNavItem));
     }
 
+    /// <summary>
+    /// Navega a una vista concreta y refresca el estado visual del menú.
+    /// </summary>
+    /// <typeparam name="T">Tipo de vista destino.</typeparam>
     public void NavigateTo<T>() where T : UserControl, new()
     {
         _navigationService.NavigateTo<T>();
@@ -113,16 +128,25 @@ public class NavigationViewModel : BaseViewModel
         OnPropertyChanged(nameof(SelectedNavItem));
     }
 
+    /// <summary>
+    /// Comando para regresar a la vista anterior.
+    /// </summary>
     public RelayCommand BackCommand => new(_ => NavigateBack());
 
+    /// <summary>
+    /// Comando para cerrar sesión y volver a la pantalla de login.
+    /// </summary>
     public RelayCommand LogoutCommand => new(_ => Logout());
 
+    /// <summary>
+    /// Cierra la sesión actual, reinicia estado de navegación y muestra la ventana de autenticación.
+    /// </summary>
     public void Logout()
     {
         SessionService.Instance.SetToken(null);
         SessionService.Instance.CurrentUser = null;
-        
-        LoginViewModel.Instance.Email = string.Empty; 
+
+        LoginViewModel.Instance.Email = string.Empty;
 
         Application.Current.Dispatcher.Invoke(() =>
             {
@@ -140,9 +164,9 @@ public class NavigationViewModel : BaseViewModel
                 }
             }
         );
-        
-        
-        
+
+
+
     }
 
 
