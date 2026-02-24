@@ -656,7 +656,8 @@ public class BookingsViewModel : BaseViewModel
     {
         try
         {
-            var res = await new RoomService().GetAllRooms();
+            Console.WriteLine("[Bookings] LoadRooms start");
+            var res = await new RoomService().GetAllRooms("",null);
 
             if (!res.Success || res.Data == null)
             {
