@@ -14,8 +14,15 @@ using PereMaria.GestorHotel.Views;
 
 namespace PereMaria.GestorHotel.Controllers;
 
+/// <summary>
+/// ViewModel principal para gestionar la tabla y formularios de reservas.
+/// Maneja filtrado, ordenacion, paginacion y operaciones CRUD contra la API.
+/// </summary>
 public class BookingsViewModel : BaseViewModel
 {
+    /// <summary>
+    /// Representa una opcion de ordenacion disponible en la interfaz.
+    /// </summary>
     public sealed class SortOption
     {
         public string Key { get; init; } = "";
@@ -67,6 +74,10 @@ public class BookingsViewModel : BaseViewModel
     public ObservableCollection<BookingModel> Bookings { get; } = [];
     public ObservableCollection<BookingModel> PagedBookings { get; } = [];
 
+    private DateTime? _filterStartDate;
+    private DateTime? _filterEndDate;
+    private string _dateFilterError = string.Empty;
+
     private string _tableSearchText = "";
 
     public string TableSearchText
@@ -82,6 +93,46 @@ public class BookingsViewModel : BaseViewModel
             UpdatePaging();
         }
     }
+
+    public DateTime? FilterStartDate
+    {
+        get => _filterStartDate;
+        set
+        {
+            if (Nullable.Equals(value, _filterStartDate)) return;
+            _filterStartDate = value;
+            OnPropertyChanged(nameof(FilterStartDate));
+            CurrentPage = 1;
+            UpdatePaging();
+        }
+    }
+
+    public DateTime? FilterEndDate
+    {
+        get => _filterEndDate;
+        set
+        {
+            if (Nullable.Equals(value, _filterEndDate)) return;
+            _filterEndDate = value;
+            OnPropertyChanged(nameof(FilterEndDate));
+            CurrentPage = 1;
+            UpdatePaging();
+        }
+    }
+
+    public string DateFilterError
+    {
+        get => _dateFilterError;
+        private set
+        {
+            if (string.Equals(value, _dateFilterError, StringComparison.Ordinal)) return;
+            _dateFilterError = value;
+            OnPropertyChanged(nameof(DateFilterError));
+            OnPropertyChanged(nameof(HasDateFilterError));
+        }
+    }
+
+    public bool HasDateFilterError => !string.IsNullOrWhiteSpace(DateFilterError);
 
     public ObservableCollection<SortOption> SortOptions { get; }
 
@@ -274,7 +325,6 @@ public class BookingsViewModel : BaseViewModel
             if (Equals(value, _selectedRoom)) return;
             if (value == null && _isFormInitializing && !string.IsNullOrWhiteSpace(CurrentBooking.RoomId))
             {
-                Console.WriteLine("[Bookings] SelectedRoom: skip clearing during init");
                 return;
             }
 
@@ -309,8 +359,6 @@ public class BookingsViewModel : BaseViewModel
         {
             if (value == _currentBooking) return;
             _currentBooking = value;
-            Console.WriteLine(
-                $"[Bookings] CurrentBooking set: id={_currentBooking.BookingId}, roomId={_currentBooking.RoomId}, userId={_currentBooking.UserId}");
             OnPropertyChanged(nameof(CurrentBooking));
             OnPropertyChanged(nameof(IsEditing));
             OnPropertyChanged(nameof(IsCreating));
@@ -569,6 +617,9 @@ public class BookingsViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Carga reservas desde backend, reinicia paginación y refresca listado visible.
+    /// </summary>
     private async Task LoadBookings()
     {
         try
@@ -598,6 +649,9 @@ public class BookingsViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Obtiene habitaciones disponibles para poblar selectores del formulario de reserva.
+    /// </summary>
     private async Task LoadRooms()
     {
         try
@@ -614,8 +668,6 @@ public class BookingsViewModel : BaseViewModel
             Rooms.Clear();
             res.Data.ForEach(r => Rooms.Add(r));
 
-            Console.WriteLine($"[Bookings] LoadRooms loaded: {Rooms.Count}");
-
             FilteredRooms.Refresh();
             SyncSelectedRoom();
             RecalculateTotals();
@@ -626,11 +678,13 @@ public class BookingsViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Obtiene clientes para el formulario y sincroniza la selección actual.
+    /// </summary>
     private async Task LoadCustomers()
     {
         try
         {
-            Console.WriteLine("[Bookings] LoadCustomers start");
             var res = await new UserService().GetAllCustomers();
 
             if (!res.Success || res.Data == null)
@@ -642,8 +696,6 @@ public class BookingsViewModel : BaseViewModel
             Customers.Clear();
             res.Data.ForEach(c => Customers.Add(c));
 
-            Console.WriteLine($"[Bookings] LoadCustomers loaded: {Customers.Count}");
-
             FilteredCustomers.Refresh();
             SyncSelectedCustomer();
         }
@@ -653,19 +705,19 @@ public class BookingsViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Sincroniza el cliente seleccionado con el estado de la reserva activa.
+    /// </summary>
     private void SyncSelectedCustomer()
     {
         if (string.IsNullOrWhiteSpace(CurrentBooking.UserId))
         {
-            Console.WriteLine("[Bookings] SyncSelectedCustomer: no UserId");
             SelectedCustomer = null;
             CustomerSearchText = "";
             return;
         }
 
         var match = Customers.FirstOrDefault(c => c.UserId == CurrentBooking.UserId);
-        Console.WriteLine(
-            $"[Bookings] SyncSelectedCustomer: userId={CurrentBooking.UserId}, match={(match != null ? match.UserId : "null")}");
         if (!Equals(match, SelectedCustomer))
         {
             SelectedCustomer = match;
@@ -675,11 +727,13 @@ public class BookingsViewModel : BaseViewModel
         CustomerSearchText = displayDni ?? "";
     }
 
+    /// <summary>
+    /// Sincroniza la habitación seleccionada con el estado de la reserva activa.
+    /// </summary>
     private void SyncSelectedRoom()
     {
         if (string.IsNullOrWhiteSpace(CurrentBooking.RoomId))
         {
-            Console.WriteLine("[Bookings] SyncSelectedRoom: no RoomId");
             SelectedRoom = null;
             _suppressRoomSearchClear = true;
             RoomSearchText = "";
@@ -688,14 +742,11 @@ public class BookingsViewModel : BaseViewModel
         }
 
         var match = Rooms.FirstOrDefault(r => r.RoomId == CurrentBooking.RoomId);
-        Console.WriteLine(
-            $"[Bookings] SyncSelectedRoom: roomId={CurrentBooking.RoomId}, match={(match != null ? match.RoomId : "null")}");
         if (match == null && CurrentBooking.Room != null)
         {
             var exists = Rooms.Any(r => r.RoomId == CurrentBooking.Room.RoomId);
             if (!exists)
             {
-                Console.WriteLine($"[Bookings] SyncSelectedRoom: add room from booking {CurrentBooking.Room.RoomId}");
                 Rooms.Add(CurrentBooking.Room);
             }
 
@@ -713,6 +764,9 @@ public class BookingsViewModel : BaseViewModel
         _suppressRoomSearchClear = false;
     }
 
+    /// <summary>
+    /// Filtro incremental para autocompletado de clientes por DNI.
+    /// </summary>
     private bool FilterCustomers(object item)
     {
         if (item is not CustomerModel customer) return false;
@@ -722,6 +776,9 @@ public class BookingsViewModel : BaseViewModel
         return customer.Dni?.StartsWith(searchText, StringComparison.OrdinalIgnoreCase) == true;
     }
 
+    /// <summary>
+    /// Filtro incremental para autocompletado de habitaciones por nombre.
+    /// </summary>
     private bool FilterRooms(object item)
     {
         if (item is not RoomModel room) return false;
@@ -731,12 +788,18 @@ public class BookingsViewModel : BaseViewModel
         return room.Name?.StartsWith(searchText, StringComparison.OrdinalIgnoreCase) == true;
     }
 
+    /// <summary>
+    /// Abre el formulario de reservas en modo creación o edición.
+    /// </summary>
     public RelayCommand NavigateFormCommand => new(parameter =>
     {
         NavigationViewModel.Instance.NavigateTo<BookingsFormView>();
         CurrentBooking = parameter as BookingModel ?? new BookingModel();
     });
 
+    /// <summary>
+    /// Valida y persiste la reserva actual (creación o actualización).
+    /// </summary>
     public RelayCommand SaveBookingCommand => new(async void (_) =>
     {
         try
@@ -747,8 +810,6 @@ public class BookingsViewModel : BaseViewModel
 
             if (IsCreating)
             {
-                // Crear nueva reserva
-                Console.WriteLine(CurrentBooking);
                 savedBooking = await BookingsService.Instance.CreateBooking(CurrentBooking);
                 if (savedBooking != null)
                 {
@@ -791,6 +852,9 @@ public class BookingsViewModel : BaseViewModel
 
     public RelayCommand CancelCommand => NavigationViewModel.Instance.BackCommand;
 
+    /// <summary>
+    /// Cancela una reserva activa previa confirmación del usuario.
+    /// </summary>
     public RelayCommand CancelBookingCommand => new(async void (_) =>
     {
         var result = ShowMessageBox(
@@ -828,6 +892,9 @@ public class BookingsViewModel : BaseViewModel
         }
     }, _ => IsEditing && CurrentBooking.Status != "canceled");
 
+    /// <summary>
+    /// Registra el pago de la reserva actual tras confirmar la operación.
+    /// </summary>
     public RelayCommand PayBookingCommand => new(async void (_) =>
     {
         var result = ShowMessageBox(
@@ -862,6 +929,9 @@ public class BookingsViewModel : BaseViewModel
         }
     }, _ => IsPaymentPending);
 
+    /// <summary>
+    /// Elimina de forma permanente una reserva cancelada.
+    /// </summary>
     public RelayCommand DeleteBookingCommand => new(async void (_) =>
     {
         var result = ShowMessageBox(
@@ -895,14 +965,32 @@ public class BookingsViewModel : BaseViewModel
         }
     }, _ => CanDeleteBooking);
 
+    /// <summary>
+    /// Recarga la colección completa de reservas.
+    /// </summary>
     public RelayCommand ReloadCommand => new(async void (_) => await LoadBookings());
 
+    /// <summary>
+    /// Limpia filtros de rango de fechas aplicados sobre la tabla de reservas.
+    /// </summary>
+    public RelayCommand ClearDateFiltersCommand => new(_ =>
+    {
+        FilterStartDate = null;
+        FilterEndDate = null;
+    });
+
+    /// <summary>
+    /// Establece el criterio de ordenación activo de la tabla.
+    /// </summary>
     public RelayCommand SetSortCommand => new(parameter =>
     {
         if (parameter is not string key) return;
         SelectedSortKey = key;
     });
 
+    /// <summary>
+    /// Avanza a la siguiente página de resultados si existe.
+    /// </summary>
     public RelayCommand NextPageCommand => new(_ =>
     {
         if (CurrentPage < TotalPages)
@@ -912,6 +1000,9 @@ public class BookingsViewModel : BaseViewModel
         }
     }, _ => CurrentPage < TotalPages);
 
+    /// <summary>
+    /// Retrocede a la página anterior de resultados si existe.
+    /// </summary>
     public RelayCommand PreviousPageCommand => new(_ =>
     {
         if (CurrentPage > 1)
@@ -921,16 +1012,29 @@ public class BookingsViewModel : BaseViewModel
         }
     }, _ => CurrentPage > 1);
 
+    /// <summary>
+    /// Recalcula el conjunto paginado aplicando filtros y ordenación actuales.
+    /// </summary>
     private void UpdatePaging()
     {
-        var totalItems = Bookings.Count;
+        var filteredList = ApplyTableSearch(Bookings).ToList();
+
+        if (HasDateFilterError)
+        {
+            PagedBookings.Clear();
+            TotalPages = 1;
+            CurrentPage = 1;
+            OnPropertyChanged(nameof(PageSummary));
+            return;
+        }
+
+        var totalItems = filteredList.Count;
         TotalPages = Math.Max(1, (int)Math.Ceiling(totalItems / (double)SelectedPageSize));
         if (CurrentPage > TotalPages) CurrentPage = TotalPages;
         if (CurrentPage < 1) CurrentPage = 1;
 
         PagedBookings.Clear();
-        var filtered = ApplyTableSearch(Bookings);
-        var sorted = ApplySorting(filtered);
+        var sorted = ApplySorting(filteredList);
         var pageItems = sorted
             .Skip((CurrentPage - 1) * SelectedPageSize)
             .Take(SelectedPageSize);
@@ -943,6 +1047,9 @@ public class BookingsViewModel : BaseViewModel
         OnPropertyChanged(nameof(PageSummary));
     }
 
+    /// <summary>
+    /// Aplica la dirección y clave de ordenación seleccionadas sobre una colección.
+    /// </summary>
     private IEnumerable<BookingModel> ApplySorting(IEnumerable<BookingModel> source)
     {
         return SelectedSortDirection == "desc"
@@ -950,15 +1057,55 @@ public class BookingsViewModel : BaseViewModel
             : source.OrderBy(GetSortValue);
     }
 
+    /// <summary>
+    /// Filtra reservas por texto libre tras aplicar filtros de fecha.
+    /// </summary>
     private IEnumerable<BookingModel> ApplyTableSearch(IEnumerable<BookingModel> source)
     {
+        var filtered = ApplyDateFilter(source);
+        if (HasDateFilterError)
+        {
+            return Enumerable.Empty<BookingModel>();
+        }
+
         var query = (TableSearchText ?? string.Empty).Trim();
-        if (string.IsNullOrWhiteSpace(query)) return source;
+        if (string.IsNullOrWhiteSpace(query)) return filtered;
 
         var normalized = query.ToLowerInvariant();
-        return source.Where(booking => BuildSearchText(booking).Contains(normalized));
+        return filtered.Where(booking => BuildSearchText(booking).Contains(normalized));
     }
 
+    /// <summary>
+    /// Aplica filtro de rango de fechas de entrada/salida sobre reservas.
+    /// </summary>
+    private IEnumerable<BookingModel> ApplyDateFilter(IEnumerable<BookingModel> source)
+    {
+        if (FilterStartDate.HasValue && FilterEndDate.HasValue && FilterStartDate > FilterEndDate)
+        {
+            DateFilterError = "La fecha inicial no puede ser posterior a la final";
+            return Enumerable.Empty<BookingModel>();
+        }
+
+        DateFilterError = string.Empty;
+
+        if (FilterStartDate.HasValue)
+        {
+            var start = FilterStartDate.Value.Date;
+            source = source.Where(booking => ParseSortDate(booking.StartDate) >= start);
+        }
+
+        if (FilterEndDate.HasValue)
+        {
+            var end = FilterEndDate.Value.Date;
+            source = source.Where(booking => ParseSortDate(booking.EndDate) <= end);
+        }
+
+        return source;
+    }
+
+    /// <summary>
+    /// Construye un texto normalizado con campos relevantes para búsqueda full-text.
+    /// </summary>
     private string BuildSearchText(BookingModel booking)
     {
         var guest = $"{booking.Customer?.FirstName ?? ""} {booking.Customer?.LastName ?? ""}";
@@ -986,6 +1133,9 @@ public class BookingsViewModel : BaseViewModel
         return string.Join(" ", parts).ToLowerInvariant();
     }
 
+    /// <summary>
+    /// Obtiene la clave de ordenación de una reserva según la columna activa.
+    /// </summary>
     private object GetSortValue(BookingModel booking)
     {
         return SelectedSortKey switch
@@ -1001,6 +1151,9 @@ public class BookingsViewModel : BaseViewModel
         };
     }
 
+    /// <summary>
+    /// Convierte texto de fecha de reserva a DateTime para ordenar de forma estable.
+    /// </summary>
     private DateTime ParseSortDate(string? dateText)
     {
         if (dateText == null) return DateTime.MinValue;
@@ -1010,14 +1163,14 @@ public class BookingsViewModel : BaseViewModel
             : DateTime.MinValue;
     }
 
+    /// <summary>
+    /// Inicializa campos del formulario con defaults y estado de la reserva actual.
+    /// </summary>
     private void InitializeFormState(BookingModel booking)
     {
-        Console.WriteLine(
-            $"[Bookings] InitializeFormState: id={booking.BookingId}, roomId={booking.RoomId}, userId={booking.UserId}");
         if (string.IsNullOrWhiteSpace(booking.RoomId) && SelectedRoom != null)
         {
             booking.RoomId = SelectedRoom.RoomId;
-            Console.WriteLine($"[Bookings] InitializeFormState: restored roomId={booking.RoomId}");
         }
 
         StartDateText = string.IsNullOrWhiteSpace(booking.StartDate)
@@ -1037,6 +1190,9 @@ public class BookingsViewModel : BaseViewModel
         ClearValidationErrors();
     }
 
+    /// <summary>
+    /// Recalcula noches, precio por noche y total según fechas, habitación y descuento.
+    /// </summary>
     private void RecalculateTotals()
     {
         ComputedTotalNights = 0;
@@ -1071,17 +1227,26 @@ public class BookingsViewModel : BaseViewModel
         ComputedTotalPrice = Math.Round(pricePerNight * nights, 2);
     }
 
+    /// <summary>
+    /// Parsea el descuento textual y devuelve 0 cuando no es válido.
+    /// </summary>
     private int ParseDiscount()
     {
         return int.TryParse(DiscountText, out var discount) ? discount : 0;
     }
 
+    /// <summary>
+    /// Intenta parsear una fecha con formato DD/MM/YYYY.
+    /// </summary>
     private bool TryParseDate(string text, out DateTime date)
     {
         return DateTime.TryParseExact(text, DateFormat, CultureInfo.InvariantCulture,
             DateTimeStyles.None, out date);
     }
 
+    /// <summary>
+    /// Limpia mensajes de validación del formulario de reservas.
+    /// </summary>
     private void ClearValidationErrors()
     {
         CustomerError = string.Empty;
@@ -1093,6 +1258,9 @@ public class BookingsViewModel : BaseViewModel
         DateConflictMessage = string.Empty;
     }
 
+    /// <summary>
+    /// Ejecuta validaciones de negocio del formulario antes de persistir la reserva.
+    /// </summary>
     private bool ValidateBooking(bool showSummary)
     {
         ClearValidationErrors();

@@ -2,18 +2,31 @@
 
 namespace PereMaria.GestorHotel.Services;
 
+/// <summary>
+/// Servicio de autenticación para login de empleados/administradores en escritorio.
+/// </summary>
 public class AuthService
 {
+    // Singleton
+    private static AuthService? _instance;
+    public static AuthService Instance => _instance ??= new AuthService();
+
     private readonly ApiService _api = ApiService.Instance;
 
 
-    public async Task<ApiResult<LoginRespone>> Login(string email, string password)
+    /// <summary>
+    /// Solicita autenticación al backend y devuelve un JWT de sesión.
+    /// </summary>
+    public async Task<ApiResult<LoginResponse>> Login(string email, string password)
     {
-        return await _api.Post<LoginRespone>($"auth/login", new { email, password });
+        return await _api.Post<LoginResponse>($"auth/login", new { email, password });
     }
 }
 
-public class LoginRespone
+/// <summary>
+/// Contrato de respuesta para login exitoso.
+/// </summary>
+public class LoginResponse
 {
     public string Token { get; set; }
 }
