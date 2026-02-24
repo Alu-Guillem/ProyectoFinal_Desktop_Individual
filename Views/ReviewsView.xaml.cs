@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using PereMaria.GestorHotel.Controllers;
 
 namespace PereMaria.GestorHotel.Views;
 
@@ -13,5 +15,11 @@ public partial class ReviewsView : UserControl
     public ReviewsView()
     {
         InitializeComponent();
+        Loaded += ReviewsView_Loaded;
+    }
+
+    private async void ReviewsView_Loaded(object sender, RoutedEventArgs e)
+    {
+        await ReviewsViewModel.Instance.LoadReviews();
     }
 }

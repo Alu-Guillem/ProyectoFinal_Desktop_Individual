@@ -20,4 +20,20 @@ public partial class Login : Window
             vm.Password = ((PasswordBox)sender).Password;
         }
     }
+    
+    private void ShowPassword(object sender, RoutedEventArgs e)
+    {
+        TxtPassword.Text = PwdBox.Password;
+        TxtPassword.Visibility = Visibility.Visible;
+        PwdBox.Visibility = Visibility.Collapsed;
+    }
+
+    private void HidePassword(object sender, RoutedEventArgs e)
+    {
+        PwdBox.Password = TxtPassword.Text;
+        PwdBox.Visibility = Visibility.Visible;
+        TxtPassword.Visibility = Visibility.Collapsed;
+    }
+
+
 }

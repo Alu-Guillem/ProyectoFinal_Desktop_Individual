@@ -23,7 +23,7 @@
             <TextBlock FontSize="26" FontFamily="{StaticResource Font-Primary}" Foreground="{StaticResource Text-Secondary}" Text="Sistema De Administración" HorizontalAlignment="Center" Margin="0 15 0 0"></TextBlock>
         </StackPanel>
         <Border Grid.Row="1" 
-                Width="500" 
+                Width="500"
                 Height="400"
                 Background="{StaticResource Nav-Hover}"
                 CornerRadius="25" 
@@ -37,10 +37,22 @@
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="TxtBoxEmailBox" Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
                 </StackPanel>
                 <StackPanel Margin="0 0 0 15">
-                    <Label FontWeight="Bold" FontFamily="{StaticResource Font-Primary}"  Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
-                    <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" Style="{StaticResource PasswordBoxStyle}"  Width="350"  Height="45"/>
+                    <Label FontWeight="Bold" FontFamily="{StaticResource Font-Primary}" Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <Grid Width="350" Height="45">
+                        <PasswordBox x:Name="PwdBox"
+                                     PasswordChanged="PasswordBox_OnPasswordChanged"
+                                     Style="{StaticResource PasswordBoxStyle}"/>
+                        <TextBox x:Name="TxtPassword"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Visibility="Collapsed"/>
+                    </Grid>
+                    <CheckBox Content="Mostrar contraseña"
+                              Style="{StaticResource CheckBoxStyle}"
+                              Foreground="{StaticResource Text-Secondary}"
+                              Margin="5 5 0 0"
+                              Checked="ShowPassword"
+                              Unchecked="HidePassword"/>
                 </StackPanel>
-                <CheckBox Style="{StaticResource CheckBoxStyle}" Content="Recordame" Margin="5 0 0 25" ></CheckBox>
                 <Button x:Name="btn" Command="{Binding LoginCommand}" Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45" ></Button>
             </StackPanel>
         </Border>

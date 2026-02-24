@@ -33,7 +33,7 @@
                 <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1.5*" />
                             <ColumnDefinition Width="1*" />
@@ -41,8 +41,8 @@
                             <ColumnDefinition Width="0.5*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Foto" Grid.Column="0" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
-                        <TextBlock Text="Nombre" Grid.Column="1" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Nombre" Grid.Column="0" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Text="Apellidos" Grid.Column="1" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                         <TextBlock Text="Email" Grid.Column="2" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                         <TextBlock Text="DNI" Grid.Column="3" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                         <TextBlock Text="VIP" Grid.Column="4" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
@@ -56,15 +56,15 @@
                                 <Border Style="{StaticResource TableRowStyle}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="1*" />
                                             <ColumnDefinition Width="1*" />
                                             <ColumnDefinition Width="1.5*" />
                                             <ColumnDefinition Width="1*" />
                                             <ColumnDefinition Width="0.5*" />
                                             <ColumnDefinition Width="0.5*" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding  Photo}" Grid.Column="0" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
-                                        <TextBlock Text="{Binding FirstName}" Grid.Column="1" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding  FirstName}" Grid.Column="0" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding LastName}" Grid.Column="1" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                         <TextBlock Text="{Binding Email}" Grid.Column="2" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                         <TextBlock Text="{Binding Dni}" Grid.Column="3" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
                                         <TextBlock Text="{Binding VipText}" Grid.Column="4" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
