@@ -30,12 +30,12 @@
             
             <StackPanel Margin="0 10 0 10">
                 <Label Content="Nombre"/>
-                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Name}"/>
+                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Name}" PreviewTextInput="String_PreviewTextInput"/>
             </StackPanel>
             
             <StackPanel Margin="0 10 0 10">
                 <Label Content="Tipo"/>
-                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Type}"/>
+                <ComboBox Style="{StaticResource DropdownStyle}" Width="auto" Margin="0 10 0 0" ItemsSource="{Binding RoomTypes}" SelectedItem="{Binding CurrentRoom.Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </StackPanel>
 
             <!-- Precio y Oferta -->
@@ -46,23 +46,23 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="0 10 15 10" Grid.Column="0">
                     <Label Content="Precio"/>
-                    <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.PricePerNight}"/>
+                    <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.PricePerNight}" PreviewTextInput="Price_PreviewTextInput"/>
                 </StackPanel>
                 <StackPanel Margin="15 10 0 10" Grid.Column="1">
                     <Label Content="Offerta"/>
-                    <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Offer}"/>
+                    <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Offer}" PreviewTextInput="Int_PreviewTextInput" MaxLength="3"/>
                 </StackPanel>
             </Grid>
 
             
             <StackPanel Margin="0 10 0 10">
                 <Label Content="Ocupacion Maxima"/>
-                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.OccupancyLimit}"/>
+                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.OccupancyLimit}" PreviewTextInput="Int_PreviewTextInput"/>
             </StackPanel>
 
             <StackPanel Margin="0 10 0 10">
                 <Label Content="Numero"/>
-                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Number}"/>
+                <TextBox Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Number}" PreviewTextInput="Int_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Margin="0 10 0 10">
                 <Label Content="Descripcion"/>
@@ -79,7 +79,12 @@
             </Border>
         </DockPanel>
 
-        
+        <!-- Estado -->
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal" >
+            <Button Content="Cerrar" Command="{Binding CloseCommand}" Style="{StaticResource ActionButtonStyle}" Margin="0 10 10 10" Height="40" FontSize="14"/>
+            <Button Content="Mantenimiento" Style="{StaticResource ActionButtonStyle}" Margin="10 10 10 10" Height="40" FontSize="14"/>
+        </StackPanel> 
+
         <!-- Buttons -->
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Content="Eliminar" Command="{Binding DeleteCommand}" Style="{StaticResource ActionButtonStyle}" Margin="10 10 30 10" Height="50" FontSize="20" />

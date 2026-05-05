@@ -303,7 +303,7 @@ public class ReviewsService
             throw new Exception(message);
         }
 
-        var roomsResponse = await _roomService.GetAllRooms();
+        var roomsResponse = await _roomService.GetAllRooms("",false);
         if (!roomsResponse.Success || roomsResponse.Data == null)
         {
             var message = roomsResponse.Error?.Message ?? "No se pudieron cargar las habitaciones";

@@ -44,11 +44,26 @@
                                 <Setter Property="FontSize" Value="30px"/>
 
                                 <Style.Triggers>
+
+                                    <DataTrigger Binding="{Binding Closed}" Value="True">
+                                        <Setter Property="Content" Value="Cerrada"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Bg-Danger}"/>
+                                    </DataTrigger>
+
                                     <!-- If Occuped == true -->
                                     <DataTrigger Binding="{Binding Occuped}" Value="True">
                                         <Setter Property="Content" Value="✗ Ocupado"/>
                                         <Setter Property="Foreground" Value="{StaticResource Bg-Danger}"/>
                                     </DataTrigger>
+                                    <!-- Occuped == false and Maintenance == true -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Occuped}" Value="False"/>
+                                            <Condition Binding="{Binding Maintenance}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Content" Value="🛠 Mantenimiento"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Bg-Warning}"/>
+                                    </MultiDataTrigger>
                                 </Style.Triggers>
 
                             </Style>

@@ -15,6 +15,11 @@ public class RoomService
         return await ApiService.Instance.Get<List<RoomModel>>($"rooms?name={name}&occuped={occuped.ToString()}");
     }*/
 
+    private static RoomService? _instance;
+    public static RoomService Instance => _instance ??= new RoomService();
+
+    private readonly ApiService _api = ApiService.Instance;
+
     public async Task<ApiResult<List<RoomModel>>> GetAllRooms(string? name, bool? occuped)
     {
         var url = "rooms";
@@ -63,4 +68,17 @@ public class RoomService
     {
         return await ApiService.Instance.Delete<RoomModel>($"rooms/{id}");
     }
+
+    //Cerrar la Habitacion
+    public async Task<ApiResult<RoomModel>> CloseRoom(RoomModel room)
+    {
+        return await ApiService.Instance.Put<RoomModel>($"rooms/{room.RoomId}/close", room);
+    }
+
+    //Stadisticas
+    public async Task<ApiResult<List<RoomStatModel>>> RoomStats() // <--- List<> es clave
+    {
+        return await ApiService.Instance.Get<List<RoomStatModel>>("rooms/stats");
+    }
+
 }

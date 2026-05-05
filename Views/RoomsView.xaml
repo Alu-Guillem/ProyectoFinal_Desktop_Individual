@@ -35,6 +35,11 @@
             </StackPanel>
         </StackPanel>
 
+        <!-- Estadisticas -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Margin="20">
+            <Button Content="Estadisticas" Style="{StaticResource PrimaryButtonStyle}" Margin="10" Height="40" Width="110" Click="History_Button"/>
+        </StackPanel>
+
         <!-- Crear -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="20">
             <Button Content="Crear" Style="{StaticResource PrimaryButtonStyle}" Margin="10" Height="40" Width="80" Click="Create_Button"/>

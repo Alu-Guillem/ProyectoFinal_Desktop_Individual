@@ -19,4 +19,10 @@ public partial class RoomsView : UserControl
         RoomsViewModel.Instance.CurrentRoom = new RoomModel();
         NavigationViewModel.Instance.NavigateTo<RoomsFormView>();
     }
+
+    private void History_Button(object sender, System.Windows.RoutedEventArgs e)
+    {
+        RoomsViewModel.Instance.CurrentRoom = new RoomModel();
+        NavigationViewModel.Instance.NavigateTo<RoomsHistoryView>();
+    }
 }

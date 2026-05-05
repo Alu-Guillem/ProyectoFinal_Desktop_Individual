@@ -18,7 +18,12 @@ public class RoomModel
 	[JsonProperty("pricePerNight")] public double PricePerNight { get; set; }
 
 	[JsonProperty("occuped")] public bool Occuped { get; set; }
-    
+    [JsonProperty("reserved")] public bool Reserved { get; set; }
+    [JsonProperty("maintenance")] public bool Maintenance { get; set; }
+    [JsonProperty("maintenanceTime")] public bool MaintenanceTime { get; set; }
+    [JsonProperty("closed")] public bool Closed { get; set; }
+
+
     [JsonProperty("occupancyLimit")] public int OccupancyLimit { get; set; }
 
     [JsonProperty("description")] public string Description { get; set; } = "";
