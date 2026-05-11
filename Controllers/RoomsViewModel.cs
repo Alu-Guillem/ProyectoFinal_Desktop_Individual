@@ -307,27 +307,30 @@ public class RoomsViewModel : BaseViewModel
     public ICommand SortByBookingsCommand => _sortByBookingsCommand ??= new RelayCommand(_ => { _currentSortOrder = "Bookings"; _ = ShowStats(null); });
 
     // 3. Modificar ShowStats para ordenar
+    // Asegúrate de que esta línea esté en tu ViewModel
     private async Task ShowStats(object? parameter)
     {
         var result = await _roomService.RoomStats();
 
         if (result.Success && result.Data != null)
         {
-            // Aplicamos ordenación principal y secundaria para desempatar
+            // Tu lógica de ordenación se mantiene igual
             var sortedData = _currentSortOrder == "Revenue"
                 ? result.Data
                     .OrderByDescending(s => s.TotalRevenue)
-                    .ThenByDescending(s => s.TotalBookings) // Si empatan en dinero, gana la que más reservas tenga
+                    .ThenByDescending(s => s.TotalBookings)
                     .ToList()
                 : result.Data
                     .OrderByDescending(s => s.TotalBookings)
-                    .ThenByDescending(s => s.TotalRevenue) // Si empatan en reservas, gana la que más dinero haya generado
+                    .ThenByDescending(s => s.TotalRevenue)
                     .ToList();
 
             Application.Current.Dispatcher.Invoke(() => {
                 RoomStatsList.Clear();
                 foreach (var stat in sortedData)
                 {
+                    // Al añadir el objeto 'stat' (que es RoomStatModel), 
+                    // ya lleva dentro la lógica de color y texto
                     RoomStatsList.Add(stat);
                 }
             });

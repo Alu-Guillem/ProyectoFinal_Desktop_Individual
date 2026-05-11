@@ -62,25 +62,27 @@
                 <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <!-- Habitacion -->
                             <ColumnDefinition Width="2*" />
-                            <!-- Name -->
-                            <ColumnDefinition Width="1.5*" />
-                            <!-- Type -->
+                            <!-- Tipo -->
                             <ColumnDefinition Width="1.5*" />
                             <!-- Total Bookings -->
-                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1*" />
                             <!-- Total Revenue -->
+                            <ColumnDefinition Width="1*" />
+                            <!-- Estado Habitacion-->
+                            <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Habitación" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                         <TextBlock Grid.Column="1" Text="Categoría" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                         <TextBlock Grid.Column="2" Text="Total Reservas" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                         <TextBlock Grid.Column="3" Text="Ingresos Totales" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="4" Text="Estado" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
                     </Grid>
                 </Border>
 
                 <!-- Cuerpo de la Tabla -->
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <!-- Importante: Vinculado a RoomStatsList que creamos antes -->
                     <ItemsControl ItemsSource="{Binding RoomStatsList}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -89,8 +91,9 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*" />
                                             <ColumnDefinition Width="1.5*" />
-                                            <ColumnDefinition Width="1.5*" />
-                                            <ColumnDefinition Width="1.5*" />
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="1*" />
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Grid.Column="0" Text="{Binding Name}" 
@@ -107,7 +110,15 @@
 
                                         <TextBlock Grid.Column="3" Text="{Binding TotalRevenue, StringFormat={}{0:C}}" 
                                                    FontWeight="Bold" Foreground="{StaticResource Bg-Success}" 
-                                                   VerticalAlignment="Center" />
+                                                   VerticalAlignment="Center" 
+                                        />
+                                        <!-- Generado Automaticamente -->
+                                        <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Ellipse Width="12" Height="12" Margin="0,0,8,0" Fill="{Binding OccupancyStatusColor}" />
+
+                                           <TextBlock Text="{Binding OccupancyStatus}" Foreground="{Binding OccupancyStatusColor}" FontWeight="SemiBold" Style="{StaticResource TableMutedText}" />
+                                        </StackPanel>
+
                                     </Grid>
                                 </Border>
                             </DataTemplate>
