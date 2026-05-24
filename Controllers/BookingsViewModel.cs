@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Windows;
@@ -288,6 +289,7 @@ public class BookingsViewModel : BaseViewModel
             if (_selectedRoom != null && !string.IsNullOrWhiteSpace(_roomSearchText))
             {
                 var name = _selectedRoom.Name ?? string.Empty;
+
                 if (!name.StartsWith(_roomSearchText, StringComparison.OrdinalIgnoreCase))
                 {
                     SelectedRoom = null;
@@ -335,7 +337,7 @@ public class BookingsViewModel : BaseViewModel
             if (_selectedRoom != null)
             {
                 _suppressRoomSearchClear = true;
-                RoomSearchText = _selectedRoom.Name ?? "";
+                RoomSearchText = _selectedRoom.Name ?? " - " ?? _selectedRoom.Type;
                 _suppressRoomSearchClear = false;
             }
 
@@ -367,6 +369,9 @@ public class BookingsViewModel : BaseViewModel
             OnPropertyChanged(nameof(IsFormEnabled));
             OnPropertyChanged(nameof(IsPaymentPending));
             OnPropertyChanged(nameof(CanDeleteBooking));
+
+            OnPropertyChanged(nameof(IsPaid)); // <---------------
+
             CommandManager.InvalidateRequerySuggested();
             _isFormInitializing = true;
             SyncSelectedCustomer();
@@ -403,6 +408,11 @@ public class BookingsViewModel : BaseViewModel
 
     public bool IsPaymentPending =>
         IsEditing && !IsBookingCanceled && !CurrentBooking.IsPaid;
+
+    //Comprueba de que la reserva actual tiene un pago registrado para mostrar/ocultar acciones relacionadas.??
+    public bool IsPaid => 
+        CurrentBooking.IsPaid;
+
 
     public bool IsAdmin =>
         string.Equals(_session.CurrentUser?.Role, "admin", StringComparison.OrdinalIgnoreCase);
@@ -657,7 +667,7 @@ public class BookingsViewModel : BaseViewModel
         try
         {
             Console.WriteLine("[Bookings] LoadRooms start");
-            var res = await new RoomService().GetAllRooms("",null);
+            var res = await new RoomService().GetAllRooms("",false, null, false);
 
             if (!res.Success || res.Data == null)
             {
@@ -759,8 +769,9 @@ public class BookingsViewModel : BaseViewModel
         }
 
         var displayName = match?.Name ?? CurrentBooking.Room?.Name ?? CurrentBooking.RoomId;
+        var displayType = match?.Type ?? CurrentBooking.Room?.Type;
         _suppressRoomSearchClear = true;
-        RoomSearchText = displayName ?? "";
+        RoomSearchText = displayName + " - " + displayType;
         _suppressRoomSearchClear = false;
     }
 
@@ -1345,4 +1356,42 @@ public class BookingsViewModel : BaseViewModel
 
         return false;
     }
+
+
+
+
+    //Logica para la factura de las reservas
+
+    private RelayCommand? _downloadInvoiceCommand;
+    public ICommand DownloadInvoiceCommand => _downloadInvoiceCommand ??= new RelayCommand(_ => MostrarFactura());
+
+    private async void MostrarFactura()
+    {
+        if (CurrentBooking == null || string.IsNullOrEmpty(CurrentBooking.BookingId))
+        {
+            MessageBox.Show("No se puede generar la factura de una reserva inexistente.", "Aviso");
+            return;
+        }
+
+        try
+        {
+            string? pdfFilePath = await BookingsService.Instance.GetInvoice(CurrentBooking.BookingId);
+
+            if (!string.IsNullOrEmpty(pdfFilePath) && File.Exists(pdfFilePath))
+            {
+                // Abre el PDF automáticamente usando el navegador
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = pdfFilePath,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ocurrió un error al procesar el PDF: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    //
 }

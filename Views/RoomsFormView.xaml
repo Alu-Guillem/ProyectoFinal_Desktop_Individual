@@ -66,7 +66,7 @@
             </StackPanel>
             <StackPanel Margin="0 10 0 10">
                 <Label Content="Descripcion"/>
-                <TextBox AcceptsReturn="True" TextWrapping="Wrap" Height="160" Width="auto" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Description}" />
+                <TextBox AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource TextBoxStyle}" Text="{Binding CurrentRoom.Description}" />
             </StackPanel>
 
         </StackPanel>
@@ -74,15 +74,16 @@
         <!-- Image -->
         <DockPanel Grid.Column="1" Grid.Row="0" Margin="5"> 
             <Label Content="Imagen: " DockPanel.Dock="Top"/>
-            <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="1" VerticalAlignment="Center">
-                <Image Source="/Resources/logo.png"/>
+            <Button DockPanel.Dock="Bottom" Content="Seleccionar Imagen" Click="SelectImage_Click" Style="{StaticResource ActionButtonStyle}" Margin="5 10 5 5"/>
+            <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="1">
+                <Image x:Name="ImgPreview" Stretch="Uniform" Source="{Binding FullImageUrl, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
         </DockPanel>
 
         <!-- Estado -->
         <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal" >
             <Button Content="Cerrar" Command="{Binding CloseCommand}" Style="{StaticResource ActionButtonStyle}" Margin="0 10 10 10" Height="40" FontSize="14"/>
-            <Button Content="Mantenimiento" Style="{StaticResource ActionButtonStyle}" Margin="10 10 10 10" Height="40" FontSize="14"/>
+            <Button Content="Mantenimiento" Click="Maintenance_Button" Style="{StaticResource ActionButtonStyle}" Margin="10 10 10 10" Height="40" FontSize="14"/>
         </StackPanel> 
 
         <!-- Buttons -->

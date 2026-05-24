@@ -19,6 +19,8 @@ public class ApiService
     private static ApiService? _instance;
     public static ApiService Instance => _instance ??= new ApiService();
 
+    public HttpClient HttpClient => _httpClient;
+
     private HttpClient _httpClient
         = new();
 
@@ -147,6 +149,46 @@ public class ApiService
         }
         catch (HttpRequestException ex)
         {
+            return new ApiResult<T>
+            {
+                Success = false,
+                Error = new ApiError { Message = "No se pudo conectar con el servidor" },
+                StatusCode = 0
+            };
+        }
+    }
+
+    /// <summary>
+    /// Ejecuta una petición PATCH
+    /// </summary>
+    public async Task<ApiResult<T>> Patch<T>(string route, object? o) where T : class
+    {
+        try
+        {
+            var response = await _httpClient.PatchAsJsonAsync(route, o);
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                return new ApiResult<T>
+                {
+                    Success = true,
+                    Data = JsonConvert.DeserializeObject<T>(content),
+                    StatusCode = response.StatusCode
+                };
+            }
+
+            return new ApiResult<T>
+            {
+                Success = false,
+                Error = TryParseError(content),
+                StatusCode = response.StatusCode
+            };
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine(ex.HttpRequestError);
+            Console.WriteLine(ex.Message);
             return new ApiResult<T>
             {
                 Success = false,

@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\models\\roomstatmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:models\\roomstatmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\auditview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\auditview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\roomsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\roomsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\controllers\\auditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:controllers\\auditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\models\\auditmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:models\\auditmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\services\\bookingsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:services\\bookingsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\roomshistoryview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\roomshistoryview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\controllers\\roomsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,24 +27,32 @@
       "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:controllers\\bookingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\bookingsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\bookingsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\roomsformview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\roomsformview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\models\\bookingmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:models\\bookingmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\models\\roommodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:models\\roommodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\bookingsformview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\bookingsformview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\components\\habitaciones.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:components\\habitaciones.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\bookingsformview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\bookingsformview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\roomsformview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\roomsformview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|c:\\users\\guillem\\onedrive\\escritorio\\pf_dam2\\proyecto-final-desktop\\views\\roomsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5E759ADA-5ACD-4F30-81A1-F75AB6EEB0DF}|proyecto-final-desktop.csproj|solutionrelative:views\\roomsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,30 +62,81 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BookingsViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\BookingsViewModel.cs",
-              "RelativeDocumentMoniker": "Controllers\\BookingsViewModel.cs",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\BookingsViewModel.cs",
-              "RelativeToolTip": "Controllers\\BookingsViewModel.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAA7wE8AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "AuditModel.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\AuditModel.cs",
+              "RelativeDocumentMoniker": "Models\\AuditModel.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\AuditModel.cs",
+              "RelativeToolTip": "Models\\AuditModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T17:46:34.811Z",
+              "WhenOpened": "2026-05-23T16:58:20.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuditView.xaml",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\AuditView.xaml",
+              "RelativeDocumentMoniker": "Views\\AuditView.xaml",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\AuditView.xaml",
+              "RelativeToolTip": "Views\\AuditView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-23T15:43:58.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuditViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\AuditViewModel.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuditViewModel.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\AuditViewModel.cs",
+              "RelativeToolTip": "Controllers\\AuditViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T16:46:00.179Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "BookingsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\BookingsViewModel.cs",
+              "RelativeDocumentMoniker": "Controllers\\BookingsViewModel.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\BookingsViewModel.cs",
+              "RelativeToolTip": "Controllers\\BookingsViewModel.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAAFMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T20:32:09.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Services\\UserService.cs",
+              "RelativeToolTip": "Services\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T15:44:42.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "RoomsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\RoomsViewModel.cs",
               "RelativeDocumentMoniker": "Controllers\\RoomsViewModel.cs",
               "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Controllers\\RoomsViewModel.cs",
               "RelativeToolTip": "Controllers\\RoomsViewModel.cs",
-              "ViewState": "AgIAAC0BAAAAAAAAAAAAADYBAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAALkCAAAAAAAAAAAMwMwCAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-24T10:14:13.165Z",
               "EditorCaption": ""
@@ -89,125 +144,87 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "BookingsView.xaml",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\BookingsView.xaml",
-              "RelativeDocumentMoniker": "Views\\BookingsView.xaml",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\BookingsView.xaml",
-              "RelativeToolTip": "Views\\BookingsView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-27T18:27:13.026Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RoomsHistoryView.xaml",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsHistoryView.xaml",
-              "RelativeDocumentMoniker": "Views\\RoomsHistoryView.xaml",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsHistoryView.xaml",
-              "RelativeToolTip": "Views\\RoomsHistoryView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-29T17:49:50.44Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RoomStatModel.cs",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\RoomStatModel.cs",
-              "RelativeDocumentMoniker": "Models\\RoomStatModel.cs",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\RoomStatModel.cs",
-              "RelativeToolTip": "Models\\RoomStatModel.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAABeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T15:20:50.145Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "RoomsFormView.xaml",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsFormView.xaml",
-              "RelativeDocumentMoniker": "Views\\RoomsFormView.xaml",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsFormView.xaml",
-              "RelativeToolTip": "Views\\RoomsFormView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-03T19:11:35.803Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BookingsService.cs",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Services\\BookingsService.cs",
-              "RelativeDocumentMoniker": "Services\\BookingsService.cs",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Services\\BookingsService.cs",
-              "RelativeToolTip": "Services\\BookingsService.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T18:00:03.987Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "RoomService.cs",
               "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Services\\RoomService.cs",
               "RelativeDocumentMoniker": "Services\\RoomService.cs",
               "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Services\\RoomService.cs",
               "RelativeToolTip": "Services\\RoomService.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAtwFEAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwBYAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T10:02:17.858Z",
+              "WhenOpened": "2026-05-18T17:06:05.327Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
+              "Title": "BookingModel.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\BookingModel.cs",
+              "RelativeDocumentMoniker": "Models\\BookingModel.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\BookingModel.cs",
+              "RelativeToolTip": "Models\\BookingModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAFMAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T09:21:22.266Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserModel.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\UserModel.cs",
+              "RelativeDocumentMoniker": "Models\\UserModel.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\UserModel.cs",
+              "RelativeToolTip": "Models\\UserModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T09:29:22.266Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BookingsFormView.xaml",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\BookingsFormView.xaml",
+              "RelativeDocumentMoniker": "Views\\BookingsFormView.xaml",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\BookingsFormView.xaml",
+              "RelativeToolTip": "Views\\BookingsFormView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-22T20:30:40.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BookingsFormView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\BookingsFormView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\BookingsFormView.xaml.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\BookingsFormView.xaml.cs",
+              "RelativeToolTip": "Views\\BookingsFormView.xaml.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAIA5wHQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T16:16:58.563Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RoomsFormView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsFormView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\RoomsFormView.xaml.cs",
+              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsFormView.xaml.cs",
+              "RelativeToolTip": "Views\\RoomsFormView.xaml.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAawD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T15:01:49.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "RoomsView.xaml",
               "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsView.xaml",
               "RelativeDocumentMoniker": "Views\\RoomsView.xaml",
               "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Views\\RoomsView.xaml",
               "RelativeToolTip": "Views\\RoomsView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-02-24T10:39:13.705Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "BookingModel.cs",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\BookingModel.cs",
-              "RelativeDocumentMoniker": "Models\\BookingModel.cs",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\BookingModel.cs",
-              "RelativeToolTip": "Models\\BookingModel.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T18:05:10.524Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RoomModel.cs",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\RoomModel.cs",
-              "RelativeDocumentMoniker": "Models\\RoomModel.cs",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Models\\RoomModel.cs",
-              "RelativeToolTip": "Models\\RoomModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T10:39:36.343Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Habitaciones.xaml",
-              "DocumentMoniker": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Components\\Habitaciones.xaml",
-              "RelativeDocumentMoniker": "Components\\Habitaciones.xaml",
-              "ToolTip": "C:\\Users\\Guillem\\OneDrive\\Escritorio\\PF_DAM2\\proyecto-final-desktop\\Components\\Habitaciones.xaml",
-              "RelativeToolTip": "Components\\Habitaciones.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-09T17:49:18.682Z"
+              "WhenOpened": "2026-05-20T14:24:53.301Z"
             }
           ]
         }

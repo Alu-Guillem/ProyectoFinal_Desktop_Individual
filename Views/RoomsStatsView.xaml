@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="PereMaria.GestorHotel.Views.RoomsStatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+             DataContext="{x:Static controllers:RoomsViewModel.Instance}">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+            <StackPanel>
+                <TextBlock Text="Análisis de Ocupación" Foreground="{StaticResource Bg-Purple-Accent}" FontSize="14" FontWeight="Bold"/>
+                <TextBlock Text="{Binding SelectedStatRoom.Name}" Foreground="{StaticResource Bg-Light}" FontSize="32" FontWeight="Bold"/>
+                <TextBlock Text="{Binding SelectedStatRoom.Type}" Foreground="{StaticResource Bg-Light}" FontSize="16"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="50,0,0,5">
+                <TextBlock Text="Año:" Foreground="{StaticResource Text-Primary}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox ItemsSource="{Binding AvailableYears}" SelectedItem="{Binding SelectedYearOccupancy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DropdownStyle}" Width="100"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,30">
+            <Border Background="{StaticResource Bg-Cosmic-Mid}" CornerRadius="10" Padding="20,15" Width="200" Margin="0,0,20,0">
+                <StackPanel>
+                    <TextBlock Text="Reservas Totales" Foreground="{StaticResource Text-Secondary}" FontSize="12"/>
+                    <TextBlock Text="{Binding TotalBookingsYear}" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource Bg-Cosmic-Mid}" CornerRadius="10" Padding="20,15" Width="200" BorderBrush="{StaticResource Bg-Success}" BorderThickness="0,0,0,3">
+                <StackPanel>
+                    <TextBlock Text="Ingresos Totales" Foreground="{StaticResource Text-Secondary}" FontSize="12"/>
+                    <TextBlock Text="{Binding TotalRevenueYear, StringFormat={}{0:N2}€}" Foreground="{StaticResource Bg-Success}" FontSize="24" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Border Grid.Row="2" Background="{StaticResource Bg-Cosmic-Dark}" CornerRadius="15" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="10,0,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="MES" Foreground="{StaticResource Bg-Purple-Accent}" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="1" Text="RESERVAS" Foreground="{StaticResource Bg-Purple-Accent}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Text="INGRESOS" Foreground="{StaticResource Bg-Purple-Accent}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="3" Text="PROM. OCUP" Foreground="{StaticResource Bg-Purple-Accent}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Text="PROM. NOCHES" Foreground="{StaticResource Bg-Purple-Accent}" FontWeight="Bold" HorizontalAlignment="Right"/>
+                </Grid>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding RoomOccupancyDetails}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource Bg-Cosmic-Mid}" Margin="0,0,0,8" Padding="15" CornerRadius="8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{Binding MonthName}" Foreground="White" FontWeight="SemiBold"/>
+
+                                        <TextBlock Grid.Column="1" Text="{Binding TotalBookings}" Foreground="White" HorizontalAlignment="Center"/>
+
+                                        <TextBlock Grid.Column="2" Text="{Binding TotalRevenue, StringFormat={}{0:N2}€}" Foreground="{StaticResource Bg-Success}" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+                                        <TextBlock Grid.Column="3" Text="{Binding AvgOccupants, StringFormat={}{0:F2}}" Foreground="{StaticResource Bg-Light}" HorizontalAlignment="Center"/>
+
+                                        <TextBlock Grid.Column="4" Text="{Binding AvgNights, StringFormat={}{0:F2}}" Foreground="{StaticResource Bg-Light}" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

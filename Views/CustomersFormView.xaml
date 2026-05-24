@@ -166,7 +166,8 @@
         </Border>
        
        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-           <Button Command="{Binding SaveUserCommand}" Style="{StaticResource ActionButtonStyle}">Guardar Cambios</Button>
+            <Button Click="Invoice_Button" Style="{StaticResource ActionButtonStyle}" Margin="0 0 10 0">Ver Facturas</Button>
+            <Button Command="{Binding SaveUserCommand}" Style="{StaticResource PrimaryButtonStyle}">Guardar Cambios</Button>
        </StackPanel>
 
     </Grid>

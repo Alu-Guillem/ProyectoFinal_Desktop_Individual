@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="PereMaria.GestorHotel.Views.AuditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
+             xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1000"
+             DataContext="{x:Static controllers:AuditViewModel.Instance}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Historial de Auditoría de Reservas" FontSize="26" FontWeight="Bold" Foreground="{StaticResource Bg-Light}"/>
+                <TextBlock Text="Registro detallado de acciones realizadas sobre las reservas del sistema" Style="{StaticResource TableMutedText}" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <Button Grid.Column="1" 
+                    Style="{StaticResource IconBaseButton}" 
+                    Command="{Binding RefreshCommand}" 
+                    VerticalAlignment="Bottom" 
+                    Margin="20,0,0,0">
+                refresh
+            </Button>
+        </Grid>
+
+        <Border Grid.Row="1" Style="{StaticResource TableContainerStyle}" Margin="0,0,0,15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1.2*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Fecha / Hora" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="1" Text="Acción realizada" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="2" Text="Reserva afectada" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="3" Text="Ejecutado por" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="4" Text="Rol Actor" Style="{StaticResource TableSubText}" FontWeight="SemiBold" />
+                    </Grid>
+                </Border>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding BookingHistoryList}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource TableRowStyle}" Cursor="Hand" MouseDown="HistoryRow_Click">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.5*" />
+                                            <ColumnDefinition Width="1.5*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="1.2*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="schedule" FontFamily="{StaticResource Material-Icons}" Foreground="{StaticResource Bg-Purple-Accent}" Margin="0,0,5,0" FontSize="14" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Timestamp, StringFormat=\{0:dd/MM/yyyy HH:mm:ss\}}" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="1" Text="{Binding ActionFormatted}" Style="{StaticResource TableMainText}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="2" Text="{Binding BookingName}" Style="{StaticResource TableMainText}" VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="3" Text="{Binding ActorName}" Style="{StaticResource TableMutedText}" VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="4" Text="{Binding ActorTypeFormatted}" Style="{StaticResource TableSubText}" VerticalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource TableContainerStyle}" Margin="0,0,10,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                        <TextBlock Text="◀ Estado Anterior" Style="{StaticResource TableSubText}" FontWeight="Bold" Foreground="{StaticResource Bg-Warning}"/>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+                        <TextBox Text="{Binding PreviousStateJson, Mode=OneWay}" 
+                                 Background="Transparent" Foreground="{StaticResource Bg-Light}" 
+                                 BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
+                                 FontFamily="Consolas" FontSize="12" AcceptsReturn="True"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource TableContainerStyle}" Margin="10,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
+                        <TextBlock Text="▶ Estado Nuevo" Style="{StaticResource TableSubText}" FontWeight="Bold" Foreground="{StaticResource Bg-Success}"/>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+                        <TextBox Text="{Binding NewStateJson, Mode=OneWay}" 
+                                 Background="Transparent" Foreground="{StaticResource Bg-Light}" 
+                                 BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
+                                 FontFamily="Consolas" FontSize="12" AcceptsReturn="True"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

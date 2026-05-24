@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PereMaria.GestorHotel.Controllers;
+using PereMaria.GestorHotel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,16 @@ namespace PereMaria.GestorHotel.Views
         {
             InitializeComponent();
         }
+
+        private void RoomRow_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement element && element.DataContext is RoomStatModel selectedStat)
+            {
+                RoomsViewModel.Instance.SelectedStatRoom = selectedStat;
+                RoomsViewModel.Instance.SelectedYearOccupancy = RoomsViewModel.Instance.SelectedYear;
+                NavigationViewModel.Instance.NavigateTo<RoomsStatsView>();
+            }
+        }
+
     }
 }

@@ -101,6 +101,8 @@
                 Visibility="{Binding IsPaymentPending, Converter={StaticResource BoolToVisibility}}">
                 Marcar como pagada
             </Button>
+            <!-- Boton para imprimir factura -->
+            <Button DockPanel.Dock="Right" Content="Imprimir Factura" Command="{Binding DownloadInvoiceCommand}" Style="{StaticResource ActionButtonStyle}" Visibility="{Binding IsPaid, Converter={StaticResource BoolToVisibility}}" Padding="15,8" Margin="0,0,10,0" Cursor="Hand"/>
             <Button DockPanel.Dock="Right"
                 Style="{StaticResource DeleteBookingButtonStyle}"
                 Command="{Binding DeleteBookingCommand}"
@@ -112,6 +114,7 @@
                 Command="{Binding CancelCommand}">
                 Cancelar
             </Button>
+
         </DockPanel>
         <Border Grid.Row="1"
             HorizontalAlignment="Center"

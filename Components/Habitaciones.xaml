@@ -4,17 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PereMaria.GestorHotel.Components"
+             xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
              mc:Ignorable="d" 
              d:DesignHeight="400"
                Height="400" Width="320"
              >
-    <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2" Margin="10">
-        <Grid Background="{StaticResource Bg-Cosmic-Mid}" MouseDown="Grid_Click">
+    <Border BorderBrush="{StaticResource Bg-Purple-Accent}" BorderThickness="2" Margin="10" CornerRadius="8" ClipToBounds="True" Background="{StaticResource Bg-Cosmic-Mid}" Cursor="Hand">
+        <Grid MouseDown="Grid_Click">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
             <Grid.Resources>
                 <!-- Style -->
                 <Style TargetType="Label">
@@ -29,7 +29,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Resources/logo.ico" Width="100" Height="100" Grid.Column="0"/>
+                <Image Width="100" Height="100" Grid.Column="0" >
+                    <Image.Source>
+                        <PriorityBinding>
+                            <Binding Path="GridImageUrl" UpdateSourceTrigger="PropertyChanged"/>
+                            <Binding Source="pack://application:,,,/Resources/logo.png"/>
+                        </PriorityBinding>
+                    </Image.Source>
+                </Image>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
                     <Label FontWeight="Bold" Content="{Binding Name}"/>
                     <!-- Nombre -->
@@ -60,8 +67,9 @@
                                         <MultiDataTrigger.Conditions>
                                             <Condition Binding="{Binding Occuped}" Value="False"/>
                                             <Condition Binding="{Binding Maintenance}" Value="True"/>
+                                            <Condition Binding="{Binding Closed}" Value="False"/>
                                         </MultiDataTrigger.Conditions>
-                                        <Setter Property="Content" Value="🛠 Mantenimiento"/>
+                                        <Setter Property="Content" Value="🛠 Manten."/>
                                         <Setter Property="Foreground" Value="{StaticResource Bg-Warning}"/>
                                     </MultiDataTrigger>
                                 </Style.Triggers>

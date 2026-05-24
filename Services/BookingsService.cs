@@ -2,6 +2,10 @@
 using System.Net.Http;
 using System.Linq;
 using PereMaria.GestorHotel.Models;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
 
 namespace PereMaria.GestorHotel.Services;
 
@@ -17,7 +21,7 @@ public class BookingsService
     private readonly ApiService _apiService = ApiService.Instance;
     private readonly UserService _userService = UserService.Instance;
     private readonly RoomService _roomService = RoomService.Instance;
-
+ 
     /// <summary>
     /// Obtiene todas las reservas accesibles para el usuario autenticado.
     /// </summary>
@@ -267,7 +271,7 @@ public class BookingsService
             throw new Exception(message);
         }
 
-        var roomsResponse = await new RoomService().GetAllRooms("",null);
+        var roomsResponse = await new RoomService().GetAllRooms("",false,null, false);
         if (!roomsResponse.Success || roomsResponse.Data == null)
         {
             var message = roomsResponse.Error?.Message ?? "No se pudieron cargar las habitaciones";
@@ -294,4 +298,59 @@ public class BookingsService
     {
         await PopulateBookings([booking]);
     }
+
+
+    //Factura de las habitaciones.
+
+
+    public async Task<string?> GetInvoice(string bookingId)
+    {
+        try
+        {
+            string url = $"bookings/{bookingId}/invoice";
+            var response = await ApiService.Instance.HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"El servidor respondió con código: {response.StatusCode}");
+            }
+
+            string tempDirectory = Path.GetTempPath();
+            string fileName = $"Factura_{bookingId}_{DateTime.Now:yyyyMMddHHmmss}.pdf";
+            string fullPath = Path.Combine(tempDirectory, fileName);
+
+            using (Stream streamToRead = await response.Content.ReadAsStreamAsync())
+            using (Stream streamToWrite = File.Open(fullPath, FileMode.Create))
+            {
+                await streamToRead.CopyToAsync(streamToWrite);
+            }
+
+            return fullPath;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error en GetInvoice: {ex.Message}");
+            throw new Exception($"Error al obtener la factura: {ex.Message}");
+        }
+    }
+    public async Task<List<AuditModel>> GetBookingAudit()
+    {
+        try
+        {
+            var result = await _apiService.Get<List<AuditModel>>("bookings/audit");
+
+            if (result != null && result.Success && result.Data != null)
+            {
+                return result.Data;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error en GetBookingAuditAsync: {ex.Message}");
+        }
+
+        return new List<AuditModel>();
+    }
+
+
 }

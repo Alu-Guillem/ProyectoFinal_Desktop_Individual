@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using PereMaria.GestorHotel.Controllers;
+using PereMaria.GestorHotel.Models;
+using System.Windows;
 using System.Windows.Controls;
-using PereMaria.GestorHotel.Controllers;
 
 namespace PereMaria.GestorHotel.Views;
 
@@ -19,4 +20,5 @@ public partial class EmployeesFormView : UserControl
         }    
         
     }
+
 }
