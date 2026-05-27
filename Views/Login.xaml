@@ -1,0 +1,61 @@
+﻿<Window x:Class="PereMaria.GestorHotel.Views.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:PereMaria.GestorHotel.Views"
+        xmlns:controllers="clr-namespace:PereMaria.GestorHotel.Controllers"
+        mc:Ignorable="d"
+        Title="Login" Height="720" Width="1280"
+        DataContext="{x:Static controllers:LoginViewModel.Instance}"
+        WindowState="Maximized">
+    
+    
+    <Grid Background="{StaticResource CosmicBackground}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock FontSize="70"   FontFamily="{StaticResource Font-Primary}" Foreground="{StaticResource Text-Primary}" Text="Hotel Pere Maria" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock FontSize="26" FontFamily="{StaticResource Font-Primary}" Foreground="{StaticResource Text-Secondary}" Text="Sistema De Administración" HorizontalAlignment="Center" Margin="0 15 0 0"></TextBlock>
+        </StackPanel>
+        <Border Grid.Row="1" 
+                Width="500"
+                Height="400"
+                Background="{StaticResource Nav-Hover}"
+                CornerRadius="25" 
+                BorderThickness="1" 
+                BorderBrush="{StaticResource Bg-Purple-Accent}"
+                VerticalAlignment="Top"
+                >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Margin="0 0 0 15">
+                    <Label FontWeight="Bold" Content="Correo Electrónico" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" x:Name="TxtBoxEmailBox" Style="{StaticResource TextBoxStyle}" Width="350"  Height="45"/>
+                </StackPanel>
+                <StackPanel Margin="0 0 0 15">
+                    <Label FontWeight="Bold" FontFamily="{StaticResource Font-Primary}" Content="Contraseña" Foreground="{StaticResource Text-Secondary}" FontSize="18" Margin="5 0 0 0"/>
+                    <Grid Width="350" Height="45">
+                        <PasswordBox x:Name="PwdBox"
+                                     PasswordChanged="PasswordBox_OnPasswordChanged"
+                                     Style="{StaticResource PasswordBoxStyle}"/>
+                        <TextBox x:Name="TxtPassword"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Visibility="Collapsed"/>
+                    </Grid>
+                    <CheckBox Content="Mostrar contraseña"
+                              Style="{StaticResource CheckBoxStyle}"
+                              Foreground="{StaticResource Text-Secondary}"
+                              Margin="5 5 0 0"
+                              Checked="ShowPassword"
+                              Unchecked="HidePassword"/>
+                </StackPanel>
+                <Button x:Name="btn" Command="{Binding LoginCommand}" Style="{StaticResource PrimaryButtonStyle}" Content="Acceder al Sistema" Width="350"  Height="45" ></Button>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

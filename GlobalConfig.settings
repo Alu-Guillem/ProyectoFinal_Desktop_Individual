@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PereMaria.GestorHotel" GeneratedClassName="GlobalConfig">
+  <Profiles />
+  <Settings>
+    <Setting Name="ApiUri" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vps-7c25fcfc.vps.ovh.ca/hotel/api/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
+

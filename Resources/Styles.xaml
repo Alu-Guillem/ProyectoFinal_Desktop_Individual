@@ -1,0 +1,93 @@
+﻿<!-- Los estilos de componentes han sido movidos a Components.xaml -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--#region Base Colors (Cosmic Theme) -->
+    <Color x:Key="Color-Cosmic-Dark">#1A0A2E</Color>
+    <Color x:Key="Color-Cosmic-Mid">#16213E</Color>
+    <Color x:Key="Color-Cosmic-Light">#0F3460</Color>
+    <Color x:Key="Color-Purple-Accent">#6A4C93</Color>
+    <Color x:Key="Color-White">#FFFFFF</Color>
+    <!--#endregion-->
+
+    <!--#region Gradient Brushes -->
+    <!-- Cosmic Background Gradient (diagonal) -->
+    <LinearGradientBrush x:Key="CosmicBackground"
+                         StartPoint="0,0"
+                         EndPoint="1,1">
+        <GradientStop Color="{StaticResource Color-Cosmic-Dark}"
+                      Offset="0" />
+        <GradientStop Color="{StaticResource Color-Cosmic-Mid}"
+                      Offset="0.5" />
+        <GradientStop Color="{StaticResource Color-Cosmic-Light}"
+                      Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- Sidebar Background (vertical) -->
+    <LinearGradientBrush x:Key="SidebarBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="{StaticResource Color-Cosmic-Dark}"
+                      Offset="0" />
+        <GradientStop Color="{StaticResource Color-Cosmic-Mid}"
+                      Offset="1" />
+    </LinearGradientBrush>
+    <!--#endregion-->
+
+    <!--#region Solid Color Brushes -->
+    <SolidColorBrush x:Key="Bg-Cosmic-Dark"
+                     Color="{StaticResource Color-Cosmic-Dark}" />
+    <SolidColorBrush x:Key="Bg-Cosmic-Mid"
+                     Color="{StaticResource Color-Cosmic-Mid}" />
+    <SolidColorBrush x:Key="Bg-Cosmic-Light"
+                     Color="{StaticResource Color-Cosmic-Light}" />
+    <SolidColorBrush x:Key="Bg-Purple-Accent"
+                     Color="{StaticResource Color-Purple-Accent}" />
+    <SolidColorBrush x:Key="Bg-Purple-Accent-Light"
+                     Color="#6A4C93DD" />
+    <SolidColorBrush x:Key="Bg-White"
+                     Color="{StaticResource Color-White}" />
+    <SolidColorBrush x:Key="Bg-Gray"
+                     Color="#CCCCCC" />
+    <SolidColorBrush x:Key="Bg-Dark"
+                     Color="#212529" />
+    <SolidColorBrush x:Key="Bg-Light"
+                     Color="#F8F9FA" />
+    <!--#endregion-->
+
+    <!--#region Semantic Colors -->
+    <SolidColorBrush x:Key="Bg-Success"
+                     Color="#198754" />
+    <SolidColorBrush x:Key="Bg-Danger"
+                     Color="#DC3545" />
+    <SolidColorBrush x:Key="Bg-Warning"
+                     Color="#FFC107" />
+    <SolidColorBrush x:Key="Bg-Info"
+                     Color="#0DCAF0" />
+    <!--#endregion-->
+
+    <!--#region Text Colors -->
+    <SolidColorBrush x:Key="Text-Primary"
+                     Color="{StaticResource Color-White}" />
+    <SolidColorBrush x:Key="Text-Secondary"
+                     Color="#B8B8D1" />
+    <SolidColorBrush x:Key="Text-Muted"
+                     Color="#E6EDF3" />
+    <!--#endregion-->
+
+    <!--#region Navigation Colors -->
+    <SolidColorBrush x:Key="Nav-Hover"
+                     Color="#2D2055" />
+    <SolidColorBrush x:Key="Nav-Active"
+                     Color="#3D2D6D" />
+    <SolidColorBrush x:Key="Nav-Border"
+                     Color="{StaticResource Color-Purple-Accent}" />
+    <!--#endregion-->
+
+    <!--#region Typography -->
+    <FontFamily x:Key="Font-Primary">Montserrat</FontFamily>
+    <FontFamily x:Key="Material-Icons">/Resources/Fonts/#Material Icons Round</FontFamily>
+    <!--#endregion-->
+
+
+</ResourceDictionary>

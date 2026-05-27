@@ -1,12 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net9.0-windows</TargetFramework>
-        <RootNamespace>proyecto_final_desktop</RootNamespace>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <UseWPF>true</UseWPF>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <RootNamespace>PereMaria.GestorHotel</RootNamespace>
+    <AssemblyName>PereMaria.GestorHotel</AssemblyName>
+    <Product>Pere Maria | Gestor de Hotel</Product>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\logo.ico" />
+    <None Remove="Resources\logo.png" />
+    <Resource Include="Resources\logo.ico" />
+    <Resource Include="Resources\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="conf.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>conf.settings</DependentUpon>
+    </Compile>
+    <Compile Update="GlobalConfig.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GlobalConfig.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="conf.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>conf.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="GlobalConfig.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>GlobalConfig.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\fonts\Material_Icons.ttf" />
+    <Content Include="Resources\Fonts\Material_Icons.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

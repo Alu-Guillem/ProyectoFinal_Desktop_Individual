@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:PereMaria.GestorHotel.Converters">
+    <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    <converters:DateStringToDateTimeConverter x:Key="DateStringToDateTime" />
+    <converters:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibility" />
+    <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibility" />
+    <converters:BookingStatusToBadgeTextConverter x:Key="BookingStatusToBadgeText" />
+    <converters:BookingStatusToBadgeBrushConverter x:Key="BookingStatusToBadgeBrush" />
+    <converters:BookingCancelVisibilityConverter x:Key="BookingCancelVisibility" />
+</ResourceDictionary>
