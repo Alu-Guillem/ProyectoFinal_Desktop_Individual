@@ -777,11 +777,9 @@ public class RoomsViewModel : BaseViewModel
                 }
             }
 
-            // 3. PARA TODO LO DEMÁS (Rutas que vienen de la API de Node/Mongo):
-            // Path.GetFileName extrae SOLO "123.png" ignorando los "/src/rooms/uploads/" molestos
+
             string nombreArchivoLimpio = Path.GetFileName(CurrentRoom.Image);
 
-            // Forzamos la URL exacta que sí te carga en Google Chrome
             string urlFinalWeb = $"http://localhost:3000/uploads/{nombreArchivoLimpio}";
 
             return urlFinalWeb;

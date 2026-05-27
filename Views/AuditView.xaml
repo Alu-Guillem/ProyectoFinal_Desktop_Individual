@@ -26,6 +26,28 @@
                 <TextBlock Text="Registro detallado de acciones realizadas sobre las reservas del sistema" Style="{StaticResource TableMutedText}" Margin="0,5,0,0"/>
             </StackPanel>
 
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Historial de Auditoría de Reservas" FontSize="26" FontWeight="Bold" Foreground="{StaticResource Bg-Light}"/>
+                <TextBlock Text="Registro detallado de acciones realizadas sobre las reservas del sistema" Style="{StaticResource TableMutedText}" Margin="0,5,0,0"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                    <TextBlock Text="Filtrar por acción:" VerticalAlignment="Center" Style="{StaticResource TableSubText}" Margin="0,0,10,0"/>
+
+                    <ComboBox Width="150" 
+                              ItemsSource="{Binding AvailableActions}" 
+                              SelectedItem="{Binding SelectedAction}" 
+                              Style="{StaticResource DropdownStyle}" 
+                              Padding="10"/>
+
+                    <TextBlock Text="Rol Actor:" VerticalAlignment="Center" Style="{StaticResource TableSubText}" Margin="20,0,10,0"/>
+                    <ComboBox Width="130" 
+                      ItemsSource="{Binding AvailableRoles}" 
+                      SelectedItem="{Binding SelectedRole}" 
+                      Style="{StaticResource DropdownStyle}" 
+                      Padding="10"/>
+                </StackPanel>
+            </StackPanel>
+
             <Button Grid.Column="1" 
                     Style="{StaticResource IconBaseButton}" 
                     Command="{Binding RefreshCommand}" 
@@ -106,7 +128,7 @@
                     <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
                         <TextBlock Text="◀ Estado Anterior" Style="{StaticResource TableSubText}" FontWeight="Bold" Foreground="{StaticResource Bg-Warning}"/>
                     </Border>
-                    <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Grid.Row="1" Margin="5" VerticalScrollBarVisibility="Auto">
                         <TextBox Text="{Binding PreviousStateJson, Mode=OneWay}" 
                                  Background="Transparent" Foreground="{StaticResource Bg-Light}" 
                                  BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
@@ -124,7 +146,7 @@
                     <Border Grid.Row="0" Style="{StaticResource TableHeaderStyle}">
                         <TextBlock Text="▶ Estado Nuevo" Style="{StaticResource TableSubText}" FontWeight="Bold" Foreground="{StaticResource Bg-Success}"/>
                     </Border>
-                    <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Grid.Row="1" Margin="5" VerticalScrollBarVisibility="Auto">
                         <TextBox Text="{Binding NewStateJson, Mode=OneWay}" 
                                  Background="Transparent" Foreground="{StaticResource Bg-Light}" 
                                  BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"

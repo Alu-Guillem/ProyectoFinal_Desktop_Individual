@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Linq;
-using PereMaria.GestorHotel.Models;
+﻿using PereMaria.GestorHotel.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace PereMaria.GestorHotel.Services;
@@ -333,11 +334,30 @@ public class BookingsService
             throw new Exception($"Error al obtener la factura: {ex.Message}");
         }
     }
-    public async Task<List<AuditModel>> GetBookingAudit()
+
+    public async Task<List<AuditModel>> GetBookingAudit(string? action, string? role)
     {
         try
         {
-            var result = await _apiService.Get<List<AuditModel>>("bookings/audit");
+            var url = "bookings/audit";
+            var query = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(action))
+            {
+                query.Add($"action={Uri.EscapeDataString(action)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(role))
+            {
+                query.Add($"role={Uri.EscapeDataString(role)}");
+            }
+
+            if (query.Count > 0)
+            {
+                url += "?" + string.Join("&", query);
+            }
+
+            var result = await _apiService.Get<List<AuditModel>>(url);
 
             if (result != null && result.Success && result.Data != null)
             {

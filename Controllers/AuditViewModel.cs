@@ -30,13 +30,46 @@ public class AuditViewModel : BaseViewModel
         _ = LoadHistoryAsync();
     }
 
+    public List<string> AvailableActions { get; } = new() { "Todos", "create", "update", "delete", "cancel", "pay", "extend" };
+    public List<string> AvailableRoles{ get; } = new() { "Todos", "admin", "employee", "customer" };
+
+    private string _selectedAction = "Todos";
+    private string _selectedRole = "Todos";
+    public string SelectedAction
+    {
+        get => _selectedAction;
+        set
+        {
+            if (value == _selectedAction) return;
+            _selectedAction = value;
+            OnPropertyChanged(nameof(SelectedAction));
+
+            _ = LoadHistoryAsync();
+        }
+    }
+
+    public string SelectedRole
+    {
+        get => _selectedRole;
+        set
+        {
+            if (value == _selectedRole) return;
+            _selectedRole = value;
+            OnPropertyChanged(nameof(SelectedRole));
+
+            _ = LoadHistoryAsync();
+        }
+    }
+
     public async Task LoadHistoryAsync()
     {
         try
         {
-            var registrosApi = await _bookingsService.GetBookingAudit();
-            if (registrosApi == null || registrosApi.Count == 0) return;
+            string? accionFiltrada = SelectedAction == "Todos" ? null : SelectedAction;
+            string? rolFiltrado = SelectedRole == "Todos" ? null : SelectedRole;
 
+            var registrosApi = await _bookingsService.GetBookingAudit(accionFiltrada, rolFiltrado);
+            if (registrosApi == null) return;
 
             int intentos = 0;
             while ((RoomsViewModel.Instance.Rooms.Count == 0 ||
@@ -106,12 +139,12 @@ public class AuditViewModel : BaseViewModel
     [Newtonsoft.Json.JsonIgnore]
     public string PreviousStateJson => SelectedAudit?.PreviousState != null
         ? Newtonsoft.Json.JsonConvert.SerializeObject(SelectedAudit.PreviousState, Newtonsoft.Json.Formatting.Indented)
-        : "Sin estado previo";
+        : "";
 
     [Newtonsoft.Json.JsonIgnore]
     public string NewStateJson => SelectedAudit?.NewState != null
         ? Newtonsoft.Json.JsonConvert.SerializeObject(SelectedAudit.NewState, Newtonsoft.Json.Formatting.Indented)
-        : "Sin estado nuevo (Eliminación / Finalización)";
+        : "";
 
 
 
