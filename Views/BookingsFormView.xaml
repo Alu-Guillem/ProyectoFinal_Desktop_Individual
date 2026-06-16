@@ -11,6 +11,7 @@
     d:DesignWidth="1024"
     DataContext="{x:Static controllers:BookingsViewModel.Instance}">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="PayButtonStyle"
             TargetType="Button"
             BasedOn="{StaticResource PrimaryButtonStyle}">
@@ -437,6 +438,20 @@
                     Estado de la reserva
                 </Label>
                 <DockPanel Grid.Column="1">
+                    <Button DockPanel.Dock="Right"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Background="#E65100"
+                        FontSize="12"
+                        Padding="8"
+                        Command="{Binding EarlyCheckoutCommand}">
+                        <Button.Visibility>
+                            <MultiBinding Converter="{StaticResource BookingCancelVisibility}">
+                                <Binding Path="IsEditing" />
+                                <Binding Path="CurrentBooking.Status" />
+                            </MultiBinding>
+                        </Button.Visibility>
+                        Check-Out Anticipado
+                    </Button>
                     <Button DockPanel.Dock="Right"
                         Style="{StaticResource ActionButtonStyle}"
                         Background="{StaticResource Bg-Danger}"
