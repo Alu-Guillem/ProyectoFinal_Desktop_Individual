@@ -33,6 +33,7 @@ namespace PereMaria.GestorHotel.Models
             "cancel" => "🚫 Cancelación",
             "pay" => "💳 Pago Registrado",
             "extend" => "⏳ Estadía Extendida",
+            "checkout" => "⏳ Check-Out",
             _ => ActionFormatted,
         };
 

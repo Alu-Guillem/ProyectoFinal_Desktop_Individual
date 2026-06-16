@@ -1199,6 +1199,7 @@ public class BookingsViewModel : BaseViewModel
         DiscountText = booking.Discount > 0 ? booking.Discount.ToString() : "0";
         RecalculateTotals();
         ClearValidationErrors();
+        OnPropertyChanged(nameof(CanPerformEarlyCheckout));
     }
 
     /// <summary>
@@ -1392,6 +1393,72 @@ public class BookingsViewModel : BaseViewModel
             MessageBox.Show($"Ocurrió un error al procesar el PDF: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+
+
+    // EARLY CHECKOUT LOGIC
+
+    private RelayCommand? _earlyCheckoutCommand;
+    public ICommand EarlyCheckoutCommand => _earlyCheckoutCommand ??= new RelayCommand(_ => ProcesarEarlyCheckout());
+
+    /// <summary>
+    /// Evalúa si se cumplen todas las condiciones para mostrar el botón de salida anticipada.
+    /// </summary>
+    public bool CanPerformEarlyCheckout
+    {
+        get
+        {
+            // 1. Condición obligatoria: Debemos estar editando una reserva real existente
+            if (!IsEditing || CurrentBooking == null || string.IsNullOrEmpty(CurrentBooking.BookingId))
+                return false;
+
+            // 2. Condición de estado infalible: Solo se muestra si la reserva está pagada (en curso)
+            // Usamos Trim() y ToLower() para que no importe si viene como "Paid", "paid " o "PAID"
+            string estadoActual = CurrentBooking.Status?.Trim().ToLower() ?? "";
+
+            if (estadoActual == "paid")
+            {
+                return true;
+            }
+
+            // Para cualquier otro estado ("pending", "completed", "cancelled") el botón no se muestra
+            return false;
+        }
+    }
+
+    private async void ProcesarEarlyCheckout()
+    {
+        var resultado = MessageBox.Show(
+            "¿Estás seguro de que deseas realizar la salida anticipada de este cliente?",
+            "Confirmar Early Checkout",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question
+        );
+
+        if (resultado != MessageBoxResult.Yes) return;
+
+        try
+        {
+            // 1. Mandamos la petición PUT a tu API de Node.js
+            bool exito = await BookingsService.Instance.EarlyCheckout(CurrentBooking.BookingId);
+
+            if (exito)
+            {
+                MessageBox.Show("El Check-Out se ha procesado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // 2. Recargamos las reservas para que los datos globales queden actualizados
+                await LoadBookings();
+
+                // 3. Forzamos a que el botón se oculte inmediatamente (ya que el estado dejará de ser "paid")
+                OnPropertyChanged(nameof(CanPerformEarlyCheckout));
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ocurrió un error al tramitar el check-out: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+
 
     //
 }

@@ -373,4 +373,26 @@ public class BookingsService
     }
 
 
+    /// <summary>
+    /// Realiza la salida anticipada (early checkout) de una reserva en curso.
+    /// </summary>
+    public async Task<bool> EarlyCheckout(string bookingId)
+    {
+        try
+        {
+            // Petición PUT a la ruta: /api/bookings/:id/checkout
+            var res = await _apiService.Put<object>($"bookings/{bookingId}/checkout", new object());
+
+            if (res.Error != null)
+                throw new HttpRequestException(res.Error.Message);
+
+            return res.Success;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error en EarlyCheckout: {ex.Message}");
+            throw new Exception($"Error al procesar el check-out: {ex.Message}");
+        }
+    }
+
 }

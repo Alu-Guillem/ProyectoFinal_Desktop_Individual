@@ -91,7 +91,7 @@ public class RoomsViewModel : BaseViewModel
     /*TIPO DE HABITACION*/
     public List<string> RoomTypes { get; } = new()
     {
-        "", "Estandar", "Suite", "Double", "Simple"
+        "Estandar", "Suite", "Double", "Simple"
     };
 
     //Cargar las habitaciones
